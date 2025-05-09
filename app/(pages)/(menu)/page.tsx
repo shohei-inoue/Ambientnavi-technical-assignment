@@ -1,5 +1,10 @@
+import MainContainer from "@/app/components/MainContainer/MainContainer";
+import MenuContents from "./_components/MenuContents/MenuContents";
+
 export default function Menu() {
   return (
-    <div>menu</div>
+    <MainContainer>
+      <MenuContents />
+    </MainContainer>
   )
 }
