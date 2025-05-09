@@ -1,11 +1,9 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## 技術スタック
 
 - FE: Next.js(App Router)
-- SS: Next.js(Server Coomponent, Server Actions)
-- DB: postgreSQL, MySQL
-- ORM: Prisma or Drizzle
+- SS: Next.js(Server Component, Server Actions)
+- DB: postgreSQL
+- ORM: Prisma
 - styling: Tailwind CSS
 
 
