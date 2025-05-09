@@ -1,6 +1,5 @@
 import Image from "next/image";
 import MenuItemBottomNav from "../MenuItemNav/MenuItemBottomNav";
-import MenuItemHeadNav from "../MenuItemNav/MenuItemHeadNav";
 import Heading from "@/app/components/Heading/Heading";
 
 type MenuItemContentProps = {
@@ -22,7 +21,6 @@ const OptionList: OptionData[] = [
 const MenuItemContent: React.FC<MenuItemContentProps> = ({ id }) => {
   return (
     <>
-      <MenuItemHeadNav />
       <div id={id}>
         <div>
           <Image
