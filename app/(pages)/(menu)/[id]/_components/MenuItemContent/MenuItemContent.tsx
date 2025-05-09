@@ -28,8 +28,8 @@ const MenuItemContent: React.FC<MenuItemContentProps> = ({ id }) => {
           <Image
             src={""}
             alt="Menu Item"
-            width={1000}
-            height={1000} 
+            width={100}
+            height={100} 
           />
         </div>
         <div className="flex flex-col justify-between gap-4 p-4">
