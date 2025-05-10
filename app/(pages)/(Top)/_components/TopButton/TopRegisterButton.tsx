@@ -5,7 +5,7 @@ const TopRegisterButton = () => {
   const router = useRouter()
 
   const handleClick = () => {
-    router.push("/register")
+    router.push("/auth/register")
   }
 
   return (
