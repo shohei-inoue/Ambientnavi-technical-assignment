@@ -1,4 +1,7 @@
+'use client'
+
 import Image from "next/image" 
+import { useRouter } from "next/navigation"
 
 type MenuCardProps = {
   id: number,
@@ -13,8 +16,17 @@ const MenuCard: React.FC<MenuCardProps> = ({
   price,
   image,
 }) => {
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push(`/menu/${id}`)
+  }
+
   return (
-    <li key={id} className="flex-column justify-between p-4 border">
+    <li
+      key={id} className="flex-column justify-between p-4 border cursor-pointer rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out" 
+      onClick={handleClick}
+    >
       <div>
         <Image src={image} height={100} width={100} alt=""/>
       </div>
