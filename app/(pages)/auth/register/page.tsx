@@ -6,10 +6,9 @@ import MainContent from "@/app/components/MainContainer/MainContent";
 import { useRouter } from "next/navigation";
 
 export default function Register() {
-
   const router = useRouter()
 
-  const toggleLogin = () => {
+  const handleLoginClick = () => {
     router.push("/auth/login")
   }
 
@@ -69,13 +68,12 @@ export default function Register() {
               登録
             </button>
           </form>
-          <div className="flex flex-col gap-4 items-center">
-            <p>すでにアカウントをお持ちですか？</p>
+          <div className="flex flex-col gap-4 items-center  cursor-pointer">
             <button
-              type="button"
-              className="bg-gray-500 text-white py-2 px-4 rounded cursor-pointer"
-              onClick={toggleLogin}>
-              ログイン
+              className="text-gray-500 hover:text-gray-700 cursor-pointer"
+              onClick={handleLoginClick}
+            >
+              すでにアカウントをお持ちの方はこちら
             </button>
         </div>
       </MainContent>
