@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import Input from "@/app/components/Input/Input"
-import RegisterItem from "./RegisterItem"
-import { useState } from "react"
+import Input from "@/app/components/Input/Input";
+import RegisterItem from "./RegisterItem";
+import { useState } from "react";
 
 type RegisterPasswordFieldProps = {
-  title: string
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-}
+  title: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const RegisterPasswordField: React.FC<RegisterPasswordFieldProps> = ({
   title,
   value,
   setValue,
 }) => {
-  const [isError, setIsError] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleValidate = () => {
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/
-    setIsError(!passwordPattern.test(value))
-  }
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+    setIsError(!passwordPattern.test(value));
+  };
 
   return (
     <RegisterItem title={title}>
@@ -41,7 +41,7 @@ const RegisterPasswordField: React.FC<RegisterPasswordFieldProps> = ({
         </p>
       )}
     </RegisterItem>
-  )
-}
+  );
+};
 
-export default RegisterPasswordField
+export default RegisterPasswordField;

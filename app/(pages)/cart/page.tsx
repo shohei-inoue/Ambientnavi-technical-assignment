@@ -11,5 +11,5 @@ export default function Cart() {
         <CartContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

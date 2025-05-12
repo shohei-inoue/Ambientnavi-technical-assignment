@@ -5,7 +5,7 @@ const CartBottomNav = () => {
         注文を確定
       </button>
     </nav>
-  )
-}
+  );
+};
 
-export default CartBottomNav
+export default CartBottomNav;

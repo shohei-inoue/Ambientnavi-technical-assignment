@@ -5,7 +5,7 @@ const Footer = () => {
         copylight &copy; 2025 shohei-inoue. All rights reserved.
       </div>
     </footer>
-  )
-}
+  );
+};
 
 export default Footer;

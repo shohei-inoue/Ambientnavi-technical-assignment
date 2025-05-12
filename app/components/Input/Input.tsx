@@ -1,16 +1,16 @@
 type InputProps = {
-  type: "text" | "email" | "password" | "number" | "tel" | "url" | "date"
-  placeholder?: string
-  value?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void
-  required?: boolean
-  disabled?: boolean
-  minLength?: number
-  maxLength?: number
-  pattern?: string
-  title?: string
-}
+  type: "text" | "email" | "password" | "number" | "tel" | "url" | "date";
+  placeholder?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  required?: boolean;
+  disabled?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: string;
+  title?: string;
+};
 
 const Input: React.FC<InputProps> = ({
   type,
@@ -38,7 +38,7 @@ const Input: React.FC<InputProps> = ({
       maxLength={maxLength}
       pattern={pattern}
     />
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

@@ -8,7 +8,7 @@ const MenuItemBottomNav = () => {
         注文確定
       </button>
     </nav>
-  )
-}
+  );
+};
 
-export default MenuItemBottomNav
+export default MenuItemBottomNav;

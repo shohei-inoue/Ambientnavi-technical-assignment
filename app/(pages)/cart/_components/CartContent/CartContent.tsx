@@ -1,13 +1,13 @@
-import CartItem from "../CartItem/CartItem"
+import CartItem from "../CartItem/CartItem";
 
 type CartItemData = {
-  title: string
-  price: number
-  quantity: number
-  sub_variable: string
-  sub_variable_price: number
-  sub_variable_quantity: number
-}
+  title: string;
+  price: number;
+  quantity: number;
+  sub_variable: string;
+  sub_variable_price: number;
+  sub_variable_quantity: number;
+};
 
 const CartItemDataList: CartItemData[] = [
   {
@@ -34,7 +34,7 @@ const CartItemDataList: CartItemData[] = [
     sub_variable_price: 0,
     sub_variable_quantity: 0,
   },
-]
+];
 
 const CartContent = () => {
   return (
@@ -57,7 +57,7 @@ const CartContent = () => {
         <p>合計金額: 297円</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CartContent
+export default CartContent;

@@ -11,5 +11,5 @@ export default function AdminMenu() {
         <MenuContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

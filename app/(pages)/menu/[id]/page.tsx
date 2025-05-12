@@ -5,7 +5,7 @@ import HeadNav from "@/app/components/HeadNav/HeadNav";
 
 export const metadata = {
   title: "Menu Item",
-}
+};
 
 export default async function MenuItem({ params }: { params: { id: string } }) {
   return (
@@ -15,5 +15,5 @@ export default async function MenuItem({ params }: { params: { id: string } }) {
         <MenuItemContent id={params.id} />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

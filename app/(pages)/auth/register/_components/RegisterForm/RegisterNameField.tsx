@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import RegisterItem from "./RegisterItem"
-import Input from "@/app/components/Input/Input"
+import { useState } from "react";
+import RegisterItem from "./RegisterItem";
+import Input from "@/app/components/Input/Input";
 
 type RegisterNameFieldProps = {
-  title: string
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-}
+  title: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const RegisterNameField: React.FC<RegisterNameFieldProps> = ({
   title,
   value,
   setValue,
 }) => {
-  const [isError, setIsError] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleValidate = () => {
-    setIsError(!value)
-  }
+    setIsError(!value);
+  };
 
   return (
     <RegisterItem title={title}>
@@ -29,15 +29,11 @@ const RegisterNameField: React.FC<RegisterNameFieldProps> = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleValidate}
-        required 
+        required
       />
-      {isError && (
-        <p className="text-red-500">
-          氏名を入力してください
-        </p>
-      )}
+      {isError && <p className="text-red-500">氏名を入力してください</p>}
     </RegisterItem>
-  )
-}
+  );
+};
 
-export default RegisterNameField
+export default RegisterNameField;

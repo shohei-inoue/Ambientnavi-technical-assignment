@@ -4,12 +4,12 @@ import Heading from "@/app/components/Heading/Heading";
 
 type MenuItemContentProps = {
   id: string;
-}
+};
 
 type OptionData = {
   id: number;
   name: string;
-}
+};
 
 const OptionList: OptionData[] = [
   { id: 1, name: "のりしお" },
@@ -23,12 +23,7 @@ const MenuItemContent: React.FC<MenuItemContentProps> = ({ id }) => {
     <>
       <div id={id}>
         <div>
-          <Image
-            src={""}
-            alt="Menu Item"
-            width={100}
-            height={100} 
-          />
+          <Image src={""} alt="Menu Item" width={100} height={100} />
         </div>
         <div className="flex flex-col justify-between gap-4 p-4">
           <div className="flex justify-between items-center">
@@ -43,7 +38,10 @@ const MenuItemContent: React.FC<MenuItemContentProps> = ({ id }) => {
           <div>
             <ul className="grid grid-cols-2 gap-4">
               {OptionList.map((option) => (
-                <li key={option.id} className="flex justify-between items-center p-4 border">
+                <li
+                  key={option.id}
+                  className="flex justify-between items-center p-4 border"
+                >
                   <span>{option.name}</span>
                   <input type="checkbox" />
                 </li>
@@ -54,7 +52,7 @@ const MenuItemContent: React.FC<MenuItemContentProps> = ({ id }) => {
       </div>
       <MenuItemBottomNav />
     </>
-  )
-}
+  );
+};
 
-export default MenuItemContent
+export default MenuItemContent;
