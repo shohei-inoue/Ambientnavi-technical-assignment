@@ -11,5 +11,5 @@ export default function OrderHistory() {
         <OrderHistoryContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

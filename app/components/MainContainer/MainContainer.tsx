@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 
 type MainContainerProps = {
   children: React.ReactNode;
-}
+};
 
 const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
   return (
@@ -12,7 +12,7 @@ const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
       <main className="flex-1">{children}</main>
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 export default MainContainer;

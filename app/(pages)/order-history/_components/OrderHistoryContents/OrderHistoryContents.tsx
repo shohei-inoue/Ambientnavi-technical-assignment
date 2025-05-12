@@ -1,6 +1,6 @@
-import Heading from "@/app/components/Heading/Heading"
-import OrderHistoryContent from "../OrderHistoryContent/OrderHistoryContent"
-import OrderHistoryBottomNav from "../OrderHistoryNav/OrderHistoryBottomNav"
+import Heading from "@/app/components/Heading/Heading";
+import OrderHistoryContent from "../OrderHistoryContent/OrderHistoryContent";
+import OrderHistoryBottomNav from "../OrderHistoryNav/OrderHistoryBottomNav";
 
 const OrderHistoryContents = () => {
   return (
@@ -9,7 +9,7 @@ const OrderHistoryContents = () => {
       <OrderHistoryContent />
       <OrderHistoryBottomNav />
     </div>
-  )
-}
+  );
+};
 
-export default OrderHistoryContents
+export default OrderHistoryContents;
