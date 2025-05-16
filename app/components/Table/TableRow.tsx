@@ -20,7 +20,7 @@ const TableRow: React.FC<TableRowProps> = ({ children, clickable, href }) => {
 
   return (
     <tr
-      className="border-b-1 border-solid border-gray-300"
+      className="border-b-1 border-solid border-gray-300 cursor-pointer"
       onClick={handleClick}
     >
       {children}

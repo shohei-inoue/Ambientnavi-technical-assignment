@@ -1,9 +1,11 @@
+import { getCategories } from "@/app/actions/categoriesActions"
 import CategoriesTable from "../CategoriesTable/CategoriesTable"
 
-const CategoriesContents = () => {
+const CategoriesContents = async () => {
+  const categories = await getCategories()
   return (
     <>
-      <CategoriesTable />
+      <CategoriesTable categories={categories}/>
     </>
   )
 }

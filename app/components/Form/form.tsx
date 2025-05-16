@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 
 type FromProps = {
-  action: (formData: FormData) => Promise<void>;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
   children: ReactNode;
 };
 
-const Form: React.FC<FromProps> = ({ action, children }) => {
+const Form: React.FC<FromProps> = ({ onSubmit, children }) => {
   return (
-    <form action={action} className="space-y-4 p-4">
+    <form onSubmit={onSubmit} className="space-y-4 p-4">
       {children}
     </form>
   );
