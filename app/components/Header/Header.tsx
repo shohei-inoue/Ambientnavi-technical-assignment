@@ -5,7 +5,7 @@ const Header = () => {
         mobile order by ambientnavi technical assignment
       </div>
     </header>
-  )
-}
+  );
+};
 
 export default Header;

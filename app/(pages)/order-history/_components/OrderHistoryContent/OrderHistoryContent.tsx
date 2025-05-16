@@ -1,13 +1,13 @@
-import OrderHistoryItem from "../OrderHistoryItem/OrderHistoryItem"
+import OrderHistoryItem from "../OrderHistoryItem/OrderHistoryItem";
 
 type OrderHistoryItemData = {
-  title: string
-  price: number
-  quantity: number
-  sub_variable: string
-  sub_variable_price: number
-  sub_variable_quantity: number
-}
+  title: string;
+  price: number;
+  quantity: number;
+  sub_variable: string;
+  sub_variable_price: number;
+  sub_variable_quantity: number;
+};
 
 const OrderHistoryItemDataList: OrderHistoryItemData[] = [
   {
@@ -34,7 +34,7 @@ const OrderHistoryItemDataList: OrderHistoryItemData[] = [
     sub_variable_price: 0,
     sub_variable_quantity: 0,
   },
-]
+];
 
 const OrderHistoryContent = () => {
   return (
@@ -48,7 +48,7 @@ const OrderHistoryContent = () => {
             quantity={item.quantity}
             sub_variable={item.sub_variable}
             sub_variable_price={item.sub_variable_price}
-            sub_variable_quantity={item.sub_variable_quantity} 
+            sub_variable_quantity={item.sub_variable_quantity}
           />
         ))}
       </ul>
@@ -57,7 +57,7 @@ const OrderHistoryContent = () => {
         <p>297円</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderHistoryContent
+export default OrderHistoryContent;

@@ -1,18 +1,18 @@
-'use client'
+"use client";
 
-import Button from "@/app/components/Button/Button"
-import { useRouter } from "next/navigation"
+import Button from "@/app/components/Button/Button";
+import { useRouter } from "next/navigation";
 
 const LoginButtonContents = () => {
-  const router = useRouter()
-  
+  const router = useRouter();
+
   const handleRegisterClick = () => {
-    router.push("/auth/register")
-  }
+    router.push("/auth/register");
+  };
 
   const handleForgotPasswordClick = () => {
-    router.push("/auth/forgot-password")
-  }
+    router.push("/auth/forgot-password");
+  };
 
   return (
     <div className="flex gap-4 items-center w-full cursor-pointer">
@@ -23,7 +23,7 @@ const LoginButtonContents = () => {
         パスワードを忘れた方はこちら
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default LoginButtonContents
+export default LoginButtonContents;

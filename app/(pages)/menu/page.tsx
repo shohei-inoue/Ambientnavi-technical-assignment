@@ -9,5 +9,5 @@ export default function Menu() {
         <MenuContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Heading from "@/app/components/Heading/Heading";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
@@ -13,5 +13,5 @@ export default function Register() {
         <RegisterContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

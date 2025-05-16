@@ -11,5 +11,5 @@ export default function Login() {
         <LoginContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }

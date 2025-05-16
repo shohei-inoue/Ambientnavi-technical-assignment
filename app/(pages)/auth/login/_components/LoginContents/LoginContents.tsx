@@ -1,5 +1,5 @@
-import LoginButtonContents from "../LoginButtonContent/LoginButtonContent"
-import LoginForm from "../LoginForm/LoginForm"
+import LoginButtonContents from "../LoginButtonContent/LoginButtonContent";
+import LoginForm from "../LoginForm/LoginForm";
 
 const LoginContents = () => {
   return (
@@ -7,7 +7,7 @@ const LoginContents = () => {
       <LoginForm />
       <LoginButtonContents />
     </div>
-  )
-}
+  );
+};
 
-export default LoginContents
+export default LoginContents;

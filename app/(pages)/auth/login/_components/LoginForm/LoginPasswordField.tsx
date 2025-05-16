@@ -1,26 +1,26 @@
-'use client'
+"use client";
 
-import Input from "@/app/components/Input/Input"
-import LoginItem from "./LoginItem"
-import { useState } from "react"
+import Input from "@/app/components/Input/Input";
+import LoginItem from "./LoginItem";
+import { useState } from "react";
 
 type LoginPasswordFieldProps = {
-  title: string
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-}
+  title: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const LoginPasswordField: React.FC<LoginPasswordFieldProps> = ({
   title,
   value,
   setValue,
 }) => {
-  const [isError, setIsError] = useState<boolean>(false)
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleValidate = () => {
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/
-    setIsError(!passwordPattern.test(value))
-  }
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$/;
+    setIsError(!passwordPattern.test(value));
+  };
 
   return (
     <LoginItem title={title}>
@@ -42,7 +42,7 @@ const LoginPasswordField: React.FC<LoginPasswordFieldProps> = ({
         </p>
       )}
     </LoginItem>
-  )
-}
+  );
+};
 
-export default LoginPasswordField
+export default LoginPasswordField;

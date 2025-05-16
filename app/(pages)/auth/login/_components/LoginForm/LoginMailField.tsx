@@ -1,23 +1,23 @@
-import Input from "@/app/components/Input/Input"
-import LoginItem from "./LoginItem"
-import { useState } from "react"
+import Input from "@/app/components/Input/Input";
+import LoginItem from "./LoginItem";
+import { useState } from "react";
 
 type LoginMailFieldProps = {
-  title: string
-  value: string
-  setValue: React.Dispatch<React.SetStateAction<string>>
-}
+  title: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
 const LoginMailField: React.FC<LoginMailFieldProps> = ({
   title,
   value,
   setValue,
 }) => {
-  const [isError, setIsError] = useState<boolean>(false)
-  
+  const [isError, setIsError] = useState<boolean>(false);
+
   const handleValidate = () => {
-    setIsError(!value)
-  }
+    setIsError(!value);
+  };
 
   return (
     <LoginItem title={title}>
@@ -28,15 +28,13 @@ const LoginMailField: React.FC<LoginMailFieldProps> = ({
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleValidate}
         required
-        disabled 
+        disabled
       />
       {isError && (
-        <p className="text-red-500">
-          メールアドレスを入力してください
-        </p>
+        <p className="text-red-500">メールアドレスを入力してください</p>
       )}
     </LoginItem>
-  )
-}
+  );
+};
 
-export default LoginMailField
+export default LoginMailField;

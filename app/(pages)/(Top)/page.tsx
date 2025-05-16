@@ -10,11 +10,11 @@ export default function Top() {
       <MainContent>
         <TopeHeadContent />
         {/* デザイン調整必須 */}
-        <div className="flex flex-col justify-center mt-8 gap-4 w-full items-center"> 
+        <div className="flex flex-col justify-center mt-8 gap-4 w-full items-center">
           <TopLoginButton />
           <TopRegisterButton />
         </div>
       </MainContent>
     </MainContainer>
-  )
+  );
 }

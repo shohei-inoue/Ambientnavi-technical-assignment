@@ -1,6 +1,6 @@
-import Heading from "@/app/components/Heading/Heading"
-import CartBottomNav from "../CartNav/CartBottomNav"
-import CartContent from "../CartContent/CartContent"
+import Heading from "@/app/components/Heading/Heading";
+import CartBottomNav from "../CartNav/CartBottomNav";
+import CartContent from "../CartContent/CartContent";
 
 const CartContents = () => {
   return (
@@ -9,7 +9,7 @@ const CartContents = () => {
       <CartContent />
       <CartBottomNav />
     </div>
-  )
-}
+  );
+};
 
-export default CartContents
+export default CartContents;

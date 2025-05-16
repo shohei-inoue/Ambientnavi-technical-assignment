@@ -1,7 +1,7 @@
-import Heading from "@/app/components/Heading/Heading"
-import MenuHeadNav from "../MenuNav/MenuHeadNav"
-import MenuContent from "../MenuContent/MenuContent"
-import MenuBottomNav from "../MenuNav/MenuBottomNav"
+import Heading from "@/app/components/Heading/Heading";
+import MenuHeadNav from "../MenuNav/MenuHeadNav";
+import MenuContent from "../MenuContent/MenuContent";
+import MenuBottomNav from "../MenuNav/MenuBottomNav";
 
 const MenuContents = () => {
   return (
@@ -14,7 +14,7 @@ const MenuContents = () => {
       <MenuContent />
       <MenuBottomNav />
     </div>
-  )
-}
+  );
+};
 
-export default MenuContents
+export default MenuContents;

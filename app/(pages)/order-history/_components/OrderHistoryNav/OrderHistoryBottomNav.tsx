@@ -9,7 +9,7 @@ const OrderHistoryBottomNav = () => {
         注文する
       </button>
     </nav>
-  )
-}
+  );
+};
 
-export default OrderHistoryBottomNav
+export default OrderHistoryBottomNav;
