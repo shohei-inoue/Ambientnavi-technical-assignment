@@ -131,12 +131,16 @@ exports.Prisma.MenuScalarFieldEnum = {
   description: 'description',
   price: 'price',
   imageUrl: 'imageUrl',
-  categoryId: 'categoryId',
   isAvailable: 'isAvailable',
   taxIncluded: 'taxIncluded',
   tags: 'tags',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.MenuCategoryScalarFieldEnum = {
+  menuId: 'menuId',
+  categoryId: 'categoryId'
 };
 
 exports.Prisma.SortOrder = {
@@ -157,7 +161,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Category: 'Category',
-  Menu: 'Menu'
+  Menu: 'Menu',
+  MenuCategory: 'MenuCategory'
 };
 
 /**

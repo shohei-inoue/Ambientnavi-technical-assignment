@@ -16,22 +16,30 @@ datasource db {
 }
 
 model Category {
-  id    String @id @default(uuid())
+  id    Int            @id @default(autoincrement())
   name  String
-  menus Menu[]
+  menus MenuCategory[]
 }
 
 model Menu {
-  id          String   @id @default(uuid())
+  id          Int            @id @default(autoincrement())
   name        String
   description String?
   price       Int
   imageUrl    String?
-  category    Category @relation(fields: [categoryId], references: [id])
-  categoryId  String
-  isAvailable Boolean  @default(true)
-  taxIncluded Boolean  @default(true)
+  isAvailable Boolean        @default(true)
+  taxIncluded Boolean        @default(true)
   tags        String[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  categories  MenuCategory[]
+}
+
+model MenuCategory {
+  menuId     Int
+  categoryId Int
+  menu       Menu     @relation(fields: [menuId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@id([menuId, categoryId])
 }
