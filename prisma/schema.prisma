@@ -15,27 +15,41 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// カテゴリー
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  menus MenuCategory[]
+  id            Int    @id @default(autoincrement())
+  name          String @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  menus         MenuCategory[]
 }
 
+// タグ
+model Tag {
+  id        Int     @id @default(autoincrement())
+  name      String  @unique
+  color     String? 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  menus     MenuTag[]
+}
 
+// メニュー
 model Menu {
   id           Int   @id @default(autoincrement())
-  name         String
+  name         String @unique
   description  String?
   price        Int
   imageUrl     String?
   isAvailable  Boolean  @default(true)
   taxIncluded  Boolean  @default(true)
-  tags         String[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   categories   MenuCategory[]
+  tags         MenuTag[]
 }
 
+// メニュー - カテゴリー
 model MenuCategory {
   menuId      Int
   categoryId  Int
@@ -43,4 +57,14 @@ model MenuCategory {
   category    Category @relation(fields: [categoryId], references: [id])
 
   @@id([menuId, categoryId])
+}
+
+// メニュー - タグ
+model MenuTag {
+  menuId  Int
+  tagId   Int
+  menu    Menu @relation(fields: [menuId], references: [id])
+  tag     Tag  @relation(fields: [tagId], references: [id])
+
+  @@id([menuId, tagId])
 }

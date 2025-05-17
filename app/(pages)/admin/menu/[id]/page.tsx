@@ -8,12 +8,19 @@ export const metadata: Metadata = {
   title: "メニュー詳細",
 };
 
-export default function MenuDetail({ params }: { params: { id: number } }) {
+type AdminMenuDetailProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function AdminMenuDetail({
+  params,
+}: AdminMenuDetailProps) {
+  const { id } = await params;
   return (
     <MainContainer>
       <Heading level={1}>メニュー詳細</Heading>
       <MainContent>
-        <MenuDetailContent id={params.id} />
+        <MenuDetailContent id={id} />
       </MainContent>
     </MainContainer>
   );

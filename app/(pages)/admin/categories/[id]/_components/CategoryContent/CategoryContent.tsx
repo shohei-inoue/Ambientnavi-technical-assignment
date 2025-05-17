@@ -3,7 +3,7 @@
 import { getCategory } from "@/app/actions/categoriesActions";
 import { categoryData } from "@/app/types/types";
 import { useEffect, useState } from "react";
-import CategorySettingForm from "../CategorySettingForm/CategorySettingform";
+import CategorySettingForm from "../CategorySettingForm/CategorySettingForm";
 
 type CategoryContentProps = {
   id: string;

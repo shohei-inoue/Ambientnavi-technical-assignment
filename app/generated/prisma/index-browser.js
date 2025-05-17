@@ -20,11 +20,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.8.1
+ * Prisma Client JS version: 6.8.2
  * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.8.1",
+  client: "6.8.2",
   engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
@@ -122,7 +122,17 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TagScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.MenuScalarFieldEnum = {
@@ -133,7 +143,6 @@ exports.Prisma.MenuScalarFieldEnum = {
   imageUrl: 'imageUrl',
   isAvailable: 'isAvailable',
   taxIncluded: 'taxIncluded',
-  tags: 'tags',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -141,6 +150,11 @@ exports.Prisma.MenuScalarFieldEnum = {
 exports.Prisma.MenuCategoryScalarFieldEnum = {
   menuId: 'menuId',
   categoryId: 'categoryId'
+};
+
+exports.Prisma.MenuTagScalarFieldEnum = {
+  menuId: 'menuId',
+  tagId: 'tagId'
 };
 
 exports.Prisma.SortOrder = {
@@ -161,8 +175,10 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Category: 'Category',
+  Tag: 'Tag',
   Menu: 'Menu',
-  MenuCategory: 'MenuCategory'
+  MenuCategory: 'MenuCategory',
+  MenuTag: 'MenuTag'
 };
 
 /**

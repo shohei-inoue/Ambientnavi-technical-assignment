@@ -7,12 +7,17 @@ export const metadata = {
   title: "Menu Item",
 };
 
-export default async function MenuItem({ params }: { params: { id: string } }) {
+type MenuItemProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function MenuItem({ params }: MenuItemProps) {
+  const { id } = await params;
   return (
     <MainContainer>
       <HeadNav />
       <MainContent>
-        <MenuItemContent id={params.id} />
+        <MenuItemContent id={id} />
       </MainContent>
     </MainContainer>
   );

@@ -10,6 +10,11 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  // TODO 一時的に自動生成されたファイルのeslintを無視
+  {
+    ignores: ["app/generated/**"],
+  },
+
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
