@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import CategoriesHeadingContainer from "./_components/CategoriesHeadingContainer/CategoriesHeadingContainer";
+import CategoriesContents from "./_components/CategoriesContents/CategoriesContents";
 
 
 export default function AdminCategories() {
@@ -10,7 +11,7 @@ export default function AdminCategories() {
     <MainContainer>
       <CategoriesHeadingContainer />
       <MainContent>
-        <CategoriesContennts />
+        <CategoriesContents />
       </MainContent>
     </MainContainer>
   );

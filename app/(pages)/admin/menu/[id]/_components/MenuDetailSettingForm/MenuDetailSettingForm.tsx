@@ -7,7 +7,7 @@ import { Category } from "@/app/generated/prisma";
 import { CategoriesData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailImageField from "../MenuDetailImageField/MenuDetailImageField";
-import MenuDetailNameFiled from "../MenuDetailName/MenuDetailNameField";
+import MenuDetailNameFiled from "../MenuDetailNameField/MenuDetailNameField";
 import MenuDetailDescriptionField from "../MenuDetailDescriptionField/MenuDetailDescriptionField";
 import MenuDetailPriceField from "../MenuDetailPriceField/MenuDetailPriceField";
 import MenuDetailTaxIncludedField from "../MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";

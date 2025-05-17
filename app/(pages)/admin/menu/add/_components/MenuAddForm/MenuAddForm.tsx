@@ -1,6 +1,6 @@
 "use client";
 
-import MenuDetailNameFiled from "../../../[id]/_components/MenuDetailName/MenuDetailNameField";
+import MenuDetailNameFiled from "../../../[id]/_components/MenuDetailNameField/MenuDetailNameField";
 import MenuDetailDescriptionField from "../../../[id]/_components/MenuDetailDescriptionField/MenuDetailDescriptionField";
 import MenuDetailPriceField from "../../../[id]/_components/MenuDetailPriceField/MenuDetailPriceField";
 import Button from "@/app/components/Button/Button";
