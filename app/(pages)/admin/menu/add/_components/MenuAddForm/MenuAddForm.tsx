@@ -7,14 +7,15 @@ import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { useEffect, useState } from "react";
 import { Category } from "@/app/generated/prisma";
-import { getCategories } from "@/app/actions/categoriesActions";
 import { CategoriesData } from "@/app/types/types";
 import MenuDetailCategoriesField from "../../../[id]/_components/MenuDetailCategoriesField/MenuDetailCategoriesField";
 import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailIsAvailableField/MenuDetailIsAvailableField";
 import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";
 import MenuDetailImageField from "../../../[id]/_components/MenuDetailImageField/MenuDetailImageField";
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailTagsField/MenuDetailTagsField";
-import { createMenu } from "@/app/actions/menuActions";
+import { createMenu } from "@/app/actions/admin/menuActions";
+import { getCategories } from "@/app/actions/admin/categoriesActions";
+
 
 const MenuAddForm = () => {
   const [name, setName] = useState<string>("");

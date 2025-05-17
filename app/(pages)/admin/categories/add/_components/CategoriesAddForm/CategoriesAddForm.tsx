@@ -1,6 +1,6 @@
 "use client";
 
-import { createCategory } from "@/app/actions/categoriesActions";
+import { createCategory } from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
 import CategoryNameFiled from "../../../[id]/_components/CategoryNameField/CategoryNameField";
 import Button from "@/app/components/Button/Button";

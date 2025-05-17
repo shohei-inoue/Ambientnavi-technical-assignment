@@ -1,6 +1,6 @@
 "use server";
 
-import { prisma } from "../lib/prisma";
+import { prisma } from "../../lib/prisma";
 
 export async function createCategory(formData: FormData) {
   const name = formData.get("name") as string;
@@ -55,7 +55,7 @@ export async function updateCategory(formData: FormData) {
   if (duplicate) {
     throw new Error("同じ名前のカテゴリがすでに存在します");
   }
-  
+
   await prisma.category.update({
     where: { id },
     data: { name },

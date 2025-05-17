@@ -1,6 +1,6 @@
 "use client";
 
-import { getCategories } from "@/app/actions/categoriesActions";
+
 import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { Category } from "@/app/generated/prisma";
@@ -14,9 +14,10 @@ import MenuDetailTaxIncludedField from "../MenuDetailTaxIncludedField/MenuDetail
 import MenuDetailCategoriesField from "../MenuDetailCategoriesField/MenuDetailCategoriesField";
 import MenuDetailTagsField from "../MenuDetailTagsField/MenuDetailTagsField";
 import MenuDetailIsAvailableField from "../MenuDetailIsAvailableField/MenuDetailIsAvailableField";
-import { deleteMenu, updateMenu } from "@/app/actions/menuActions";
 import { useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
+import { deleteMenu, updateMenu } from "@/app/actions/admin/menuActions";
+import { getCategories } from "@/app/actions/admin/categoriesActions";
 
 type MenuDetailSettingFormProps = {
   id: number;

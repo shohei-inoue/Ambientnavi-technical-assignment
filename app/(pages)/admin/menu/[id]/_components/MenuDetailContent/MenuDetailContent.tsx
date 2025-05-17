@@ -1,12 +1,12 @@
 "use client";
 
-import { getMenuDetail } from "@/app/actions/menuActions";
 import { MenuData, TagData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailSettingForm from "../MenuDetailSettingForm/MenuDetailSettingForm";
 import Loader from "@/app/components/Loader/Loader";
 import Error from "@/app/components/Error/Error";
 import NoData from "@/app/components/NoData/NoData";
+import { getMenuDetail } from "@/app/actions/admin/menuActions";
 
 type MenuDetailContentProps = {
   id: string;
@@ -22,7 +22,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
       setLoading(true);
       setError(null);
       try {
-        const menuDetail = await getMenuDetail(parseInt(id));
+        const menuDetail = await getMenuDetail(parseInt(id))
         setMenuDetailData(menuDetail);
       } catch (error) {
         console.error(error);

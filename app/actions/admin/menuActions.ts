@@ -1,8 +1,8 @@
 "use server";
 
 import path from "path";
-import { prisma } from "../lib/prisma";
-import { MenuData } from "../types/types";
+import { prisma } from "../../lib/prisma";
+import { MenuData } from "../../types/types";
 import { writeFile, unlink } from "fs/promises";
 
 export async function createMenu(formData: FormData) {

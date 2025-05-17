@@ -3,7 +3,7 @@
 import {
   deleteCategory,
   updateCategory,
-} from "@/app/actions/categoriesActions";
+} from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
 import CategoryNameFiled from "../CategoryNameField/CategoryNameField";
 import Button from "@/app/components/Button/Button";
