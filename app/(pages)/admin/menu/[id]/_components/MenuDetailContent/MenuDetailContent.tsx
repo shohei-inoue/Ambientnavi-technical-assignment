@@ -2,10 +2,11 @@
 
 import { getMenuDetail } from "@/app/actions/menuActions";
 import { MenuData, TagData } from "@/app/types/types";
-import Error from "next/error";
 import { useEffect, useState } from "react";
 import MenuDetailSettingForm from "../MenuDetailSettingForm/MenuDetailSettingForm";
 import Loader from "@/app/components/Loader/Loader";
+import Error from "@/app/components/Error/Error";
+import NoData from "@/app/components/NoData/NoData";
 
 type MenuDetailContentProps = {
   id: string;
@@ -43,7 +44,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <div>エラー</div>
+        <Error />
       ) : menuDetailData ? (
         <MenuDetailSettingForm
           id={menuDetailData.id}
@@ -57,7 +58,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
           menu_tax_included={menuDetailData.taxIncluded}
         />
       ) : (
-        <div>データが見つかりませんでした</div>
+        <NoData />
       )}
     </div>
   );
