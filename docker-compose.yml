@@ -9,6 +9,7 @@ services:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/atadb?schema=public
     volumes:
       - .:/app
+      - ./public/uploads:/app/public/uploads
     depends_on:
       - db
 

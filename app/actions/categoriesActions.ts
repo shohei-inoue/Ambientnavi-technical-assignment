@@ -55,6 +55,7 @@ export async function updateCategory(formData: FormData) {
   if (duplicate) {
     throw new Error("同じ名前のカテゴリがすでに存在します");
   }
+  
   await prisma.category.update({
     where: { id },
     data: { name },

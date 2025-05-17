@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"; 
+
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import MenuHeadingContainer from "./_components/MenuHeadingContainer/MenuHeadingContainer";

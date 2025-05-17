@@ -8,16 +8,17 @@ export const metadata: Metadata = {
   title: "カテゴリー詳細",
 };
 
-export default async function AdminCategory({
-  params,
-}: {
-  params: { id: string };
-}) {
+type AdminCategoryProps = {
+  params: Promise<{ id: string }>;
+};
+
+export default async function AdminCategory({ params }: AdminCategoryProps) {
+  const { id } = await params;
   return (
     <MainContainer>
       <Heading level={1}>カテゴリー詳細</Heading>
       <MainContent>
-        <CategoryContent id={params.id} />
+        <CategoryContent id={id} />
       </MainContent>
     </MainContainer>
   );

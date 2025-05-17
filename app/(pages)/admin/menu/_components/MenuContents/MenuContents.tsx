@@ -1,18 +1,11 @@
-// 'use client'
-
-// import { useState } from "react"
+import { getMenu } from "@/app/actions/menuActions";
 import MenuTable from "../MenuTable/MenuTable";
 
-const MenuContents = () => {
-  // const [loading, setLoading] = useState(true)
+const MenuContents = async () => {
+  const menu = await getMenu()
   return (
     <>
-      {/* {loading ? (
-      <div>ロード中...</div>
-    ) : (
-      <div>データが見つかりませんでした</div>
-    )} */}
-      <MenuTable />
+      <MenuTable menu={menu} />
     </>
   );
 };

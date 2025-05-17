@@ -3,7 +3,10 @@
 import { getCategory } from "@/app/actions/categoriesActions";
 import { categoryData } from "@/app/types/types";
 import { useEffect, useState } from "react";
-import CategorySettingForm from "../CategorySettingForm/CategorySettingform";
+import CategorySettingForm from "../CategorySettingForm/CategorySettingForm";
+import Loader from "@/app/components/Loader/Loader";
+import Error from "@/app/components/Error/Error";
+import NoData from "@/app/components/NoData/NoData";
 
 type CategoryContentProps = {
   id: string;
@@ -35,16 +38,16 @@ const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
   return (
     <>
       {loading ? (
-        <div>ロード中...</div>
+        <Loader />
       ) : error ? (
-        <div>エラー</div>
+        <Error />
       ) : categoryData ? (
         <CategorySettingForm
           id={categoryData.id}
           category_name={categoryData.name}
         />
       ) : (
-        <div>データが見つかりませんでした</div>
+        <NoData />
       )}
     </>
   );

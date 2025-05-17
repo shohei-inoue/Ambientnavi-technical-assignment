@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
 /**
+ * Model Tag
+ * 
+ */
+export type Tag = $Result.DefaultSelection<Prisma.$TagPayload>
+/**
  * Model Menu
  * 
  */
@@ -28,6 +33,11 @@ export type Menu = $Result.DefaultSelection<Prisma.$MenuPayload>
  * 
  */
 export type MenuCategory = $Result.DefaultSelection<Prisma.$MenuCategoryPayload>
+/**
+ * Model MenuTag
+ * 
+ */
+export type MenuTag = $Result.DefaultSelection<Prisma.$MenuTagPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -165,6 +175,16 @@ export class PrismaClient<
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.tag`: Exposes CRUD operations for the **Tag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tags
+    * const tags = await prisma.tag.findMany()
+    * ```
+    */
+  get tag(): Prisma.TagDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.menu`: Exposes CRUD operations for the **Menu** model.
     * Example usage:
     * ```ts
@@ -183,6 +203,16 @@ export class PrismaClient<
     * ```
     */
   get menuCategory(): Prisma.MenuCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.menuTag`: Exposes CRUD operations for the **MenuTag** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MenuTags
+    * const menuTags = await prisma.menuTag.findMany()
+    * ```
+    */
+  get menuTag(): Prisma.MenuTagDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -241,7 +271,7 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.8.1
+   * Prisma Client JS version: 6.8.2
    * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
    */
   export type PrismaVersion = {
@@ -624,8 +654,10 @@ export namespace Prisma {
 
   export const ModelName: {
     Category: 'Category',
+    Tag: 'Tag',
     Menu: 'Menu',
-    MenuCategory: 'MenuCategory'
+    MenuCategory: 'MenuCategory',
+    MenuTag: 'MenuTag'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -644,7 +676,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "category" | "menu" | "menuCategory"
+      modelProps: "category" | "tag" | "menu" | "menuCategory" | "menuTag"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -719,6 +751,80 @@ export namespace Prisma {
           count: {
             args: Prisma.CategoryCountArgs<ExtArgs>
             result: $Utils.Optional<CategoryCountAggregateOutputType> | number
+          }
+        }
+      }
+      Tag: {
+        payload: Prisma.$TagPayload<ExtArgs>
+        fields: Prisma.TagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findFirst: {
+            args: Prisma.TagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          findMany: {
+            args: Prisma.TagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          create: {
+            args: Prisma.TagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          createMany: {
+            args: Prisma.TagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          delete: {
+            args: Prisma.TagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          update: {
+            args: Prisma.TagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          deleteMany: {
+            args: Prisma.TagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>[]
+          }
+          upsert: {
+            args: Prisma.TagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TagPayload>
+          }
+          aggregate: {
+            args: Prisma.TagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTag>
+          }
+          groupBy: {
+            args: Prisma.TagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TagCountArgs<ExtArgs>
+            result: $Utils.Optional<TagCountAggregateOutputType> | number
           }
         }
       }
@@ -870,6 +976,80 @@ export namespace Prisma {
           }
         }
       }
+      MenuTag: {
+        payload: Prisma.$MenuTagPayload<ExtArgs>
+        fields: Prisma.MenuTagFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MenuTagFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MenuTagFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          findFirst: {
+            args: Prisma.MenuTagFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MenuTagFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          findMany: {
+            args: Prisma.MenuTagFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>[]
+          }
+          create: {
+            args: Prisma.MenuTagCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          createMany: {
+            args: Prisma.MenuTagCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MenuTagCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>[]
+          }
+          delete: {
+            args: Prisma.MenuTagDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          update: {
+            args: Prisma.MenuTagUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          deleteMany: {
+            args: Prisma.MenuTagDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MenuTagUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MenuTagUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>[]
+          }
+          upsert: {
+            args: Prisma.MenuTagUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MenuTagPayload>
+          }
+          aggregate: {
+            args: Prisma.MenuTagAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMenuTag>
+          }
+          groupBy: {
+            args: Prisma.MenuTagGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MenuTagGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MenuTagCountArgs<ExtArgs>
+            result: $Utils.Optional<MenuTagCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -955,8 +1135,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     category?: CategoryOmit
+    tag?: TagOmit
     menu?: MenuOmit
     menuCategory?: MenuCategoryOmit
+    menuTag?: MenuTagOmit
   }
 
   /* Types for Logging */
@@ -1078,15 +1260,48 @@ export namespace Prisma {
 
 
   /**
+   * Count Type TagCountOutputType
+   */
+
+  export type TagCountOutputType = {
+    menus: number
+  }
+
+  export type TagCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menus?: boolean | TagCountOutputTypeCountMenusArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TagCountOutputType
+     */
+    select?: TagCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TagCountOutputType without action
+   */
+  export type TagCountOutputTypeCountMenusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuTagWhereInput
+  }
+
+
+  /**
    * Count Type MenuCountOutputType
    */
 
   export type MenuCountOutputType = {
     categories: number
+    tags: number
   }
 
   export type MenuCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | MenuCountOutputTypeCountCategoriesArgs
+    tags?: boolean | MenuCountOutputTypeCountTagsArgs
   }
 
   // Custom InputTypes
@@ -1105,6 +1320,13 @@ export namespace Prisma {
    */
   export type MenuCountOutputTypeCountCategoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MenuCategoryWhereInput
+  }
+
+  /**
+   * MenuCountOutputType without action
+   */
+  export type MenuCountOutputTypeCountTagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuTagWhereInput
   }
 
 
@@ -1135,16 +1357,22 @@ export namespace Prisma {
   export type CategoryMinAggregateOutputType = {
     id: number | null
     name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CategoryMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type CategoryCountAggregateOutputType = {
     id: number
     name: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -1160,16 +1388,22 @@ export namespace Prisma {
   export type CategoryMinAggregateInputType = {
     id?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CategoryMaxAggregateInputType = {
     id?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type CategoryCountAggregateInputType = {
     id?: true
     name?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -1262,6 +1496,8 @@ export namespace Prisma {
   export type CategoryGroupByOutputType = {
     id: number
     name: string
+    createdAt: Date
+    updatedAt: Date
     _count: CategoryCountAggregateOutputType | null
     _avg: CategoryAvgAggregateOutputType | null
     _sum: CategorySumAggregateOutputType | null
@@ -1286,6 +1522,8 @@ export namespace Prisma {
   export type CategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     menus?: boolean | Category$menusArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["category"]>
@@ -1293,19 +1531,25 @@ export namespace Prisma {
   export type CategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectScalar = {
     id?: boolean
     name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     menus?: boolean | Category$menusArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -1321,6 +1565,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -1747,6 +1993,8 @@ export namespace Prisma {
   interface CategoryFieldRefs {
     readonly id: FieldRef<"Category", 'Int'>
     readonly name: FieldRef<"Category", 'String'>
+    readonly createdAt: FieldRef<"Category", 'DateTime'>
+    readonly updatedAt: FieldRef<"Category", 'DateTime'>
   }
     
 
@@ -2178,6 +2426,1110 @@ export namespace Prisma {
 
 
   /**
+   * Model Tag
+   */
+
+  export type AggregateTag = {
+    _count: TagCountAggregateOutputType | null
+    _avg: TagAvgAggregateOutputType | null
+    _sum: TagSumAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  export type TagAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TagSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type TagMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TagMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    color: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TagCountAggregateOutputType = {
+    id: number
+    name: number
+    color: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TagAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type TagSumAggregateInputType = {
+    id?: true
+  }
+
+  export type TagMinAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TagMaxAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TagCountAggregateInputType = {
+    id?: true
+    name?: true
+    color?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tag to aggregate.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tags
+    **/
+    _count?: true | TagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TagAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TagSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type GetTagAggregateType<T extends TagAggregateArgs> = {
+        [P in keyof T & keyof AggregateTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTag[P]>
+      : GetScalarType<T[P], AggregateTag[P]>
+  }
+
+
+
+
+  export type TagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TagWhereInput
+    orderBy?: TagOrderByWithAggregationInput | TagOrderByWithAggregationInput[]
+    by: TagScalarFieldEnum[] | TagScalarFieldEnum
+    having?: TagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TagCountAggregateInputType | true
+    _avg?: TagAvgAggregateInputType
+    _sum?: TagSumAggregateInputType
+    _min?: TagMinAggregateInputType
+    _max?: TagMaxAggregateInputType
+  }
+
+  export type TagGroupByOutputType = {
+    id: number
+    name: string
+    color: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TagCountAggregateOutputType | null
+    _avg: TagAvgAggregateOutputType | null
+    _sum: TagSumAggregateOutputType | null
+    _min: TagMinAggregateOutputType | null
+    _max: TagMaxAggregateOutputType | null
+  }
+
+  type GetTagGroupByPayload<T extends TagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TagGroupByOutputType[P]>
+            : GetScalarType<T[P], TagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    menus?: boolean | Tag$menusArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tag"]>
+
+  export type TagSelectScalar = {
+    id?: boolean
+    name?: boolean
+    color?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color" | "createdAt" | "updatedAt", ExtArgs["result"]["tag"]>
+  export type TagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menus?: boolean | Tag$menusArgs<ExtArgs>
+    _count?: boolean | TagCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tag"
+    objects: {
+      menus: Prisma.$MenuTagPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      color: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tag"]>
+    composites: {}
+  }
+
+  type TagGetPayload<S extends boolean | null | undefined | TagDefaultArgs> = $Result.GetResult<Prisma.$TagPayload, S>
+
+  type TagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TagCountAggregateInputType | true
+    }
+
+  export interface TagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tag'], meta: { name: 'Tag' } }
+    /**
+     * Find zero or one Tag that matches the filter.
+     * @param {TagFindUniqueArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TagFindUniqueArgs>(args: SelectSubset<T, TagFindUniqueArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TagFindUniqueOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TagFindUniqueOrThrowArgs>(args: SelectSubset<T, TagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TagFindFirstArgs>(args?: SelectSubset<T, TagFindFirstArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindFirstOrThrowArgs} args - Arguments to find a Tag
+     * @example
+     * // Get one Tag
+     * const tag = await prisma.tag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TagFindFirstOrThrowArgs>(args?: SelectSubset<T, TagFindFirstOrThrowArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tags
+     * const tags = await prisma.tag.findMany()
+     * 
+     * // Get first 10 Tags
+     * const tags = await prisma.tag.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tagWithIdOnly = await prisma.tag.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TagFindManyArgs>(args?: SelectSubset<T, TagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tag.
+     * @param {TagCreateArgs} args - Arguments to create a Tag.
+     * @example
+     * // Create one Tag
+     * const Tag = await prisma.tag.create({
+     *   data: {
+     *     // ... data to create a Tag
+     *   }
+     * })
+     * 
+     */
+    create<T extends TagCreateArgs>(args: SelectSubset<T, TagCreateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tags.
+     * @param {TagCreateManyArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TagCreateManyArgs>(args?: SelectSubset<T, TagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tags and returns the data saved in the database.
+     * @param {TagCreateManyAndReturnArgs} args - Arguments to create many Tags.
+     * @example
+     * // Create many Tags
+     * const tag = await prisma.tag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TagCreateManyAndReturnArgs>(args?: SelectSubset<T, TagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tag.
+     * @param {TagDeleteArgs} args - Arguments to delete one Tag.
+     * @example
+     * // Delete one Tag
+     * const Tag = await prisma.tag.delete({
+     *   where: {
+     *     // ... filter to delete one Tag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TagDeleteArgs>(args: SelectSubset<T, TagDeleteArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tag.
+     * @param {TagUpdateArgs} args - Arguments to update one Tag.
+     * @example
+     * // Update one Tag
+     * const tag = await prisma.tag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TagUpdateArgs>(args: SelectSubset<T, TagUpdateArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tags.
+     * @param {TagDeleteManyArgs} args - Arguments to filter Tags to delete.
+     * @example
+     * // Delete a few Tags
+     * const { count } = await prisma.tag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TagDeleteManyArgs>(args?: SelectSubset<T, TagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TagUpdateManyArgs>(args: SelectSubset<T, TagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tags and returns the data updated in the database.
+     * @param {TagUpdateManyAndReturnArgs} args - Arguments to update many Tags.
+     * @example
+     * // Update many Tags
+     * const tag = await prisma.tag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tags and only return the `id`
+     * const tagWithIdOnly = await prisma.tag.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TagUpdateManyAndReturnArgs>(args: SelectSubset<T, TagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tag.
+     * @param {TagUpsertArgs} args - Arguments to update or create a Tag.
+     * @example
+     * // Update or create a Tag
+     * const tag = await prisma.tag.upsert({
+     *   create: {
+     *     // ... data to create a Tag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TagUpsertArgs>(args: SelectSubset<T, TagUpsertArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagCountArgs} args - Arguments to filter Tags to count.
+     * @example
+     * // Count the number of Tags
+     * const count = await prisma.tag.count({
+     *   where: {
+     *     // ... the filter for the Tags we want to count
+     *   }
+     * })
+    **/
+    count<T extends TagCountArgs>(
+      args?: Subset<T, TagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TagAggregateArgs>(args: Subset<T, TagAggregateArgs>): Prisma.PrismaPromise<GetTagAggregateType<T>>
+
+    /**
+     * Group by Tag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TagGroupByArgs['orderBy'] }
+        : { orderBy?: TagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tag model
+   */
+  readonly fields: TagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    menus<T extends Tag$menusArgs<ExtArgs> = {}>(args?: Subset<T, Tag$menusArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tag model
+   */
+  interface TagFieldRefs {
+    readonly id: FieldRef<"Tag", 'Int'>
+    readonly name: FieldRef<"Tag", 'String'>
+    readonly color: FieldRef<"Tag", 'String'>
+    readonly createdAt: FieldRef<"Tag", 'DateTime'>
+    readonly updatedAt: FieldRef<"Tag", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tag findUnique
+   */
+  export type TagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findUniqueOrThrow
+   */
+  export type TagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag findFirst
+   */
+  export type TagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findFirstOrThrow
+   */
+  export type TagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tag to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tags.
+     */
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag findMany
+   */
+  export type TagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter, which Tags to fetch.
+     */
+    where?: TagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tags to fetch.
+     */
+    orderBy?: TagOrderByWithRelationInput | TagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tags.
+     */
+    cursor?: TagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tags.
+     */
+    skip?: number
+    distinct?: TagScalarFieldEnum | TagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag create
+   */
+  export type TagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tag.
+     */
+    data: XOR<TagCreateInput, TagUncheckedCreateInput>
+  }
+
+  /**
+   * Tag createMany
+   */
+  export type TagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tag createManyAndReturn
+   */
+  export type TagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tags.
+     */
+    data: TagCreateManyInput | TagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tag update
+   */
+  export type TagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tag.
+     */
+    data: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+    /**
+     * Choose, which Tag to update.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag updateMany
+   */
+  export type TagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag updateManyAndReturn
+   */
+  export type TagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * The data used to update Tags.
+     */
+    data: XOR<TagUpdateManyMutationInput, TagUncheckedUpdateManyInput>
+    /**
+     * Filter which Tags to update
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag upsert
+   */
+  export type TagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tag to update in case it exists.
+     */
+    where: TagWhereUniqueInput
+    /**
+     * In case the Tag found by the `where` argument doesn't exist, create a new Tag with this data.
+     */
+    create: XOR<TagCreateInput, TagUncheckedCreateInput>
+    /**
+     * In case the Tag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TagUpdateInput, TagUncheckedUpdateInput>
+  }
+
+  /**
+   * Tag delete
+   */
+  export type TagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+    /**
+     * Filter which Tag to delete.
+     */
+    where: TagWhereUniqueInput
+  }
+
+  /**
+   * Tag deleteMany
+   */
+  export type TagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tags to delete
+     */
+    where?: TagWhereInput
+    /**
+     * Limit how many Tags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tag.menus
+   */
+  export type Tag$menusArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    where?: MenuTagWhereInput
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    cursor?: MenuTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuTagScalarFieldEnum | MenuTagScalarFieldEnum[]
+  }
+
+  /**
+   * Tag without action
+   */
+  export type TagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tag
+     */
+    select?: TagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tag
+     */
+    omit?: TagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TagInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Menu
    */
 
@@ -2231,7 +3583,6 @@ export namespace Prisma {
     imageUrl: number
     isAvailable: number
     taxIncluded: number
-    tags: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2280,7 +3631,6 @@ export namespace Prisma {
     imageUrl?: true
     isAvailable?: true
     taxIncluded?: true
-    tags?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2380,7 +3730,6 @@ export namespace Prisma {
     imageUrl: string | null
     isAvailable: boolean
     taxIncluded: boolean
-    tags: string[]
     createdAt: Date
     updatedAt: Date
     _count: MenuCountAggregateOutputType | null
@@ -2412,10 +3761,10 @@ export namespace Prisma {
     imageUrl?: boolean
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
+    tags?: boolean | Menu$tagsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menu"]>
 
@@ -2427,7 +3776,6 @@ export namespace Prisma {
     imageUrl?: boolean
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["menu"]>
@@ -2440,7 +3788,6 @@ export namespace Prisma {
     imageUrl?: boolean
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["menu"]>
@@ -2453,14 +3800,14 @@ export namespace Prisma {
     imageUrl?: boolean
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageUrl" | "isAvailable" | "taxIncluded" | "tags" | "createdAt" | "updatedAt", ExtArgs["result"]["menu"]>
+  export type MenuOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageUrl" | "isAvailable" | "taxIncluded" | "createdAt" | "updatedAt", ExtArgs["result"]["menu"]>
   export type MenuInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categories?: boolean | Menu$categoriesArgs<ExtArgs>
+    tags?: boolean | Menu$tagsArgs<ExtArgs>
     _count?: boolean | MenuCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MenuIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2470,6 +3817,7 @@ export namespace Prisma {
     name: "Menu"
     objects: {
       categories: Prisma.$MenuCategoryPayload<ExtArgs>[]
+      tags: Prisma.$MenuTagPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2479,7 +3827,6 @@ export namespace Prisma {
       imageUrl: string | null
       isAvailable: boolean
       taxIncluded: boolean
-      tags: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["menu"]>
@@ -2877,6 +4224,7 @@ export namespace Prisma {
   export interface Prisma__MenuClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     categories<T extends Menu$categoriesArgs<ExtArgs> = {}>(args?: Subset<T, Menu$categoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tags<T extends Menu$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Menu$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2913,7 +4261,6 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"Menu", 'String'>
     readonly isAvailable: FieldRef<"Menu", 'Boolean'>
     readonly taxIncluded: FieldRef<"Menu", 'Boolean'>
-    readonly tags: FieldRef<"Menu", 'String[]'>
     readonly createdAt: FieldRef<"Menu", 'DateTime'>
     readonly updatedAt: FieldRef<"Menu", 'DateTime'>
   }
@@ -3325,6 +4672,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MenuCategoryScalarFieldEnum | MenuCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * Menu.tags
+   */
+  export type Menu$tagsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    where?: MenuTagWhereInput
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    cursor?: MenuTagWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MenuTagScalarFieldEnum | MenuTagScalarFieldEnum[]
   }
 
   /**
@@ -4412,6 +5783,1071 @@ export namespace Prisma {
 
 
   /**
+   * Model MenuTag
+   */
+
+  export type AggregateMenuTag = {
+    _count: MenuTagCountAggregateOutputType | null
+    _avg: MenuTagAvgAggregateOutputType | null
+    _sum: MenuTagSumAggregateOutputType | null
+    _min: MenuTagMinAggregateOutputType | null
+    _max: MenuTagMaxAggregateOutputType | null
+  }
+
+  export type MenuTagAvgAggregateOutputType = {
+    menuId: number | null
+    tagId: number | null
+  }
+
+  export type MenuTagSumAggregateOutputType = {
+    menuId: number | null
+    tagId: number | null
+  }
+
+  export type MenuTagMinAggregateOutputType = {
+    menuId: number | null
+    tagId: number | null
+  }
+
+  export type MenuTagMaxAggregateOutputType = {
+    menuId: number | null
+    tagId: number | null
+  }
+
+  export type MenuTagCountAggregateOutputType = {
+    menuId: number
+    tagId: number
+    _all: number
+  }
+
+
+  export type MenuTagAvgAggregateInputType = {
+    menuId?: true
+    tagId?: true
+  }
+
+  export type MenuTagSumAggregateInputType = {
+    menuId?: true
+    tagId?: true
+  }
+
+  export type MenuTagMinAggregateInputType = {
+    menuId?: true
+    tagId?: true
+  }
+
+  export type MenuTagMaxAggregateInputType = {
+    menuId?: true
+    tagId?: true
+  }
+
+  export type MenuTagCountAggregateInputType = {
+    menuId?: true
+    tagId?: true
+    _all?: true
+  }
+
+  export type MenuTagAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MenuTag to aggregate.
+     */
+    where?: MenuTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuTags to fetch.
+     */
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MenuTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MenuTags
+    **/
+    _count?: true | MenuTagCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: MenuTagAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: MenuTagSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MenuTagMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MenuTagMaxAggregateInputType
+  }
+
+  export type GetMenuTagAggregateType<T extends MenuTagAggregateArgs> = {
+        [P in keyof T & keyof AggregateMenuTag]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMenuTag[P]>
+      : GetScalarType<T[P], AggregateMenuTag[P]>
+  }
+
+
+
+
+  export type MenuTagGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MenuTagWhereInput
+    orderBy?: MenuTagOrderByWithAggregationInput | MenuTagOrderByWithAggregationInput[]
+    by: MenuTagScalarFieldEnum[] | MenuTagScalarFieldEnum
+    having?: MenuTagScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MenuTagCountAggregateInputType | true
+    _avg?: MenuTagAvgAggregateInputType
+    _sum?: MenuTagSumAggregateInputType
+    _min?: MenuTagMinAggregateInputType
+    _max?: MenuTagMaxAggregateInputType
+  }
+
+  export type MenuTagGroupByOutputType = {
+    menuId: number
+    tagId: number
+    _count: MenuTagCountAggregateOutputType | null
+    _avg: MenuTagAvgAggregateOutputType | null
+    _sum: MenuTagSumAggregateOutputType | null
+    _min: MenuTagMinAggregateOutputType | null
+    _max: MenuTagMaxAggregateOutputType | null
+  }
+
+  type GetMenuTagGroupByPayload<T extends MenuTagGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MenuTagGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MenuTagGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MenuTagGroupByOutputType[P]>
+            : GetScalarType<T[P], MenuTagGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MenuTagSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    menuId?: boolean
+    tagId?: boolean
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuTag"]>
+
+  export type MenuTagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    menuId?: boolean
+    tagId?: boolean
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuTag"]>
+
+  export type MenuTagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    menuId?: boolean
+    tagId?: boolean
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["menuTag"]>
+
+  export type MenuTagSelectScalar = {
+    menuId?: boolean
+    tagId?: boolean
+  }
+
+  export type MenuTagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"menuId" | "tagId", ExtArgs["result"]["menuTag"]>
+  export type MenuTagInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }
+  export type MenuTagIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }
+  export type MenuTagIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    menu?: boolean | MenuDefaultArgs<ExtArgs>
+    tag?: boolean | TagDefaultArgs<ExtArgs>
+  }
+
+  export type $MenuTagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MenuTag"
+    objects: {
+      menu: Prisma.$MenuPayload<ExtArgs>
+      tag: Prisma.$TagPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      menuId: number
+      tagId: number
+    }, ExtArgs["result"]["menuTag"]>
+    composites: {}
+  }
+
+  type MenuTagGetPayload<S extends boolean | null | undefined | MenuTagDefaultArgs> = $Result.GetResult<Prisma.$MenuTagPayload, S>
+
+  type MenuTagCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MenuTagFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MenuTagCountAggregateInputType | true
+    }
+
+  export interface MenuTagDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MenuTag'], meta: { name: 'MenuTag' } }
+    /**
+     * Find zero or one MenuTag that matches the filter.
+     * @param {MenuTagFindUniqueArgs} args - Arguments to find a MenuTag
+     * @example
+     * // Get one MenuTag
+     * const menuTag = await prisma.menuTag.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MenuTagFindUniqueArgs>(args: SelectSubset<T, MenuTagFindUniqueArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MenuTag that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MenuTagFindUniqueOrThrowArgs} args - Arguments to find a MenuTag
+     * @example
+     * // Get one MenuTag
+     * const menuTag = await prisma.menuTag.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MenuTagFindUniqueOrThrowArgs>(args: SelectSubset<T, MenuTagFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MenuTag that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagFindFirstArgs} args - Arguments to find a MenuTag
+     * @example
+     * // Get one MenuTag
+     * const menuTag = await prisma.menuTag.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MenuTagFindFirstArgs>(args?: SelectSubset<T, MenuTagFindFirstArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MenuTag that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagFindFirstOrThrowArgs} args - Arguments to find a MenuTag
+     * @example
+     * // Get one MenuTag
+     * const menuTag = await prisma.menuTag.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MenuTagFindFirstOrThrowArgs>(args?: SelectSubset<T, MenuTagFindFirstOrThrowArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MenuTags that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MenuTags
+     * const menuTags = await prisma.menuTag.findMany()
+     * 
+     * // Get first 10 MenuTags
+     * const menuTags = await prisma.menuTag.findMany({ take: 10 })
+     * 
+     * // Only select the `menuId`
+     * const menuTagWithMenuIdOnly = await prisma.menuTag.findMany({ select: { menuId: true } })
+     * 
+     */
+    findMany<T extends MenuTagFindManyArgs>(args?: SelectSubset<T, MenuTagFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MenuTag.
+     * @param {MenuTagCreateArgs} args - Arguments to create a MenuTag.
+     * @example
+     * // Create one MenuTag
+     * const MenuTag = await prisma.menuTag.create({
+     *   data: {
+     *     // ... data to create a MenuTag
+     *   }
+     * })
+     * 
+     */
+    create<T extends MenuTagCreateArgs>(args: SelectSubset<T, MenuTagCreateArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MenuTags.
+     * @param {MenuTagCreateManyArgs} args - Arguments to create many MenuTags.
+     * @example
+     * // Create many MenuTags
+     * const menuTag = await prisma.menuTag.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MenuTagCreateManyArgs>(args?: SelectSubset<T, MenuTagCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MenuTags and returns the data saved in the database.
+     * @param {MenuTagCreateManyAndReturnArgs} args - Arguments to create many MenuTags.
+     * @example
+     * // Create many MenuTags
+     * const menuTag = await prisma.menuTag.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MenuTags and only return the `menuId`
+     * const menuTagWithMenuIdOnly = await prisma.menuTag.createManyAndReturn({
+     *   select: { menuId: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MenuTagCreateManyAndReturnArgs>(args?: SelectSubset<T, MenuTagCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MenuTag.
+     * @param {MenuTagDeleteArgs} args - Arguments to delete one MenuTag.
+     * @example
+     * // Delete one MenuTag
+     * const MenuTag = await prisma.menuTag.delete({
+     *   where: {
+     *     // ... filter to delete one MenuTag
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MenuTagDeleteArgs>(args: SelectSubset<T, MenuTagDeleteArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MenuTag.
+     * @param {MenuTagUpdateArgs} args - Arguments to update one MenuTag.
+     * @example
+     * // Update one MenuTag
+     * const menuTag = await prisma.menuTag.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MenuTagUpdateArgs>(args: SelectSubset<T, MenuTagUpdateArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MenuTags.
+     * @param {MenuTagDeleteManyArgs} args - Arguments to filter MenuTags to delete.
+     * @example
+     * // Delete a few MenuTags
+     * const { count } = await prisma.menuTag.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MenuTagDeleteManyArgs>(args?: SelectSubset<T, MenuTagDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MenuTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MenuTags
+     * const menuTag = await prisma.menuTag.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MenuTagUpdateManyArgs>(args: SelectSubset<T, MenuTagUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MenuTags and returns the data updated in the database.
+     * @param {MenuTagUpdateManyAndReturnArgs} args - Arguments to update many MenuTags.
+     * @example
+     * // Update many MenuTags
+     * const menuTag = await prisma.menuTag.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MenuTags and only return the `menuId`
+     * const menuTagWithMenuIdOnly = await prisma.menuTag.updateManyAndReturn({
+     *   select: { menuId: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MenuTagUpdateManyAndReturnArgs>(args: SelectSubset<T, MenuTagUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MenuTag.
+     * @param {MenuTagUpsertArgs} args - Arguments to update or create a MenuTag.
+     * @example
+     * // Update or create a MenuTag
+     * const menuTag = await prisma.menuTag.upsert({
+     *   create: {
+     *     // ... data to create a MenuTag
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MenuTag we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MenuTagUpsertArgs>(args: SelectSubset<T, MenuTagUpsertArgs<ExtArgs>>): Prisma__MenuTagClient<$Result.GetResult<Prisma.$MenuTagPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MenuTags.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagCountArgs} args - Arguments to filter MenuTags to count.
+     * @example
+     * // Count the number of MenuTags
+     * const count = await prisma.menuTag.count({
+     *   where: {
+     *     // ... the filter for the MenuTags we want to count
+     *   }
+     * })
+    **/
+    count<T extends MenuTagCountArgs>(
+      args?: Subset<T, MenuTagCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MenuTagCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MenuTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MenuTagAggregateArgs>(args: Subset<T, MenuTagAggregateArgs>): Prisma.PrismaPromise<GetMenuTagAggregateType<T>>
+
+    /**
+     * Group by MenuTag.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MenuTagGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MenuTagGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MenuTagGroupByArgs['orderBy'] }
+        : { orderBy?: MenuTagGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MenuTagGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMenuTagGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MenuTag model
+   */
+  readonly fields: MenuTagFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MenuTag.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MenuTagClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    menu<T extends MenuDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MenuDefaultArgs<ExtArgs>>): Prisma__MenuClient<$Result.GetResult<Prisma.$MenuPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    tag<T extends TagDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TagDefaultArgs<ExtArgs>>): Prisma__TagClient<$Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MenuTag model
+   */
+  interface MenuTagFieldRefs {
+    readonly menuId: FieldRef<"MenuTag", 'Int'>
+    readonly tagId: FieldRef<"MenuTag", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MenuTag findUnique
+   */
+  export type MenuTagFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuTag to fetch.
+     */
+    where: MenuTagWhereUniqueInput
+  }
+
+  /**
+   * MenuTag findUniqueOrThrow
+   */
+  export type MenuTagFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuTag to fetch.
+     */
+    where: MenuTagWhereUniqueInput
+  }
+
+  /**
+   * MenuTag findFirst
+   */
+  export type MenuTagFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuTag to fetch.
+     */
+    where?: MenuTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuTags to fetch.
+     */
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MenuTags.
+     */
+    cursor?: MenuTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MenuTags.
+     */
+    distinct?: MenuTagScalarFieldEnum | MenuTagScalarFieldEnum[]
+  }
+
+  /**
+   * MenuTag findFirstOrThrow
+   */
+  export type MenuTagFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuTag to fetch.
+     */
+    where?: MenuTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuTags to fetch.
+     */
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MenuTags.
+     */
+    cursor?: MenuTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuTags.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MenuTags.
+     */
+    distinct?: MenuTagScalarFieldEnum | MenuTagScalarFieldEnum[]
+  }
+
+  /**
+   * MenuTag findMany
+   */
+  export type MenuTagFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter, which MenuTags to fetch.
+     */
+    where?: MenuTagWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MenuTags to fetch.
+     */
+    orderBy?: MenuTagOrderByWithRelationInput | MenuTagOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MenuTags.
+     */
+    cursor?: MenuTagWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MenuTags from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MenuTags.
+     */
+    skip?: number
+    distinct?: MenuTagScalarFieldEnum | MenuTagScalarFieldEnum[]
+  }
+
+  /**
+   * MenuTag create
+   */
+  export type MenuTagCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MenuTag.
+     */
+    data: XOR<MenuTagCreateInput, MenuTagUncheckedCreateInput>
+  }
+
+  /**
+   * MenuTag createMany
+   */
+  export type MenuTagCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MenuTags.
+     */
+    data: MenuTagCreateManyInput | MenuTagCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MenuTag createManyAndReturn
+   */
+  export type MenuTagCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * The data used to create many MenuTags.
+     */
+    data: MenuTagCreateManyInput | MenuTagCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MenuTag update
+   */
+  export type MenuTagUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MenuTag.
+     */
+    data: XOR<MenuTagUpdateInput, MenuTagUncheckedUpdateInput>
+    /**
+     * Choose, which MenuTag to update.
+     */
+    where: MenuTagWhereUniqueInput
+  }
+
+  /**
+   * MenuTag updateMany
+   */
+  export type MenuTagUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MenuTags.
+     */
+    data: XOR<MenuTagUpdateManyMutationInput, MenuTagUncheckedUpdateManyInput>
+    /**
+     * Filter which MenuTags to update
+     */
+    where?: MenuTagWhereInput
+    /**
+     * Limit how many MenuTags to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MenuTag updateManyAndReturn
+   */
+  export type MenuTagUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * The data used to update MenuTags.
+     */
+    data: XOR<MenuTagUpdateManyMutationInput, MenuTagUncheckedUpdateManyInput>
+    /**
+     * Filter which MenuTags to update
+     */
+    where?: MenuTagWhereInput
+    /**
+     * Limit how many MenuTags to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MenuTag upsert
+   */
+  export type MenuTagUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MenuTag to update in case it exists.
+     */
+    where: MenuTagWhereUniqueInput
+    /**
+     * In case the MenuTag found by the `where` argument doesn't exist, create a new MenuTag with this data.
+     */
+    create: XOR<MenuTagCreateInput, MenuTagUncheckedCreateInput>
+    /**
+     * In case the MenuTag was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MenuTagUpdateInput, MenuTagUncheckedUpdateInput>
+  }
+
+  /**
+   * MenuTag delete
+   */
+  export type MenuTagDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+    /**
+     * Filter which MenuTag to delete.
+     */
+    where: MenuTagWhereUniqueInput
+  }
+
+  /**
+   * MenuTag deleteMany
+   */
+  export type MenuTagDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MenuTags to delete
+     */
+    where?: MenuTagWhereInput
+    /**
+     * Limit how many MenuTags to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MenuTag without action
+   */
+  export type MenuTagDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MenuTag
+     */
+    select?: MenuTagSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MenuTag
+     */
+    omit?: MenuTagOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MenuTagInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4427,10 +6863,23 @@ export namespace Prisma {
 
   export const CategoryScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
+
+
+  export const TagScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    color: 'color',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TagScalarFieldEnum = (typeof TagScalarFieldEnum)[keyof typeof TagScalarFieldEnum]
 
 
   export const MenuScalarFieldEnum: {
@@ -4441,7 +6890,6 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     isAvailable: 'isAvailable',
     taxIncluded: 'taxIncluded',
-    tags: 'tags',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4455,6 +6903,14 @@ export namespace Prisma {
   };
 
   export type MenuCategoryScalarFieldEnum = (typeof MenuCategoryScalarFieldEnum)[keyof typeof MenuCategoryScalarFieldEnum]
+
+
+  export const MenuTagScalarFieldEnum: {
+    menuId: 'menuId',
+    tagId: 'tagId'
+  };
+
+  export type MenuTagScalarFieldEnum = (typeof MenuTagScalarFieldEnum)[keyof typeof MenuTagScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4515,13 +6971,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -4532,6 +6981,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -4558,27 +7014,35 @@ export namespace Prisma {
     NOT?: CategoryWhereInput | CategoryWhereInput[]
     id?: IntFilter<"Category"> | number
     name?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
     menus?: MenuCategoryListRelationFilter
   }
 
   export type CategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     menus?: MenuCategoryOrderByRelationAggregateInput
   }
 
   export type CategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    name?: string
     AND?: CategoryWhereInput | CategoryWhereInput[]
     OR?: CategoryWhereInput[]
     NOT?: CategoryWhereInput | CategoryWhereInput[]
-    name?: StringFilter<"Category"> | string
+    createdAt?: DateTimeFilter<"Category"> | Date | string
+    updatedAt?: DateTimeFilter<"Category"> | Date | string
     menus?: MenuCategoryListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type CategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _avg?: CategoryAvgOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
@@ -4592,6 +7056,65 @@ export namespace Prisma {
     NOT?: CategoryScalarWhereWithAggregatesInput | CategoryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Category"> | number
     name?: StringWithAggregatesFilter<"Category"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+  }
+
+  export type TagWhereInput = {
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    id?: IntFilter<"Tag"> | number
+    name?: StringFilter<"Tag"> | string
+    color?: StringNullableFilter<"Tag"> | string | null
+    createdAt?: DateTimeFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeFilter<"Tag"> | Date | string
+    menus?: MenuTagListRelationFilter
+  }
+
+  export type TagOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    menus?: MenuTagOrderByRelationAggregateInput
+  }
+
+  export type TagWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: TagWhereInput | TagWhereInput[]
+    OR?: TagWhereInput[]
+    NOT?: TagWhereInput | TagWhereInput[]
+    color?: StringNullableFilter<"Tag"> | string | null
+    createdAt?: DateTimeFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeFilter<"Tag"> | Date | string
+    menus?: MenuTagListRelationFilter
+  }, "id" | "name">
+
+  export type TagOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TagCountOrderByAggregateInput
+    _avg?: TagAvgOrderByAggregateInput
+    _max?: TagMaxOrderByAggregateInput
+    _min?: TagMinOrderByAggregateInput
+    _sum?: TagSumOrderByAggregateInput
+  }
+
+  export type TagScalarWhereWithAggregatesInput = {
+    AND?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    OR?: TagScalarWhereWithAggregatesInput[]
+    NOT?: TagScalarWhereWithAggregatesInput | TagScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Tag"> | number
+    name?: StringWithAggregatesFilter<"Tag"> | string
+    color?: StringNullableWithAggregatesFilter<"Tag"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Tag"> | Date | string
   }
 
   export type MenuWhereInput = {
@@ -4605,10 +7128,10 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"Menu"> | string | null
     isAvailable?: BoolFilter<"Menu"> | boolean
     taxIncluded?: BoolFilter<"Menu"> | boolean
-    tags?: StringNullableListFilter<"Menu">
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     categories?: MenuCategoryListRelationFilter
+    tags?: MenuTagListRelationFilter
   }
 
   export type MenuOrderByWithRelationInput = {
@@ -4619,28 +7142,28 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     isAvailable?: SortOrder
     taxIncluded?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     categories?: MenuCategoryOrderByRelationAggregateInput
+    tags?: MenuTagOrderByRelationAggregateInput
   }
 
   export type MenuWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    name?: string
     AND?: MenuWhereInput | MenuWhereInput[]
     OR?: MenuWhereInput[]
     NOT?: MenuWhereInput | MenuWhereInput[]
-    name?: StringFilter<"Menu"> | string
     description?: StringNullableFilter<"Menu"> | string | null
     price?: IntFilter<"Menu"> | number
     imageUrl?: StringNullableFilter<"Menu"> | string | null
     isAvailable?: BoolFilter<"Menu"> | boolean
     taxIncluded?: BoolFilter<"Menu"> | boolean
-    tags?: StringNullableListFilter<"Menu">
     createdAt?: DateTimeFilter<"Menu"> | Date | string
     updatedAt?: DateTimeFilter<"Menu"> | Date | string
     categories?: MenuCategoryListRelationFilter
-  }, "id">
+    tags?: MenuTagListRelationFilter
+  }, "id" | "name">
 
   export type MenuOrderByWithAggregationInput = {
     id?: SortOrder
@@ -4650,7 +7173,6 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     isAvailable?: SortOrder
     taxIncluded?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: MenuCountOrderByAggregateInput
@@ -4671,7 +7193,6 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"Menu"> | string | null
     isAvailable?: BoolWithAggregatesFilter<"Menu"> | boolean
     taxIncluded?: BoolWithAggregatesFilter<"Menu"> | boolean
-    tags?: StringNullableListFilter<"Menu">
     createdAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Menu"> | Date | string
   }
@@ -4722,40 +7243,157 @@ export namespace Prisma {
     categoryId?: IntWithAggregatesFilter<"MenuCategory"> | number
   }
 
+  export type MenuTagWhereInput = {
+    AND?: MenuTagWhereInput | MenuTagWhereInput[]
+    OR?: MenuTagWhereInput[]
+    NOT?: MenuTagWhereInput | MenuTagWhereInput[]
+    menuId?: IntFilter<"MenuTag"> | number
+    tagId?: IntFilter<"MenuTag"> | number
+    menu?: XOR<MenuScalarRelationFilter, MenuWhereInput>
+    tag?: XOR<TagScalarRelationFilter, TagWhereInput>
+  }
+
+  export type MenuTagOrderByWithRelationInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+    menu?: MenuOrderByWithRelationInput
+    tag?: TagOrderByWithRelationInput
+  }
+
+  export type MenuTagWhereUniqueInput = Prisma.AtLeast<{
+    menuId_tagId?: MenuTagMenuIdTagIdCompoundUniqueInput
+    AND?: MenuTagWhereInput | MenuTagWhereInput[]
+    OR?: MenuTagWhereInput[]
+    NOT?: MenuTagWhereInput | MenuTagWhereInput[]
+    menuId?: IntFilter<"MenuTag"> | number
+    tagId?: IntFilter<"MenuTag"> | number
+    menu?: XOR<MenuScalarRelationFilter, MenuWhereInput>
+    tag?: XOR<TagScalarRelationFilter, TagWhereInput>
+  }, "menuId_tagId">
+
+  export type MenuTagOrderByWithAggregationInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+    _count?: MenuTagCountOrderByAggregateInput
+    _avg?: MenuTagAvgOrderByAggregateInput
+    _max?: MenuTagMaxOrderByAggregateInput
+    _min?: MenuTagMinOrderByAggregateInput
+    _sum?: MenuTagSumOrderByAggregateInput
+  }
+
+  export type MenuTagScalarWhereWithAggregatesInput = {
+    AND?: MenuTagScalarWhereWithAggregatesInput | MenuTagScalarWhereWithAggregatesInput[]
+    OR?: MenuTagScalarWhereWithAggregatesInput[]
+    NOT?: MenuTagScalarWhereWithAggregatesInput | MenuTagScalarWhereWithAggregatesInput[]
+    menuId?: IntWithAggregatesFilter<"MenuTag"> | number
+    tagId?: IntWithAggregatesFilter<"MenuTag"> | number
+  }
+
   export type CategoryCreateInput = {
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     menus?: MenuCategoryCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUncheckedCreateInput = {
     id?: number
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     menus?: MenuCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type CategoryUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     menus?: MenuCategoryUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     menus?: MenuCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type CategoryCreateManyInput = {
     id?: number
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CategoryUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagCreateInput = {
+    name: string
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menus?: MenuTagCreateNestedManyWithoutTagInput
+  }
+
+  export type TagUncheckedCreateInput = {
+    id?: number
+    name: string
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menus?: MenuTagUncheckedCreateNestedManyWithoutTagInput
+  }
+
+  export type TagUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menus?: MenuTagUpdateManyWithoutTagNestedInput
+  }
+
+  export type TagUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menus?: MenuTagUncheckedUpdateManyWithoutTagNestedInput
+  }
+
+  export type TagCreateManyInput = {
+    id?: number
+    name: string
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MenuCreateInput = {
@@ -4765,10 +7403,10 @@ export namespace Prisma {
     imageUrl?: string | null
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: MenuCreatetagsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: MenuCategoryCreateNestedManyWithoutMenuInput
+    tags?: MenuTagCreateNestedManyWithoutMenuInput
   }
 
   export type MenuUncheckedCreateInput = {
@@ -4779,10 +7417,10 @@ export namespace Prisma {
     imageUrl?: string | null
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: MenuCreatetagsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
+    tags?: MenuTagUncheckedCreateNestedManyWithoutMenuInput
   }
 
   export type MenuUpdateInput = {
@@ -4792,10 +7430,10 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
+    tags?: MenuTagUpdateManyWithoutMenuNestedInput
   }
 
   export type MenuUncheckedUpdateInput = {
@@ -4806,10 +7444,10 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
+    tags?: MenuTagUncheckedUpdateManyWithoutMenuNestedInput
   }
 
   export type MenuCreateManyInput = {
@@ -4820,7 +7458,6 @@ export namespace Prisma {
     imageUrl?: string | null
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: MenuCreatetagsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4832,7 +7469,6 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4845,7 +7481,6 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4884,6 +7519,40 @@ export namespace Prisma {
     categoryId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type MenuTagCreateInput = {
+    menu: MenuCreateNestedOneWithoutTagsInput
+    tag: TagCreateNestedOneWithoutMenusInput
+  }
+
+  export type MenuTagUncheckedCreateInput = {
+    menuId: number
+    tagId: number
+  }
+
+  export type MenuTagUpdateInput = {
+    menu?: MenuUpdateOneRequiredWithoutTagsNestedInput
+    tag?: TagUpdateOneRequiredWithoutMenusNestedInput
+  }
+
+  export type MenuTagUncheckedUpdateInput = {
+    menuId?: IntFieldUpdateOperationsInput | number
+    tagId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MenuTagCreateManyInput = {
+    menuId: number
+    tagId: number
+  }
+
+  export type MenuTagUpdateManyMutationInput = {
+
+  }
+
+  export type MenuTagUncheckedUpdateManyInput = {
+    menuId?: IntFieldUpdateOperationsInput | number
+    tagId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -4910,6 +7579,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
   export type MenuCategoryListRelationFilter = {
     every?: MenuCategoryWhereInput
     some?: MenuCategoryWhereInput
@@ -4923,6 +7603,8 @@ export namespace Prisma {
   export type CategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategoryAvgOrderByAggregateInput = {
@@ -4932,11 +7614,15 @@ export namespace Prisma {
   export type CategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type CategorySumOrderByAggregateInput = {
@@ -4977,6 +7663,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4992,33 +7692,74 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type StringNullableListFilter<$PrismaModel = never> = {
-    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    has?: string | StringFieldRefInput<$PrismaModel> | null
-    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
-    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type MenuTagListRelationFilter = {
+    every?: MenuTagWhereInput
+    some?: MenuTagWhereInput
+    none?: MenuTagWhereInput
   }
 
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type MenuTagOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TagCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type TagMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    color?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TagSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type MenuCountOrderByAggregateInput = {
@@ -5029,7 +7770,6 @@ export namespace Prisma {
     imageUrl?: SortOrder
     isAvailable?: SortOrder
     taxIncluded?: SortOrder
-    tags?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5068,44 +7808,12 @@ export namespace Prisma {
     price?: SortOrder
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type MenuScalarRelationFilter = {
@@ -5148,6 +7856,41 @@ export namespace Prisma {
     categoryId?: SortOrder
   }
 
+  export type TagScalarRelationFilter = {
+    is?: TagWhereInput
+    isNot?: TagWhereInput
+  }
+
+  export type MenuTagMenuIdTagIdCompoundUniqueInput = {
+    menuId: number
+    tagId: number
+  }
+
+  export type MenuTagCountOrderByAggregateInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+  }
+
+  export type MenuTagAvgOrderByAggregateInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+  }
+
+  export type MenuTagMaxOrderByAggregateInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+  }
+
+  export type MenuTagMinOrderByAggregateInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+  }
+
+  export type MenuTagSumOrderByAggregateInput = {
+    menuId?: SortOrder
+    tagId?: SortOrder
+  }
+
   export type MenuCategoryCreateNestedManyWithoutCategoryInput = {
     create?: XOR<MenuCategoryCreateWithoutCategoryInput, MenuCategoryUncheckedCreateWithoutCategoryInput> | MenuCategoryCreateWithoutCategoryInput[] | MenuCategoryUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutCategoryInput | MenuCategoryCreateOrConnectWithoutCategoryInput[]
@@ -5164,6 +7907,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type MenuCategoryUpdateManyWithoutCategoryNestedInput = {
@@ -5202,8 +7949,50 @@ export namespace Prisma {
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
   }
 
-  export type MenuCreatetagsInput = {
-    set: string[]
+  export type MenuTagCreateNestedManyWithoutTagInput = {
+    create?: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput> | MenuTagCreateWithoutTagInput[] | MenuTagUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutTagInput | MenuTagCreateOrConnectWithoutTagInput[]
+    createMany?: MenuTagCreateManyTagInputEnvelope
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+  }
+
+  export type MenuTagUncheckedCreateNestedManyWithoutTagInput = {
+    create?: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput> | MenuTagCreateWithoutTagInput[] | MenuTagUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutTagInput | MenuTagCreateOrConnectWithoutTagInput[]
+    createMany?: MenuTagCreateManyTagInputEnvelope
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type MenuTagUpdateManyWithoutTagNestedInput = {
+    create?: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput> | MenuTagCreateWithoutTagInput[] | MenuTagUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutTagInput | MenuTagCreateOrConnectWithoutTagInput[]
+    upsert?: MenuTagUpsertWithWhereUniqueWithoutTagInput | MenuTagUpsertWithWhereUniqueWithoutTagInput[]
+    createMany?: MenuTagCreateManyTagInputEnvelope
+    set?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    disconnect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    delete?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    update?: MenuTagUpdateWithWhereUniqueWithoutTagInput | MenuTagUpdateWithWhereUniqueWithoutTagInput[]
+    updateMany?: MenuTagUpdateManyWithWhereWithoutTagInput | MenuTagUpdateManyWithWhereWithoutTagInput[]
+    deleteMany?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
+  }
+
+  export type MenuTagUncheckedUpdateManyWithoutTagNestedInput = {
+    create?: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput> | MenuTagCreateWithoutTagInput[] | MenuTagUncheckedCreateWithoutTagInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutTagInput | MenuTagCreateOrConnectWithoutTagInput[]
+    upsert?: MenuTagUpsertWithWhereUniqueWithoutTagInput | MenuTagUpsertWithWhereUniqueWithoutTagInput[]
+    createMany?: MenuTagCreateManyTagInputEnvelope
+    set?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    disconnect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    delete?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    update?: MenuTagUpdateWithWhereUniqueWithoutTagInput | MenuTagUpdateWithWhereUniqueWithoutTagInput[]
+    updateMany?: MenuTagUpdateManyWithWhereWithoutTagInput | MenuTagUpdateManyWithWhereWithoutTagInput[]
+    deleteMany?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
   }
 
   export type MenuCategoryCreateNestedManyWithoutMenuInput = {
@@ -5213,6 +8002,13 @@ export namespace Prisma {
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
   }
 
+  export type MenuTagCreateNestedManyWithoutMenuInput = {
+    create?: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput> | MenuTagCreateWithoutMenuInput[] | MenuTagUncheckedCreateWithoutMenuInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutMenuInput | MenuTagCreateOrConnectWithoutMenuInput[]
+    createMany?: MenuTagCreateManyMenuInputEnvelope
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+  }
+
   export type MenuCategoryUncheckedCreateNestedManyWithoutMenuInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
@@ -5220,21 +8016,15 @@ export namespace Prisma {
     connect?: MenuCategoryWhereUniqueInput | MenuCategoryWhereUniqueInput[]
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type MenuTagUncheckedCreateNestedManyWithoutMenuInput = {
+    create?: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput> | MenuTagCreateWithoutMenuInput[] | MenuTagUncheckedCreateWithoutMenuInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutMenuInput | MenuTagCreateOrConnectWithoutMenuInput[]
+    createMany?: MenuTagCreateManyMenuInputEnvelope
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
-  }
-
-  export type MenuUpdatetagsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type MenuCategoryUpdateManyWithoutMenuNestedInput = {
@@ -5251,6 +8041,20 @@ export namespace Prisma {
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
   }
 
+  export type MenuTagUpdateManyWithoutMenuNestedInput = {
+    create?: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput> | MenuTagCreateWithoutMenuInput[] | MenuTagUncheckedCreateWithoutMenuInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutMenuInput | MenuTagCreateOrConnectWithoutMenuInput[]
+    upsert?: MenuTagUpsertWithWhereUniqueWithoutMenuInput | MenuTagUpsertWithWhereUniqueWithoutMenuInput[]
+    createMany?: MenuTagCreateManyMenuInputEnvelope
+    set?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    disconnect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    delete?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    update?: MenuTagUpdateWithWhereUniqueWithoutMenuInput | MenuTagUpdateWithWhereUniqueWithoutMenuInput[]
+    updateMany?: MenuTagUpdateManyWithWhereWithoutMenuInput | MenuTagUpdateManyWithWhereWithoutMenuInput[]
+    deleteMany?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
+  }
+
   export type MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput = {
     create?: XOR<MenuCategoryCreateWithoutMenuInput, MenuCategoryUncheckedCreateWithoutMenuInput> | MenuCategoryCreateWithoutMenuInput[] | MenuCategoryUncheckedCreateWithoutMenuInput[]
     connectOrCreate?: MenuCategoryCreateOrConnectWithoutMenuInput | MenuCategoryCreateOrConnectWithoutMenuInput[]
@@ -5263,6 +8067,20 @@ export namespace Prisma {
     update?: MenuCategoryUpdateWithWhereUniqueWithoutMenuInput | MenuCategoryUpdateWithWhereUniqueWithoutMenuInput[]
     updateMany?: MenuCategoryUpdateManyWithWhereWithoutMenuInput | MenuCategoryUpdateManyWithWhereWithoutMenuInput[]
     deleteMany?: MenuCategoryScalarWhereInput | MenuCategoryScalarWhereInput[]
+  }
+
+  export type MenuTagUncheckedUpdateManyWithoutMenuNestedInput = {
+    create?: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput> | MenuTagCreateWithoutMenuInput[] | MenuTagUncheckedCreateWithoutMenuInput[]
+    connectOrCreate?: MenuTagCreateOrConnectWithoutMenuInput | MenuTagCreateOrConnectWithoutMenuInput[]
+    upsert?: MenuTagUpsertWithWhereUniqueWithoutMenuInput | MenuTagUpsertWithWhereUniqueWithoutMenuInput[]
+    createMany?: MenuTagCreateManyMenuInputEnvelope
+    set?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    disconnect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    delete?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    connect?: MenuTagWhereUniqueInput | MenuTagWhereUniqueInput[]
+    update?: MenuTagUpdateWithWhereUniqueWithoutMenuInput | MenuTagUpdateWithWhereUniqueWithoutMenuInput[]
+    updateMany?: MenuTagUpdateManyWithWhereWithoutMenuInput | MenuTagUpdateManyWithWhereWithoutMenuInput[]
+    deleteMany?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
   }
 
   export type MenuCreateNestedOneWithoutCategoriesInput = {
@@ -5293,6 +8111,34 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutMenusInput, CategoryUpdateWithoutMenusInput>, CategoryUncheckedUpdateWithoutMenusInput>
   }
 
+  export type MenuCreateNestedOneWithoutTagsInput = {
+    create?: XOR<MenuCreateWithoutTagsInput, MenuUncheckedCreateWithoutTagsInput>
+    connectOrCreate?: MenuCreateOrConnectWithoutTagsInput
+    connect?: MenuWhereUniqueInput
+  }
+
+  export type TagCreateNestedOneWithoutMenusInput = {
+    create?: XOR<TagCreateWithoutMenusInput, TagUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: TagCreateOrConnectWithoutMenusInput
+    connect?: TagWhereUniqueInput
+  }
+
+  export type MenuUpdateOneRequiredWithoutTagsNestedInput = {
+    create?: XOR<MenuCreateWithoutTagsInput, MenuUncheckedCreateWithoutTagsInput>
+    connectOrCreate?: MenuCreateOrConnectWithoutTagsInput
+    upsert?: MenuUpsertWithoutTagsInput
+    connect?: MenuWhereUniqueInput
+    update?: XOR<XOR<MenuUpdateToOneWithWhereWithoutTagsInput, MenuUpdateWithoutTagsInput>, MenuUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type TagUpdateOneRequiredWithoutMenusNestedInput = {
+    create?: XOR<TagCreateWithoutMenusInput, TagUncheckedCreateWithoutMenusInput>
+    connectOrCreate?: TagCreateOrConnectWithoutMenusInput
+    upsert?: TagUpsertWithoutMenusInput
+    connect?: TagWhereUniqueInput
+    update?: XOR<XOR<TagUpdateToOneWithWhereWithoutMenusInput, TagUpdateWithoutMenusInput>, TagUncheckedUpdateWithoutMenusInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -5316,6 +8162,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -5362,6 +8219,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -5374,22 +8245,6 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5420,26 +8275,17 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type MenuCategoryCreateWithoutCategoryInput = {
@@ -5484,6 +8330,48 @@ export namespace Prisma {
     categoryId?: IntFilter<"MenuCategory"> | number
   }
 
+  export type MenuTagCreateWithoutTagInput = {
+    menu: MenuCreateNestedOneWithoutTagsInput
+  }
+
+  export type MenuTagUncheckedCreateWithoutTagInput = {
+    menuId: number
+  }
+
+  export type MenuTagCreateOrConnectWithoutTagInput = {
+    where: MenuTagWhereUniqueInput
+    create: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput>
+  }
+
+  export type MenuTagCreateManyTagInputEnvelope = {
+    data: MenuTagCreateManyTagInput | MenuTagCreateManyTagInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MenuTagUpsertWithWhereUniqueWithoutTagInput = {
+    where: MenuTagWhereUniqueInput
+    update: XOR<MenuTagUpdateWithoutTagInput, MenuTagUncheckedUpdateWithoutTagInput>
+    create: XOR<MenuTagCreateWithoutTagInput, MenuTagUncheckedCreateWithoutTagInput>
+  }
+
+  export type MenuTagUpdateWithWhereUniqueWithoutTagInput = {
+    where: MenuTagWhereUniqueInput
+    data: XOR<MenuTagUpdateWithoutTagInput, MenuTagUncheckedUpdateWithoutTagInput>
+  }
+
+  export type MenuTagUpdateManyWithWhereWithoutTagInput = {
+    where: MenuTagScalarWhereInput
+    data: XOR<MenuTagUpdateManyMutationInput, MenuTagUncheckedUpdateManyWithoutTagInput>
+  }
+
+  export type MenuTagScalarWhereInput = {
+    AND?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
+    OR?: MenuTagScalarWhereInput[]
+    NOT?: MenuTagScalarWhereInput | MenuTagScalarWhereInput[]
+    menuId?: IntFilter<"MenuTag"> | number
+    tagId?: IntFilter<"MenuTag"> | number
+  }
+
   export type MenuCategoryCreateWithoutMenuInput = {
     category: CategoryCreateNestedOneWithoutMenusInput
   }
@@ -5499,6 +8387,24 @@ export namespace Prisma {
 
   export type MenuCategoryCreateManyMenuInputEnvelope = {
     data: MenuCategoryCreateManyMenuInput | MenuCategoryCreateManyMenuInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MenuTagCreateWithoutMenuInput = {
+    tag: TagCreateNestedOneWithoutMenusInput
+  }
+
+  export type MenuTagUncheckedCreateWithoutMenuInput = {
+    tagId: number
+  }
+
+  export type MenuTagCreateOrConnectWithoutMenuInput = {
+    where: MenuTagWhereUniqueInput
+    create: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput>
+  }
+
+  export type MenuTagCreateManyMenuInputEnvelope = {
+    data: MenuTagCreateManyMenuInput | MenuTagCreateManyMenuInput[]
     skipDuplicates?: boolean
   }
 
@@ -5518,6 +8424,22 @@ export namespace Prisma {
     data: XOR<MenuCategoryUpdateManyMutationInput, MenuCategoryUncheckedUpdateManyWithoutMenuInput>
   }
 
+  export type MenuTagUpsertWithWhereUniqueWithoutMenuInput = {
+    where: MenuTagWhereUniqueInput
+    update: XOR<MenuTagUpdateWithoutMenuInput, MenuTagUncheckedUpdateWithoutMenuInput>
+    create: XOR<MenuTagCreateWithoutMenuInput, MenuTagUncheckedCreateWithoutMenuInput>
+  }
+
+  export type MenuTagUpdateWithWhereUniqueWithoutMenuInput = {
+    where: MenuTagWhereUniqueInput
+    data: XOR<MenuTagUpdateWithoutMenuInput, MenuTagUncheckedUpdateWithoutMenuInput>
+  }
+
+  export type MenuTagUpdateManyWithWhereWithoutMenuInput = {
+    where: MenuTagScalarWhereInput
+    data: XOR<MenuTagUpdateManyMutationInput, MenuTagUncheckedUpdateManyWithoutMenuInput>
+  }
+
   export type MenuCreateWithoutCategoriesInput = {
     name: string
     description?: string | null
@@ -5525,9 +8447,9 @@ export namespace Prisma {
     imageUrl?: string | null
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: MenuCreatetagsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: MenuTagCreateNestedManyWithoutMenuInput
   }
 
   export type MenuUncheckedCreateWithoutCategoriesInput = {
@@ -5538,9 +8460,9 @@ export namespace Prisma {
     imageUrl?: string | null
     isAvailable?: boolean
     taxIncluded?: boolean
-    tags?: MenuCreatetagsInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
+    tags?: MenuTagUncheckedCreateNestedManyWithoutMenuInput
   }
 
   export type MenuCreateOrConnectWithoutCategoriesInput = {
@@ -5550,11 +8472,15 @@ export namespace Prisma {
 
   export type CategoryCreateWithoutMenusInput = {
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CategoryUncheckedCreateWithoutMenusInput = {
     id?: number
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type CategoryCreateOrConnectWithoutMenusInput = {
@@ -5580,9 +8506,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: MenuTagUpdateManyWithoutMenuNestedInput
   }
 
   export type MenuUncheckedUpdateWithoutCategoriesInput = {
@@ -5593,9 +8519,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isAvailable?: BoolFieldUpdateOperationsInput | boolean
     taxIncluded?: BoolFieldUpdateOperationsInput | boolean
-    tags?: MenuUpdatetagsInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: MenuTagUncheckedUpdateManyWithoutMenuNestedInput
   }
 
   export type CategoryUpsertWithoutMenusInput = {
@@ -5611,11 +8537,127 @@ export namespace Prisma {
 
   export type CategoryUpdateWithoutMenusInput = {
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CategoryUncheckedUpdateWithoutMenusInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MenuCreateWithoutTagsInput = {
+    name: string
+    description?: string | null
+    price: number
+    imageUrl?: string | null
+    isAvailable?: boolean
+    taxIncluded?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: MenuCategoryCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuUncheckedCreateWithoutTagsInput = {
+    id?: number
+    name: string
+    description?: string | null
+    price: number
+    imageUrl?: string | null
+    isAvailable?: boolean
+    taxIncluded?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    categories?: MenuCategoryUncheckedCreateNestedManyWithoutMenuInput
+  }
+
+  export type MenuCreateOrConnectWithoutTagsInput = {
+    where: MenuWhereUniqueInput
+    create: XOR<MenuCreateWithoutTagsInput, MenuUncheckedCreateWithoutTagsInput>
+  }
+
+  export type TagCreateWithoutMenusInput = {
+    name: string
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagUncheckedCreateWithoutMenusInput = {
+    id?: number
+    name: string
+    color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TagCreateOrConnectWithoutMenusInput = {
+    where: TagWhereUniqueInput
+    create: XOR<TagCreateWithoutMenusInput, TagUncheckedCreateWithoutMenusInput>
+  }
+
+  export type MenuUpsertWithoutTagsInput = {
+    update: XOR<MenuUpdateWithoutTagsInput, MenuUncheckedUpdateWithoutTagsInput>
+    create: XOR<MenuCreateWithoutTagsInput, MenuUncheckedCreateWithoutTagsInput>
+    where?: MenuWhereInput
+  }
+
+  export type MenuUpdateToOneWithWhereWithoutTagsInput = {
+    where?: MenuWhereInput
+    data: XOR<MenuUpdateWithoutTagsInput, MenuUncheckedUpdateWithoutTagsInput>
+  }
+
+  export type MenuUpdateWithoutTagsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    taxIncluded?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: MenuCategoryUpdateManyWithoutMenuNestedInput
+  }
+
+  export type MenuUncheckedUpdateWithoutTagsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: IntFieldUpdateOperationsInput | number
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isAvailable?: BoolFieldUpdateOperationsInput | boolean
+    taxIncluded?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    categories?: MenuCategoryUncheckedUpdateManyWithoutMenuNestedInput
+  }
+
+  export type TagUpsertWithoutMenusInput = {
+    update: XOR<TagUpdateWithoutMenusInput, TagUncheckedUpdateWithoutMenusInput>
+    create: XOR<TagCreateWithoutMenusInput, TagUncheckedCreateWithoutMenusInput>
+    where?: TagWhereInput
+  }
+
+  export type TagUpdateToOneWithWhereWithoutMenusInput = {
+    where?: TagWhereInput
+    data: XOR<TagUpdateWithoutMenusInput, TagUncheckedUpdateWithoutMenusInput>
+  }
+
+  export type TagUpdateWithoutMenusInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TagUncheckedUpdateWithoutMenusInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MenuCategoryCreateManyCategoryInput = {
@@ -5634,8 +8676,28 @@ export namespace Prisma {
     menuId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type MenuTagCreateManyTagInput = {
+    menuId: number
+  }
+
+  export type MenuTagUpdateWithoutTagInput = {
+    menu?: MenuUpdateOneRequiredWithoutTagsNestedInput
+  }
+
+  export type MenuTagUncheckedUpdateWithoutTagInput = {
+    menuId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MenuTagUncheckedUpdateManyWithoutTagInput = {
+    menuId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type MenuCategoryCreateManyMenuInput = {
     categoryId: number
+  }
+
+  export type MenuTagCreateManyMenuInput = {
+    tagId: number
   }
 
   export type MenuCategoryUpdateWithoutMenuInput = {
@@ -5648,6 +8710,18 @@ export namespace Prisma {
 
   export type MenuCategoryUncheckedUpdateManyWithoutMenuInput = {
     categoryId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MenuTagUpdateWithoutMenuInput = {
+    tag?: TagUpdateOneRequiredWithoutMenusNestedInput
+  }
+
+  export type MenuTagUncheckedUpdateWithoutMenuInput = {
+    tagId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type MenuTagUncheckedUpdateManyWithoutMenuInput = {
+    tagId?: IntFieldUpdateOperationsInput | number
   }
 
 
