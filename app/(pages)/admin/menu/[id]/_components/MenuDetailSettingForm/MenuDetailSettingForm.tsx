@@ -7,7 +7,7 @@ import { Category } from "@/app/generated/prisma";
 import { CategoriesData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailImageField from "../MenuDetailImageField/MenuDetailImageField";
-import MenuDetailNameFiled from "../MenuDetailNameField/MenuDetailNameField";
+import MenuDetailNameFiled from "../MenuDetailName/MenuDetailNameField";
 import MenuDetailDescriptionField from "../MenuDetailDescriptionField/MenuDetailDescriptionField";
 import MenuDetailPriceField from "../MenuDetailPriceField/MenuDetailPriceField";
 import MenuDetailTaxIncludedField from "../MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";
@@ -78,9 +78,9 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
 
     // カテゴリーのバリデーション
     if (categories.length === 0) {
-    alert("カテゴリーを1つ以上選択してください");
-    return;
-  }
+      alert("カテゴリーを1つ以上選択してください");
+      return;
+    }
 
     // ダイアログの表示
     const isConfirmed = window.confirm("メニューを更新しますか?");
