@@ -127,6 +127,12 @@ exports.Prisma.CategoryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SubCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  categoryId: 'categoryId'
+};
+
 exports.Prisma.TagScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -144,12 +150,8 @@ exports.Prisma.MenuScalarFieldEnum = {
   isAvailable: 'isAvailable',
   taxIncluded: 'taxIncluded',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MenuCategoryScalarFieldEnum = {
-  menuId: 'menuId',
-  categoryId: 'categoryId'
+  updatedAt: 'updatedAt',
+  subCategoryId: 'subCategoryId'
 };
 
 exports.Prisma.MenuTagScalarFieldEnum = {
@@ -175,9 +177,9 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Category: 'Category',
+  SubCategory: 'SubCategory',
   Tag: 'Tag',
   Menu: 'Menu',
-  MenuCategory: 'MenuCategory',
   MenuTag: 'MenuTag'
 };
 

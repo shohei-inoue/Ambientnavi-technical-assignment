@@ -5,10 +5,10 @@ import TableData from "@/app/components/Table/TableData";
 import TableHead from "@/app/components/Table/TableHead";
 import TableHeader from "@/app/components/Table/TableHeader";
 import TableRow from "@/app/components/Table/TableRow";
-import { CategoriesData } from "@/app/types/types";
+import { AdminCategoriesData } from "@/app/types/types";
 
 type CategoriesTableProps = {
-  categories: CategoriesData[];
+  categories: AdminCategoriesData[];
 };
 
 const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {
@@ -18,20 +18,29 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {
         <TableHead>
           <TableHeader>ID</TableHeader>
           <TableHeader>カテゴリ名</TableHeader>
-          <TableHeader>メニュー数</TableHeader>
+          <TableHeader>サブカテゴリ数</TableHeader>
+          <TableHeader>メニュー総数</TableHeader>
         </TableHead>
         <TableBody>
-          {categories.map((category) => (
-            <TableRow
-              key={category.id}
-              href={`/admin/categories/` + category.id}
-              clickable={true}
-            >
-              <TableData>{category.id}</TableData>
-              <TableData>{category.name}</TableData>
-              <TableData>{category._count.menus}個</TableData>
-            </TableRow>
-          ))}
+          {categories.map((category) => {
+            const subCategoryCount = category.subCategories.length;
+            const menuTotalCount = category.subCategories.reduce(
+              (sum, sub) => sum + sub._count.menus,
+              0
+            );
+            return (
+              <TableRow
+                key={category.id}
+                href={`/admin/categories/${category.id}`}
+                clickable={true}
+              >
+                <TableData>{category.id}</TableData>
+                <TableData>{category.name}</TableData>
+                <TableData>{subCategoryCount}件</TableData>
+                <TableData>{menuTotalCount}件</TableData>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>

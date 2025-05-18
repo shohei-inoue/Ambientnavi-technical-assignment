@@ -1,19 +1,21 @@
 "use client";
 
-import { getMenuDetail } from "@/app/actions/menuActions";
-import { MenuData, TagData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailSettingForm from "../MenuDetailSettingForm/MenuDetailSettingForm";
 import Loader from "@/app/components/Loader/Loader";
 import Error from "@/app/components/Error/Error";
 import NoData from "@/app/components/NoData/NoData";
+import { getMenuDetail } from "@/app/actions/admin/menuActions";
+import { AdminMenuData, AdminTagData } from "@/app/types/types";
 
 type MenuDetailContentProps = {
   id: string;
 };
 
 const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
-  const [menuDetailData, setMenuDetailData] = useState<MenuData | null>(null);
+  const [menuDetailData, setMenuDetailData] = useState<AdminMenuData | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -35,7 +37,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
     fetchMenuDetail();
   }, [id]);
 
-  const handleFormateTags = (tags: TagData[]): string[] => {
+  const handleFormateTags = (tags: AdminTagData[]): string[] => {
     return tags.map((tag) => tag.name);
   };
 
@@ -52,7 +54,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
           menu_description={menuDetailData.description}
           menu_price={menuDetailData.price}
           menu_image_url={menuDetailData.imageUrl}
-          menu_categories={menuDetailData.categories}
+          menu_sub_category_id={menuDetailData.subCategory.id}
           menu_is_available={menuDetailData.isAvailable}
           menu_tags={handleFormateTags(menuDetailData.tags)}
           menu_tax_included={menuDetailData.taxIncluded}

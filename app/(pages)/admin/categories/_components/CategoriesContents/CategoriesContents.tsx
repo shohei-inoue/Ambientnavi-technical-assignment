@@ -1,13 +1,13 @@
-import { getCategories } from "@/app/actions/categoriesActions"
-import CategoriesTable from "../CategoriesTable/CategoriesTable"
+import { getCategories } from "@/app/actions/admin/categoriesActions";
+import CategoriesTable from "../CategoriesTable/CategoriesTable";
 
 const CategoriesContents = async () => {
-  const categories = await getCategories()
+  const categories = await getCategories();
   return (
     <>
-      <CategoriesTable categories={categories}/>
+      <CategoriesTable categories={categories} />
     </>
-  )
-}
+  );
+};
 
-export default CategoriesContents
+export default CategoriesContents;

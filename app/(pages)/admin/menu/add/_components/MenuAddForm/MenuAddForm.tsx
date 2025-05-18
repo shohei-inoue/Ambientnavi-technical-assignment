@@ -6,15 +6,14 @@ import MenuDetailPriceField from "../../../[id]/_components/MenuDetailPriceField
 import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { useEffect, useState } from "react";
-import { Category } from "@/app/generated/prisma";
-import { getCategories } from "@/app/actions/categoriesActions";
-import { CategoriesData } from "@/app/types/types";
 import MenuDetailCategoriesField from "../../../[id]/_components/MenuDetailCategoriesField/MenuDetailCategoriesField";
 import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailIsAvailableField/MenuDetailIsAvailableField";
 import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";
 import MenuDetailImageField from "../../../[id]/_components/MenuDetailImageField/MenuDetailImageField";
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailTagsField/MenuDetailTagsField";
-import { createMenu } from "@/app/actions/menuActions";
+import { createMenu } from "@/app/actions/admin/menuActions";
+import { getCategories } from "@/app/actions/admin/categoriesActions";
+import { AdminCategoriesData } from "@/app/types/types";
 
 const MenuAddForm = () => {
   const [name, setName] = useState<string>("");
@@ -24,10 +23,12 @@ const MenuAddForm = () => {
   const [isAvailable, setIsAvailable] = useState<boolean>(true);
   const [taxIncluded, setTaxIncluded] = useState<boolean>(true);
   const [tags, setTags] = useState<string[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [subCategoryId, setSubCategoryId] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<CategoriesData[]>([]);
+  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>(
+    []
+  );
 
   // categories情報を取得
   useEffect(() => {
@@ -51,6 +52,12 @@ const MenuAddForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // カテゴリーのバリデーション
+    if (!subCategoryId) {
+      alert("サブカテゴリを選択してください");
+      return;
+    }
+
     // ダイアログの表示
     const isConfirmed = window.confirm("メニューを追加しますか?");
     if (!isConfirmed) {
@@ -66,9 +73,7 @@ const MenuAddForm = () => {
     formData.append("price", price.toString());
     formData.append("isAvailable", String(isAvailable));
     formData.append("taxIncluded", String(taxIncluded));
-    categories.forEach((category) =>
-      formData.append("categoryIds", category.id.toString())
-    );
+    formData.append("subCategoryId", subCategoryId.toString());
     formData.append("tags", tags.join(","));
 
     try {
@@ -81,7 +86,7 @@ const MenuAddForm = () => {
       setIsAvailable(true);
       setTaxIncluded(true);
       setTags([]);
-      setCategories([]);
+      setSubCategoryId(null);
     } catch (error) {
       console.error(error);
       alert(`メニューを追加できませんでした. \n${error}`);
@@ -105,10 +110,10 @@ const MenuAddForm = () => {
         <div>ロード中</div>
       ) : error ? (
         <div>{error.message}</div>
-      ) : categories ? (
+      ) : categoriesData ? (
         <MenuDetailCategoriesField
-          value={categories}
-          setValue={setCategories}
+          value={subCategoryId}
+          setValue={setSubCategoryId}
           categories={categoriesData}
         />
       ) : (

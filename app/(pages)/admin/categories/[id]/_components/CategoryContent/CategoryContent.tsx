@@ -1,19 +1,21 @@
 "use client";
 
-import { getCategory } from "@/app/actions/categoriesActions";
-import { categoryData } from "@/app/types/types";
+import { AdminCategoryData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import CategorySettingForm from "../CategorySettingForm/CategorySettingForm";
 import Loader from "@/app/components/Loader/Loader";
 import Error from "@/app/components/Error/Error";
 import NoData from "@/app/components/NoData/NoData";
+import { getCategory } from "@/app/actions/admin/categoriesActions";
 
 type CategoryContentProps = {
   id: string;
 };
 
 const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
-  const [categoryData, setCategoryData] = useState<categoryData | null>(null);
+  const [categoryData, setCategoryData] = useState<AdminCategoryData | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -45,6 +47,7 @@ const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
         <CategorySettingForm
           id={categoryData.id}
           category_name={categoryData.name}
+          sub_categories={categoryData.subCategories.map((sub) => sub.name)}
         />
       ) : (
         <NoData />

@@ -1,10 +1,7 @@
 "use client";
 
-import { getCategories } from "@/app/actions/categoriesActions";
 import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
-import { Category } from "@/app/generated/prisma";
-import { CategoriesData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailImageField from "../MenuDetailImageField/MenuDetailImageField";
 import MenuDetailNameFiled from "../MenuDetailNameField/MenuDetailNameField";
@@ -14,9 +11,11 @@ import MenuDetailTaxIncludedField from "../MenuDetailTaxIncludedField/MenuDetail
 import MenuDetailCategoriesField from "../MenuDetailCategoriesField/MenuDetailCategoriesField";
 import MenuDetailTagsField from "../MenuDetailTagsField/MenuDetailTagsField";
 import MenuDetailIsAvailableField from "../MenuDetailIsAvailableField/MenuDetailIsAvailableField";
-import { deleteMenu, updateMenu } from "@/app/actions/menuActions";
 import { useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
+import { deleteMenu, updateMenu } from "@/app/actions/admin/menuActions";
+import { getCategories } from "@/app/actions/admin/categoriesActions";
+import { AdminCategoriesData } from "@/app/types/types";
 
 type MenuDetailSettingFormProps = {
   id: number;
@@ -26,7 +25,7 @@ type MenuDetailSettingFormProps = {
   menu_image_url: string;
   menu_is_available: boolean;
   menu_tax_included: boolean;
-  menu_categories: Category[];
+  menu_sub_category_id: number;
   menu_tags: string[];
 };
 
@@ -39,7 +38,7 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
   menu_is_available,
   menu_tax_included,
   menu_tags,
-  menu_categories,
+  menu_sub_category_id,
 }) => {
   const router = useRouter();
   const [name, setName] = useState<string>(menu_name);
@@ -49,10 +48,13 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
   const [isAvailable, setIsAvailable] = useState<boolean>(menu_is_available);
   const [taxIncluded, setTaxIncluded] = useState<boolean>(menu_tax_included);
   const [tags, setTags] = useState<string[]>(menu_tags);
-  const [categories, setCategories] = useState<Category[]>(menu_categories);
+  const [subCategoryId, setSubCategoryId] =
+    useState<number>(menu_sub_category_id);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<CategoriesData[]>([]);
+  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>(
+    []
+  );
 
   // categories情報を取得
   useEffect(() => {
@@ -77,8 +79,8 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     e.preventDefault();
 
     // カテゴリーのバリデーション
-    if (categories.length === 0) {
-      alert("カテゴリーを1つ以上選択してください");
+    if (!subCategoryId) {
+      alert("サブカテゴリを選択してください");
       return;
     }
 
@@ -98,9 +100,7 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     formData.append("price", price.toString());
     formData.append("isAvailable", String(isAvailable));
     formData.append("taxIncluded", String(taxIncluded));
-    categories.forEach((category) =>
-      formData.append("categoryIds", category.id.toString())
-    );
+    formData.append("subCategoryId", subCategoryId.toString());
     formData.append("tags", tags.join(","));
 
     try {
@@ -151,10 +151,10 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
         <Loader />
       ) : error ? (
         <div>{error.message}</div>
-      ) : categories ? (
+      ) : categoriesData.length > 0 ? (
         <MenuDetailCategoriesField
-          value={categories}
-          setValue={setCategories}
+          value={subCategoryId}
+          setValue={setSubCategoryId}
           categories={categoriesData}
         />
       ) : (

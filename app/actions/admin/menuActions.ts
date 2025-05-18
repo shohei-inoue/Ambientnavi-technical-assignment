@@ -1,25 +1,25 @@
 "use server";
 
 import path from "path";
-import { prisma } from "../lib/prisma";
-import { MenuData } from "../types/types";
 import { writeFile, unlink } from "fs/promises";
+import { prisma } from "../../lib/prisma";
+import { AdminMenuData } from "@/app/types/types";
 
 export async function createMenu(formData: FormData) {
   const name = formData.get("name") as string;
   const price = parseInt(formData.get("price") as string, 10);
   const description = formData.get("description") as string;
   const imageFile = formData.get("image") as File;
-  const isAvailable = formData.get("isAvailable") !== null;
-  const taxIncluded = formData.get("taxIncluded") !== null;
+  const isAvailable = formData.get("isAvailable") === "true";
+  const taxIncluded = formData.get("taxIncluded") === "true";
   const tagsString = formData.get("tags") as string;
-  const categoryIds = formData.getAll("categoryIds") as string[];
+  const subCategoryId = parseInt(formData.get("subCategoryId") as string, 10);
 
   const tags = tagsString
     ? tagsString
         .split(",")
         .map((tag) => tag.trim())
-        .filter((t) => t.length > 0)
+        .filter(Boolean)
     : [];
 
   const existing = await prisma.menu.findFirst({ where: { name } });
@@ -27,12 +27,10 @@ export async function createMenu(formData: FormData) {
 
   let imageUrl: string | null = null;
 
-  // 画像のアップロード
   if (imageFile && imageFile.size > 0) {
     const buffer = Buffer.from(await imageFile.arrayBuffer());
     const fileName = `${Date.now()}_${imageFile.name}`;
     const filePath = path.join(process.cwd(), "public/uploads", fileName);
-
     await writeFile(filePath, buffer);
     imageUrl = `/uploads/${fileName}`;
   }
@@ -45,12 +43,8 @@ export async function createMenu(formData: FormData) {
       imageUrl,
       isAvailable,
       taxIncluded,
-      categories: {
-        create: categoryIds.map((id) => ({
-          category: {
-            connect: { id: parseInt(id, 10) },
-          },
-        })),
+      subCategory: {
+        connect: { id: subCategoryId },
       },
       tags: {
         create: tags.map((tagName) => ({
@@ -69,23 +63,21 @@ export async function createMenu(formData: FormData) {
 export async function getMenu() {
   const menus = await prisma.menu.findMany({
     include: {
-      categories: {
+      subCategory: {
         include: {
-          category: true,
+          _count: {
+            select: { menus: true },
+          },
         },
       },
       tags: {
-        include: {
-          tag: true,
-        },
+        include: { tag: true },
       },
     },
-    orderBy: {
-      createdAt: "desc",
-    },
+    orderBy: { createdAt: "desc" },
   });
 
-  const formattedMenus: MenuData[] = menus.map((menu) => ({
+  const formattedMenus: AdminMenuData[] = menus.map((menu) => ({
     id: menu.id,
     name: menu.name,
     description: menu.description || "",
@@ -95,20 +87,34 @@ export async function getMenu() {
     taxIncluded: menu.taxIncluded,
     createdAt: menu.createdAt,
     updatedAt: menu.updatedAt,
-    categories: menu.categories.map((c) => c.category),
-    tags: menu.tags.map((t) => t.tag),
+    subCategory: {
+      id: menu.subCategory.id,
+      name: menu.subCategory.name,
+      _count: {
+        menus: menu.subCategory._count.menus,
+      },
+    },
+    tags: menu.tags.map((t) => ({
+      id: t.tag.id,
+      name: t.tag.name,
+      color: t.tag.color,
+      createdAt: t.tag.createdAt,
+      updatedAt: t.tag.updatedAt,
+    })),
   }));
 
   return formattedMenus;
 }
 
-export async function getMenuDetail(id: number): Promise<MenuData | null> {
+export async function getMenuDetail(id: number) {
   const menu = await prisma.menu.findUnique({
     where: { id },
     include: {
-      categories: {
+      subCategory: {
         include: {
-          category: true,
+          _count: {
+            select: { menus: true },
+          },
         },
       },
       tags: {
@@ -121,7 +127,7 @@ export async function getMenuDetail(id: number): Promise<MenuData | null> {
 
   if (!menu) return null;
 
-  const formattedMenu: MenuData = {
+  const formattedMenu: AdminMenuData = {
     id: menu.id,
     name: menu.name,
     description: menu.description || "",
@@ -131,8 +137,20 @@ export async function getMenuDetail(id: number): Promise<MenuData | null> {
     taxIncluded: menu.taxIncluded,
     createdAt: menu.createdAt,
     updatedAt: menu.updatedAt,
-    categories: menu.categories.map((c) => c.category),
-    tags: menu.tags.map((t) => t.tag),
+    subCategory: {
+      id: menu.subCategory.id,
+      name: menu.subCategory.name,
+      _count: {
+        menus: menu.subCategory._count.menus,
+      },
+    },
+    tags: menu.tags.map((t) => ({
+      id: t.tag.id,
+      name: t.tag.name,
+      color: t.tag.color,
+      createdAt: t.tag.createdAt,
+      updatedAt: t.tag.updatedAt,
+    })),
   };
 
   return formattedMenu;
@@ -143,11 +161,11 @@ export async function updateMenu(formData: FormData) {
   const name = formData.get("name") as string;
   const price = parseInt(formData.get("price") as string, 10);
   const description = formData.get("description") as string;
-  const categoryIds = formData.getAll("categoryIds") as string[];
   const tagsString = formData.get("tags") as string;
   const imageFile = formData.get("image") as File;
   const isAvailable = formData.get("isAvailable") === "true";
   const taxIncluded = formData.get("taxIncluded") === "true";
+  const subCategoryId = parseInt(formData.get("subCategoryId") as string, 10);
 
   const tags = tagsString
     ? tagsString
@@ -159,16 +177,12 @@ export async function updateMenu(formData: FormData) {
   const duplicate = await prisma.menu.findFirst({
     where: { name, NOT: { id } },
   });
-
   if (duplicate) throw new Error("同じ名前のメニューがすでに存在します");
 
-  // 既存メニューを取得（既存画像の削除に使う）
   const existing = await prisma.menu.findUnique({ where: { id } });
-
   let imageUrl = existing?.imageUrl ?? null;
 
   if (imageFile && imageFile.size > 0) {
-    // 古い画像がローカルに存在する場合は削除
     if (existing?.imageUrl?.startsWith("/uploads/")) {
       const oldPath = path.join(process.cwd(), "public", existing.imageUrl);
       try {
@@ -178,7 +192,6 @@ export async function updateMenu(formData: FormData) {
       }
     }
 
-    // 新しい画像を保存
     const buffer = Buffer.from(await imageFile.arrayBuffer());
     const fileName = `${Date.now()}_${imageFile.name}`;
     const filePath = path.join(process.cwd(), "public/uploads", fileName);
@@ -195,14 +208,7 @@ export async function updateMenu(formData: FormData) {
       imageUrl,
       isAvailable,
       taxIncluded,
-      categories: {
-        deleteMany: {},
-        create: categoryIds.map((id) => ({
-          category: {
-            connect: { id: parseInt(id, 10) },
-          },
-        })),
-      },
+      subCategory: { connect: { id: subCategoryId } },
       tags: {
         deleteMany: {},
         create: tags.map((tagName) => ({
@@ -220,13 +226,9 @@ export async function updateMenu(formData: FormData) {
 
 export async function deleteMenu(id: number) {
   const menu = await prisma.menu.findUnique({ where: { id } });
+  if (!menu) throw new Error("該当するメニューが存在しません");
 
-  if (!menu) {
-    throw new Error("該当するメニューが存在しません");
-  }
-
-  // imageUrl が存在し、ローカルパスである場合のみ削除
-  if (menu.imageUrl && menu.imageUrl.startsWith("/uploads/")) {
+  if (menu.imageUrl?.startsWith("/uploads/")) {
     const filePath = path.join(process.cwd(), "public", menu.imageUrl);
     try {
       await unlink(filePath);
@@ -235,10 +237,6 @@ export async function deleteMenu(id: number) {
     }
   }
 
-  // 関連データ削除
   await prisma.menuTag.deleteMany({ where: { menuId: id } });
-  await prisma.menuCategory.deleteMany({ where: { menuId: id } });
-
-  // メニュー本体削除
   await prisma.menu.delete({ where: { id } });
 }
