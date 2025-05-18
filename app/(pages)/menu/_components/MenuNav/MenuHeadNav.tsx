@@ -13,8 +13,8 @@ const MenuHeadNav: React.FC<MenuHeadNavProps> = ({
   onSelectCategory,
 }) => {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10 bg-white shadow">
-      <ul className="flex justify-around bg-gray-100 p-4">
+    <nav className="fixed top-0 left-0 right-0 z-10 bg-white shadow overflow-x-auto">
+      <ul className="flex gap-4 p-4 max-w-screen-sm mx-auto overflow-x-auto whitespace-nowrap">
         {categories.map((category) => (
           <MenuHeadNavItem
             key={category.id}

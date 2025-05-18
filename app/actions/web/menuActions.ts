@@ -3,15 +3,18 @@
 import { prisma } from "@/app/lib/prisma";
 import { MenuData } from "@/app/types/types";
 
-export async function getMenuByCategoryId(categoryId: number | null): Promise<MenuData[]> {
+export async function getMenuByCategoryId(
+  categoryId: number | null
+): Promise<MenuData[]> {
   const menus = await prisma.menu.findMany({
-    where: categoryId !== null
-      ? {
-          subCategory: {
-            categoryId: categoryId,
-          },
-        }
-      : undefined,
+    where:
+      categoryId !== null
+        ? {
+            subCategory: {
+              categoryId: categoryId,
+            },
+          }
+        : undefined,
     include: {
       subCategory: {
         include: {
@@ -24,9 +27,20 @@ export async function getMenuByCategoryId(categoryId: number | null): Promise<Me
         },
       },
     },
-    orderBy: {
-      createdAt: "desc",
-    },
+    orderBy: [
+      {
+        subCategory: {
+          category: {
+            name: "asc",
+          },
+        },
+      },
+      {
+        subCategory: {
+          name: "asc",
+        },
+      },
+    ],
   });
 
   return menus.map((menu) => ({

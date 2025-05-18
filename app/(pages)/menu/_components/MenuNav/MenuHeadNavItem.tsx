@@ -15,7 +15,11 @@ const MenuHeadNavItem: React.FC<MenuNavItemProps> = ({
     <li key={id} className="text-center">
       <button
         onClick={() => onSelect(id)}
-        className={`text-sm hover:text-blue-500 ${isActive ? "text-blue-600 font-bold" : "text-gray-700"}`}
+        className={`px-4 py-2 rounded transition-colors duration-200 ${
+          isActive
+            ? "bg-blue-100 text-blue-600 font-bold border-b-2 border-blue-500"
+            : "text-gray-700 hover:text-blue-500"
+        }`}
       >
         {name}
       </button>

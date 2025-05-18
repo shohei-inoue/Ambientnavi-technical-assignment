@@ -9,7 +9,7 @@ const Heading: React.FC<HeadingProps> = ({ children, level }) => {
   return createElement(
     `h${level}`,
     {
-      className: `text-${level}xl font-bold text-gray-800 m-4`,
+      className: `text-${level}xl font-bold text-gray-800 my-2`,
       id: `heading-${level}`,
     },
     children

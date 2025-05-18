@@ -24,7 +24,8 @@ const MenuCard: React.FC<MenuCardProps> = ({ id, name, price, image }) => {
       onClick={handleClick}
     >
       <div>
-        <Image src={image} height={100} width={100} alt="" />
+        {/* TODO default直がきやめる */}
+        <Image src={image || "/default.png"} height={100} width={100} alt="" />
       </div>
       <div>
         <p className="text-lg font-semibold">{name}</p>

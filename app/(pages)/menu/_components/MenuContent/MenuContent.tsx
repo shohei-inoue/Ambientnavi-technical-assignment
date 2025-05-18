@@ -7,9 +7,13 @@ import { MenuData } from "@/app/types/types";
 
 type MenuContentProps = {
   categoryId: number | null;
+  categoryName: string | null;
 };
 
-const MenuContent: React.FC<MenuContentProps> = ({ categoryId }) => {
+const MenuContent: React.FC<MenuContentProps> = ({
+  categoryId,
+  categoryName,
+}) => {
   const [menu, setMenu] = useState<MenuData[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -18,9 +22,10 @@ const MenuContent: React.FC<MenuContentProps> = ({ categoryId }) => {
     const fetchMenu = async () => {
       setLoading(true);
       try {
-        const url = categoryId !== null 
-          ? `/api/web/menu?categoryId=${categoryId}` 
-          : `/api/web/menu`;
+        const url =
+          categoryId !== null
+            ? `/api/web/menu?categoryId=${categoryId}`
+            : `/api/web/menu`;
         const res = await fetch(url);
         if (!res.ok) throw new Error("メニュー取得に失敗しました");
 
@@ -40,7 +45,7 @@ const MenuContent: React.FC<MenuContentProps> = ({ categoryId }) => {
 
   return (
     <div className="px-4 py-6">
-      <Heading level={2}>メニュー一覧</Heading>
+      <Heading level={2}>{categoryName || ""}</Heading>
       {loading && <p>読み込み中...</p>}
       {error && <p className="text-red-500">{error}</p>}
       {!loading && !error && <MenuGrid menu={menu} />}
