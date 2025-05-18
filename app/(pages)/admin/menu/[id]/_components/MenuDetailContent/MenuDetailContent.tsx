@@ -54,7 +54,7 @@ const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
           menu_description={menuDetailData.description}
           menu_price={menuDetailData.price}
           menu_image_url={menuDetailData.imageUrl}
-          menu_categories={menuDetailData.categories}
+          menu_sub_category_id={menuDetailData.subCategory.id}
           menu_is_available={menuDetailData.isAvailable}
           menu_tags={handleFormateTags(menuDetailData.tags)}
           menu_tax_included={menuDetailData.taxIncluded}

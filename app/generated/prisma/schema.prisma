@@ -17,11 +17,20 @@ datasource db {
 
 // カテゴリー
 model Category {
-  id        Int            @id @default(autoincrement())
-  name      String         @unique
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
-  menus     MenuCategory[]
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  subCategories SubCategory[]
+}
+
+// サブカテゴリー
+model SubCategory {
+  id         Int      @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  menus      Menu[]
 }
 
 // タグ
@@ -36,27 +45,18 @@ model Tag {
 
 // メニュー
 model Menu {
-  id          Int            @id @default(autoincrement())
-  name        String         @unique
-  description String?
-  price       Int
-  imageUrl    String?
-  isAvailable Boolean        @default(true)
-  taxIncluded Boolean        @default(true)
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  categories  MenuCategory[]
-  tags        MenuTag[]
-}
-
-// メニュー - カテゴリー
-model MenuCategory {
-  menuId     Int
-  categoryId Int
-  menu       Menu     @relation(fields: [menuId], references: [id])
-  category   Category @relation(fields: [categoryId], references: [id])
-
-  @@id([menuId, categoryId])
+  id            Int         @id @default(autoincrement())
+  name          String      @unique
+  description   String?
+  price         Int
+  imageUrl      String?
+  isAvailable   Boolean     @default(true)
+  taxIncluded   Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  subCategoryId Int
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
+  tags          MenuTag[]
 }
 
 // メニュー - タグ

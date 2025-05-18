@@ -1,6 +1,13 @@
 export type CategoryData = {
   id: number;
   name: string;
+  subCategories: SubCategoryData[];
+};
+
+export type SubCategoryData = {
+  id: number;
+  name: string;
+  category: CategoryData;
 };
 
 export type TagData = {
@@ -18,19 +25,25 @@ export type MenuData = {
   isAvailable: boolean;
   taxIncluded: boolean;
   tags: TagData[];
-  categories: CategoryData[];
+  subCategory: SubCategoryData;
 };
 
 /* ----- admin ----- */
 // カテゴリー
+export type AdminSubCategoryData = {
+  id: number;
+  name: string;
+  _count: {
+    menus: number;
+  };
+};
+
 export type AdminCategoriesData = {
   id: number;
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  _count: {
-    menus: number;
-  };
+  subCategories: AdminSubCategoryData[];
 };
 
 export type AdminCategoryData = {
@@ -38,6 +51,7 @@ export type AdminCategoryData = {
   name: string;
   createdAt: Date;
   updatedAt: Date;
+  subCategories: AdminSubCategoryData[];
 };
 
 // メニュー
@@ -52,7 +66,7 @@ export type AdminMenuData = {
   isAvailable: boolean;
   taxIncluded: boolean;
   tags: AdminTagData[];
-  categories: AdminCategoryData[];
+  subCategory: AdminSubCategoryData;
 };
 
 export type AdminTagData = {

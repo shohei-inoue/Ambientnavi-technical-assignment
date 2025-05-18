@@ -21,7 +21,16 @@ model Category {
   name          String @unique
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-  menus         MenuCategory[]
+  subCategories SubCategory[]
+}
+
+// サブカテゴリー
+model SubCategory {
+  id         Int     @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category   @relation(fields: [categoryId], references: [id])
+  menus      Menu[]
 }
 
 // タグ
@@ -45,18 +54,9 @@ model Menu {
   taxIncluded  Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  categories   MenuCategory[]
+  subCategoryId Int
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
   tags         MenuTag[]
-}
-
-// メニュー - カテゴリー
-model MenuCategory {
-  menuId      Int
-  categoryId  Int
-  menu        Menu     @relation(fields: [menuId], references: [id])
-  category    Category @relation(fields: [categoryId], references: [id])
-
-  @@id([menuId, categoryId])
 }
 
 // メニュー - タグ

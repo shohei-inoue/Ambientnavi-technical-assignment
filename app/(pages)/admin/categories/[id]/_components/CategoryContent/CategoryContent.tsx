@@ -13,7 +13,9 @@ type CategoryContentProps = {
 };
 
 const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
-  const [categoryData, setCategoryData] = useState<AdminCategoryData | null>(null);
+  const [categoryData, setCategoryData] = useState<AdminCategoryData | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
@@ -45,6 +47,7 @@ const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
         <CategorySettingForm
           id={categoryData.id}
           category_name={categoryData.name}
+          sub_categories={categoryData.subCategories.map((sub) => sub.name)}
         />
       ) : (
         <NoData />

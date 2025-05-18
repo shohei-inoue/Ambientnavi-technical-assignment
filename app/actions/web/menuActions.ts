@@ -1,20 +1,19 @@
 "use server";
 
 import { prisma } from "@/app/lib/prisma";
+import { MenuData } from "@/app/types/types";
 
-export async function getMenuByCategory(categoryName: string) {
+export async function getMenuByCategoryId(categoryId: number | null): Promise<MenuData[]> {
   const menus = await prisma.menu.findMany({
-    where: {
-      categories: {
-        some: {
-          category: {
-            name: categoryName,
+    where: categoryId !== null
+      ? {
+          subCategory: {
+            categoryId: categoryId,
           },
-        },
-      },
-    },
+        }
+      : undefined,
     include: {
-      categories: {
+      subCategory: {
         include: {
           category: true,
         },
@@ -38,7 +37,19 @@ export async function getMenuByCategory(categoryName: string) {
     imageUrl: menu.imageUrl || "",
     isAvailable: menu.isAvailable,
     taxIncluded: menu.taxIncluded,
-    categories: menu.categories.map((c) => c.category),
-    tags: menu.tags.map((t) => t.tag),
+    subCategory: {
+      id: menu.subCategory.id,
+      name: menu.subCategory.name,
+      category: {
+        id: menu.subCategory.category.id,
+        name: menu.subCategory.category.name,
+        subCategories: [], // 型に合わせて空配列で対応
+      },
+    },
+    tags: menu.tags.map((t) => ({
+      id: t.tag.id,
+      name: t.tag.name,
+      color: t.tag.color,
+    })),
   }));
 }

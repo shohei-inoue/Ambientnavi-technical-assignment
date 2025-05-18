@@ -18,6 +18,7 @@ const CategoryNameFiled: React.FC<CategoryNameFieldProps> = ({
         placeholder="カテゴリー名"
         value={value}
         onChange={(e) => setValue(e.target.value)}
+        className="border p-2 rounded w-full"
       />
     </CategoryItem>
   );
