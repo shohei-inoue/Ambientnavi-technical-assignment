@@ -13,6 +13,13 @@ const eslintConfig = [
   // TODO 一時的に自動生成されたファイルのeslintを無視
   {
     ignores: ["app/generated/**"],
+
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
+      ],
+    },
   },
 
   ...compat.extends("next/core-web-vitals", "next/typescript"),

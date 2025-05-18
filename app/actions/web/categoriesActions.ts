@@ -6,7 +6,7 @@ export async function getCategories(): Promise<CategoryData[]> {
     include: {
       subCategories: {
         include: {
-          category: true, // categoryを含める
+          category: true,
         },
       },
     },

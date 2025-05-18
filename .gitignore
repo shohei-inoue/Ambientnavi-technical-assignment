@@ -41,5 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 # upload/images
-/public/uploads/**/*.{jpg,jpeg,png,gif,webp,svg,bmp,tiff}
+/public/uploads/**/*.{jpg,jpeg,png,gif,webp,svg,bmp,tiff, JPG}
 !public/uploads/.gitkeep
