@@ -3,12 +3,12 @@
 import { Category } from "@/app/generated/prisma";
 import MenuDetailItem from "../MenuDetailItem/MenuDetailItem";
 import { SetStateAction, useState } from "react";
-import { CategoriesData } from "@/app/types/types";
+import { AdminCategoriesData } from "@/app/types/types";
 
 type MenuDetailCategoriesFieldProps = {
   value: Category[];
   setValue: React.Dispatch<SetStateAction<Category[]>>;
-  categories: CategoriesData[];
+  categories: AdminCategoriesData[];
 };
 
 const MenuDetailCategoriesField: React.FC<MenuDetailCategoriesFieldProps> = ({
@@ -18,7 +18,7 @@ const MenuDetailCategoriesField: React.FC<MenuDetailCategoriesFieldProps> = ({
 }) => {
   const [isError, setIsError] = useState<boolean>(false);
 
-  const handleChange = (checked: boolean, category: CategoriesData) => {
+  const handleChange = (checked: boolean, category: AdminCategoriesData) => {
     if (checked) {
       setValue([...value, category]);
     } else {

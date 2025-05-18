@@ -5,10 +5,10 @@ import TableData from "@/app/components/Table/TableData";
 import TableHead from "@/app/components/Table/TableHead";
 import TableHeader from "@/app/components/Table/TableHeader";
 import TableRow from "@/app/components/Table/TableRow";
-import { CategoriesData } from "@/app/types/types";
+import { AdminCategoriesData } from "@/app/types/types";
 
 type CategoriesTableProps = {
-  categories: CategoriesData[];
+  categories: AdminCategoriesData[];
 };
 
 const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {

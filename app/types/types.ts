@@ -1,5 +1,5 @@
 // カテゴリー
-export type CategoriesData = {
+export type AdminCategoriesData = {
   id: number;
   name: string;
   createdAt: Date;
@@ -9,7 +9,7 @@ export type CategoriesData = {
   };
 };
 
-export type categoryData = {
+export type AdminCategoryData = {
   id: number;
   name: string;
   createdAt: Date;
@@ -17,7 +17,7 @@ export type categoryData = {
 };
 
 // メニュー
-export type MenuData = {
+export type AdminMenuData = {
   id: number;
   name: string;
   createdAt: Date;
@@ -27,11 +27,11 @@ export type MenuData = {
   imageUrl: string;
   isAvailable: boolean;
   taxIncluded: boolean;
-  tags: TagData[];
-  categories: categoryData[];
+  tags: AdminTagData[];
+  categories: AdminCategoryData[];
 };
 
-export type TagData = {
+export type AdminTagData = {
   id: number;
   name: string;
   color?: string | null;

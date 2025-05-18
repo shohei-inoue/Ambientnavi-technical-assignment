@@ -1,6 +1,6 @@
 "use client";
 
-import { categoryData } from "@/app/types/types";
+import { AdminCategoryData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import CategorySettingForm from "../CategorySettingForm/CategorySettingForm";
 import Loader from "@/app/components/Loader/Loader";
@@ -13,7 +13,7 @@ type CategoryContentProps = {
 };
 
 const CategoryContent: React.FC<CategoryContentProps> = ({ id }) => {
-  const [categoryData, setCategoryData] = useState<categoryData | null>(null);
+  const [categoryData, setCategoryData] = useState<AdminCategoryData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 

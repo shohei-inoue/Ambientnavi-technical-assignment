@@ -7,7 +7,6 @@ import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { useEffect, useState } from "react";
 import { Category } from "@/app/generated/prisma";
-import { CategoriesData } from "@/app/types/types";
 import MenuDetailCategoriesField from "../../../[id]/_components/MenuDetailCategoriesField/MenuDetailCategoriesField";
 import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailIsAvailableField/MenuDetailIsAvailableField";
 import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";
@@ -15,6 +14,7 @@ import MenuDetailImageField from "../../../[id]/_components/MenuDetailImageField
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailTagsField/MenuDetailTagsField";
 import { createMenu } from "@/app/actions/admin/menuActions";
 import { getCategories } from "@/app/actions/admin/categoriesActions";
+import { AdminCategoriesData } from "@/app/types/types";
 
 
 const MenuAddForm = () => {
@@ -28,7 +28,7 @@ const MenuAddForm = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<CategoriesData[]>([]);
+  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>([]);
 
   // categories情報を取得
   useEffect(() => {

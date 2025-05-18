@@ -2,7 +2,7 @@
 
 import path from "path";
 import { prisma } from "../../lib/prisma";
-import { MenuData } from "../../types/types";
+import { AdminMenuData } from "../../types/types";
 import { writeFile, unlink } from "fs/promises";
 
 export async function createMenu(formData: FormData) {
@@ -85,7 +85,7 @@ export async function getMenu() {
     },
   });
 
-  const formattedMenus: MenuData[] = menus.map((menu) => ({
+  const formattedMenus: AdminMenuData[] = menus.map((menu) => ({
     id: menu.id,
     name: menu.name,
     description: menu.description || "",
@@ -102,7 +102,7 @@ export async function getMenu() {
   return formattedMenus;
 }
 
-export async function getMenuDetail(id: number): Promise<MenuData | null> {
+export async function getMenuDetail(id: number): Promise<AdminMenuData | null> {
   const menu = await prisma.menu.findUnique({
     where: { id },
     include: {
@@ -121,7 +121,7 @@ export async function getMenuDetail(id: number): Promise<MenuData | null> {
 
   if (!menu) return null;
 
-  const formattedMenu: MenuData = {
+  const formattedMenu: AdminMenuData = {
     id: menu.id,
     name: menu.name,
     description: menu.description || "",

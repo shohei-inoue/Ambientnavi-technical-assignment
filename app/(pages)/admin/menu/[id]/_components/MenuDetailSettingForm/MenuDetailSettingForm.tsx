@@ -4,7 +4,6 @@
 import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { Category } from "@/app/generated/prisma";
-import { CategoriesData } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import MenuDetailImageField from "../MenuDetailImageField/MenuDetailImageField";
 import MenuDetailNameFiled from "../MenuDetailNameField/MenuDetailNameField";
@@ -18,6 +17,7 @@ import { useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
 import { deleteMenu, updateMenu } from "@/app/actions/admin/menuActions";
 import { getCategories } from "@/app/actions/admin/categoriesActions";
+import { AdminCategoriesData } from "@/app/types/types";
 
 type MenuDetailSettingFormProps = {
   id: number;
@@ -53,7 +53,7 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
   const [categories, setCategories] = useState<Category[]>(menu_categories);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<CategoriesData[]>([]);
+  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>([]);
 
   // categories情報を取得
   useEffect(() => {
