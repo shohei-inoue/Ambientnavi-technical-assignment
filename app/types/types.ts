@@ -1,3 +1,27 @@
+export type CategoryData = {
+  id: number;
+  name: string;
+};
+
+export type TagData = {
+  id: number;
+  name: string;
+  color?: string | null;
+};
+
+export type MenuData = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  isAvailable: boolean;
+  taxIncluded: boolean;
+  tags: TagData[];
+  categories: CategoryData[];
+};
+
+/* ----- admin ----- */
 // カテゴリー
 export type AdminCategoriesData = {
   id: number;

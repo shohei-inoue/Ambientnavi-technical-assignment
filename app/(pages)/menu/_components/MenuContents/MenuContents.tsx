@@ -2,11 +2,13 @@ import Heading from "@/app/components/Heading/Heading";
 import MenuHeadNav from "../MenuNav/MenuHeadNav";
 import MenuContent from "../MenuContent/MenuContent";
 import MenuBottomNav from "../MenuNav/MenuBottomNav";
+import { getCategories } from "@/app/actions/web/categoriesActions";
 
-const MenuContents = () => {
+const MenuContents = async () => {
+  const categories = await getCategories()
   return (
     <div>
-      <MenuHeadNav />
+      <MenuHeadNav categories={categories}/>
       <Heading level={1}>Menu</Heading>
       <MenuContent />
       <MenuContent />
