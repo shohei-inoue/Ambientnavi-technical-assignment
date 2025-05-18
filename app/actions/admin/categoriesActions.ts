@@ -80,30 +80,44 @@ export async function updateCategory(formData: FormData) {
     throw new Error("同じ名前のカテゴリがすでに存在します");
   }
 
-  // 既存のサブカテゴリを削除（メニューも削除される前提）
-  await prisma.menu.deleteMany({
-    where: {
-      subCategory: {
+  await prisma.$transaction(async (tx) => {
+    // MenuTag を先に削除
+    await tx.menuTag.deleteMany({
+      where: {
+        menu: {
+          subCategory: {
+            categoryId: id,
+          },
+        },
+      },
+    });
+
+    // Menu を削除
+    await tx.menu.deleteMany({
+      where: {
+        subCategory: {
+          categoryId: id,
+        },
+      },
+    });
+
+    // SubCategory を削除
+    await tx.subCategory.deleteMany({
+      where: {
         categoryId: id,
       },
-    },
-  });
+    });
 
-  await prisma.subCategory.deleteMany({
-    where: {
-      categoryId: id,
-    },
-  });
-
-  // 更新
-  await prisma.category.update({
-    where: { id },
-    data: {
-      name,
-      subCategories: {
-        create: subCategoryNames.map((name) => ({ name })),
+    // Category を更新 + サブカテゴリ再登録
+    await tx.category.update({
+      where: { id },
+      data: {
+        name,
+        subCategories: {
+          create: subCategoryNames.map((name) => ({ name })),
+        },
       },
-    },
+    });
   });
 }
 
@@ -112,30 +126,43 @@ export async function deleteCategory(id: number) {
     throw new Error("IDが無効です");
   }
 
-  // カテゴリに属するサブカテゴリを取得
-  const subCategories = await prisma.subCategory.findMany({
-    where: { categoryId: id },
-    select: { id: true },
-  });
+  await prisma.$transaction(async (tx) => {
+    // カテゴリに属するサブカテゴリを取得
+    const subCategories = await tx.subCategory.findMany({
+      where: { categoryId: id },
+      select: { id: true },
+    });
 
-  const subCategoryIds = subCategories.map((sc) => sc.id);
+    const subCategoryIds = subCategories.map((sc) => sc.id);
 
-  // サブカテゴリに属するメニューを削除
-  await prisma.menu.deleteMany({
-    where: {
-      subCategoryId: {
-        in: subCategoryIds,
+    // MenuTag を削除（subCategory 経由で menu を辿る）
+    await tx.menuTag.deleteMany({
+      where: {
+        menu: {
+          subCategoryId: {
+            in: subCategoryIds,
+          },
+        },
       },
-    },
-  });
+    });
 
-  // サブカテゴリを削除
-  await prisma.subCategory.deleteMany({
-    where: { categoryId: id },
-  });
+    // メニューを削除
+    await tx.menu.deleteMany({
+      where: {
+        subCategoryId: {
+          in: subCategoryIds,
+        },
+      },
+    });
 
-  // カテゴリを削除
-  await prisma.category.delete({
-    where: { id },
+    // サブカテゴリを削除
+    await tx.subCategory.deleteMany({
+      where: { categoryId: id },
+    });
+
+    // カテゴリを削除
+    await tx.category.delete({
+      where: { id },
+    });
   });
 }
