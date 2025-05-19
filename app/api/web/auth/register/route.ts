@@ -1,4 +1,4 @@
-import { createUser } from "@/app/actions/web/registerActions";
+import { createUser } from "@/app/actions/web/authActions";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {

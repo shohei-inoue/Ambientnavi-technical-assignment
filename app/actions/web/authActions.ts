@@ -2,7 +2,7 @@
 
 import { prisma } from "@/app/lib/prisma";
 import { Gender } from "@/app/types/types";
-import { hash } from "bcryptjs";
+import { hash, compare } from "bcryptjs";
 import { v4 as uuidv4 } from "uuid";
 
 export async function createUser(formData: FormData) {
@@ -46,4 +46,32 @@ export async function createUser(formData: FormData) {
   });
 
   return user;
+}
+export async function loginUser(email: string, password: string) {
+  if (!email || !password) {
+    throw new Error("メールアドレスとパスワードは必須です");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (!user) {
+    throw new Error("ユーザーが見つかりません");
+  }
+
+  const isPasswordValid = await compare(password, user.password);
+
+  if (!isPasswordValid) {
+    throw new Error("パスワードが正しくありません");
+  }
+
+  // TODO: 認証用トークンを返す or セッションを開始する
+  return {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    gender: user.gender,
+    birthday: user.birthday,
+  };
 }
