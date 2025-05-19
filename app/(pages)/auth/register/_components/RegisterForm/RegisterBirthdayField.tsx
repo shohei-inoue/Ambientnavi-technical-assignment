@@ -18,8 +18,7 @@ const RegisterBirthdayField: React.FC<RegisterBirthdayFieldProps> = ({
   const [isError, setIsError] = useState<boolean>(false);
 
   const handleValidate = () => {
-    const datePattern = /^\d{4}\/\d{2}\/\d{2}$/;
-    setIsError(!datePattern.test(value));
+    setIsError(!value);
   };
 
   return (
@@ -31,7 +30,6 @@ const RegisterBirthdayField: React.FC<RegisterBirthdayFieldProps> = ({
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleValidate}
         required
-        disabled
       />
       {isError && (
         <p className="text-red-500">生年月日を正しい形式で入力してください</p>

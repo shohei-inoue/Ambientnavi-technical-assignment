@@ -31,7 +31,6 @@ const RegisterMailField: React.FC<RegisterMailFieldProps> = ({
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleValidate}
         required
-        disabled
       />
       {isError && (
         <p className="text-red-500">

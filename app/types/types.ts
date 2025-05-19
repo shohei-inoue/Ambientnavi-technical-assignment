@@ -1,3 +1,7 @@
+// 性別
+export type Gender = 'MALE' | 'FEMALE' | 'OTHER'
+
+// カテゴリー
 export type CategoryData = {
   id: number;
   name: string;
@@ -10,12 +14,14 @@ export type SubCategoryData = {
   category: CategoryData;
 };
 
+
 export type TagData = {
   id: number;
   name: string;
   color?: string | null;
 };
 
+// メニュー
 export type MenuData = {
   id: number;
   name: string;
