@@ -34,7 +34,6 @@ const LoginPasswordField: React.FC<LoginPasswordFieldProps> = ({
         minLength={8}
         maxLength={20}
         pattern="^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
-        disabled
       />
       {isError && (
         <p className="text-red-500">

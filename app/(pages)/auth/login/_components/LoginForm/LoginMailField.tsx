@@ -28,7 +28,6 @@ const LoginMailField: React.FC<LoginMailFieldProps> = ({
         onChange={(e) => setValue(e.target.value)}
         onBlur={handleValidate}
         required
-        disabled
       />
       {isError && (
         <p className="text-red-500">メールアドレスを入力してください</p>

@@ -6,16 +6,56 @@ import { useState } from "react";
 import RegisterBirthdayField from "./RegisterBirthdayField";
 import RegisterMailField from "./RegisterMailField";
 import RegisterPasswordField from "./RegisterPasswordField";
+import RegisterGenderField from "./RegisterGenderField";
+import { Gender } from "@/app/types/types";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [name, setName] = useState<string>("");
   const [birthday, setBirthday] = useState<string>("");
   const [mail, setMail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [gender, setGender] = useState<Gender>("MALE");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", mail);
+    formData.append("password", password);
+    formData.append("birthday", birthday);
+    formData.append("gender", gender);
+
+    try {
+      const res = await fetch("/api/web/auth/register", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "登録に失敗しました");
+      }
+
+      const result = await res.json();
+      console.log("登録成功:", result);
+      alert("登録が完了しました");
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+      alert(`登録に失敗しました: ${error}`);
+    }
+  };
 
   return (
-    <form className="flex flex-col gap-4 items-center w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 items-center w-full"
+    >
       <RegisterNameField title="氏名" value={name} setValue={setName} />
+      <RegisterGenderField value={gender} setValue={setGender} />
       <RegisterBirthdayField
         title="生年月日"
         value={birthday}

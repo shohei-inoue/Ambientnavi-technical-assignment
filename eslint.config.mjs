@@ -10,19 +10,29 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  // TODO 一時的に自動生成されたファイルのeslintを無視
   {
-    ignores: ["app/generated/**"],
-
+    // 自動生成コードのみ無視
+    files: ["app/generated/**"],
+    rules: {
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+    },
+  },
+  {
+    // 通常コードには警告ルールを適用
+    files: ["**/*.ts", "**/*.tsx"],
+    excludedFiles: ["app/generated/**"],
     rules: {
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { argsIgnorePattern: "^_" },
       ],
+      "@typescript-eslint/no-unused-expressions": "warn",
     },
   },
 
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
+
 
 export default eslintConfig;
