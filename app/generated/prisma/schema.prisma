@@ -23,15 +23,68 @@ enum Gender {
 }
 
 model User {
+  id            Int            @id @default(autoincrement())
+  uuid          String         @unique
+  email         String         @unique
+  password      String
+  name          String
+  gender        Gender
+  birthday      DateTime
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  tableSessions TableSession[]
+}
+
+// テーブル
+model Table {
+  id           Int            @id @default(autoincrement())
+  uuid         String         @unique @default(uuid()) // ← 追加
+  number       Int
+  guestCount   Int?
+  checkedInAt  DateTime
+  checkedOutAt DateTime?
+  isPaid       Boolean        @default(false)
+  sessions     TableSession[]
+  orders       Order[]
+}
+
+model TableSession {
   id        Int      @id @default(autoincrement())
-  uuid      String   @unique
-  email     String   @unique
-  password  String
-  name      String
-  gender    Gender
-  birthday  DateTime
+  uuid      String   @unique @default(uuid()) // ← 追加
+  tableId   Int
+  table     Table    @relation(fields: [tableId], references: [id])
+  userId    Int?
+  user      User?    @relation(fields: [userId], references: [id])
+  sessionId String // cookie/token等で紐づける識別子
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  uuid       String      @unique @default(uuid()) // ← 追加
+  tableId    Int
+  table      Table       @relation(fields: [tableId], references: [id])
+  status     OrderStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  orderItems OrderItem[]
+}
+
+model OrderItem {
+  id       Int     @id @default(autoincrement())
+  orderId  Int
+  order    Order   @relation(fields: [orderId], references: [id])
+  menuId   Int
+  menu     Menu    @relation(fields: [menuId], references: [id])
+  quantity Int
+  note     String? // 備考
+}
+
+enum OrderStatus {
+  PENDING // 注文受付中
+  CONFIRMED // 厨房確認済み
+  SERVED // 配膳済み
+  PAID // 支払い済み
 }
 
 // カテゴリー
@@ -76,6 +129,7 @@ model Menu {
   subCategoryId Int
   subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
   tags          MenuTag[]
+  orderItems    OrderItem[]
 }
 
 // メニュー - タグ
