@@ -58,6 +58,7 @@ model TableSession {
   user      User?    @relation(fields: [userId], references: [id])
   sessionId String   @unique
   createdAt DateTime @default(now())
+  cart      Cart?    
 }
 
 model Order {
@@ -79,7 +80,7 @@ model OrderItem {
   menuId    Int
   menu      Menu     @relation(fields: [menuId], references: [id])
   quantity  Int
-  note      String?  // 備考
+  note      String? 
 }
 
 enum OrderStatus {
@@ -89,6 +90,26 @@ enum OrderStatus {
   PAID      // 支払い済み
 }
 
+// カート
+model Cart {
+  id            Int          @id @default(autoincrement())
+  tableSession  TableSession @relation(fields: [tableSessionId], references: [id])
+  tableSessionId Int           @unique
+  items         CartItem[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+// カート内の商品
+model CartItem {
+  id      Int   @id @default(autoincrement())
+  cart    Cart  @relation(fields: [cartId], references: [id])
+  cartId  Int
+  menu    Menu  @relation(fields: [menuId], references: [id])
+  menuId  Int
+  quantity Int
+  note     String?
+}
 
 // カテゴリー
 model Category {
@@ -133,6 +154,7 @@ model Menu {
   subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
   tags         MenuTag[]
   orderItems    OrderItem[]
+  cartItems     CartItem[] 
 }
 
 // メニュー - タグ

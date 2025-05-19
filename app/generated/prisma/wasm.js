@@ -168,6 +168,21 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   note: 'note'
 };
 
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  tableSessionId: 'tableSessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  menuId: 'menuId',
+  quantity: 'quantity',
+  note: 'note'
+};
+
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -240,6 +255,8 @@ exports.Prisma.ModelName = {
   TableSession: 'TableSession',
   Order: 'Order',
   OrderItem: 'OrderItem',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
   Category: 'Category',
   SubCategory: 'SubCategory',
   Tag: 'Tag',
