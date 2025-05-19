@@ -3,6 +3,7 @@ import { compare } from "bcryptjs";
 import { signJwt } from "@/app/lib/jwt";
 import { NextRequest } from "next/server";
 import { setAuthCookie } from "@/app/lib/cookies";
+import { linkUserToTableSession } from "@/app/actions/web/sessionActions";
 
 export async function POST(req: NextRequest) {
   const data = await req.formData();
@@ -25,7 +26,8 @@ export async function POST(req: NextRequest) {
   }
 
   const token = signJwt({ id: user.id, email: user.email });
-  setAuthCookie(token);
+  await setAuthCookie(token);
+  await linkUserToTableSession(user.id);
 
   return new Response(JSON.stringify({ message: "ログイン成功" }), {
     status: 200,

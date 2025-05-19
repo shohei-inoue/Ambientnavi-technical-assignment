@@ -13679,16 +13679,16 @@ export namespace Prisma {
   export type TableSessionWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     uuid?: string
+    sessionId?: string
     AND?: TableSessionWhereInput | TableSessionWhereInput[]
     OR?: TableSessionWhereInput[]
     NOT?: TableSessionWhereInput | TableSessionWhereInput[]
     tableId?: IntFilter<"TableSession"> | number
     userId?: IntNullableFilter<"TableSession"> | number | null
-    sessionId?: StringFilter<"TableSession"> | string
     createdAt?: DateTimeFilter<"TableSession"> | Date | string
     table?: XOR<TableScalarRelationFilter, TableWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id" | "uuid">
+  }, "id" | "uuid" | "sessionId">
 
   export type TableSessionOrderByWithAggregationInput = {
     id?: SortOrder

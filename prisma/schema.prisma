@@ -56,7 +56,7 @@ model TableSession {
   table     Table    @relation(fields: [tableId], references: [id])
   userId    Int?
   user      User?    @relation(fields: [userId], references: [id])
-  sessionId String   // cookie/token等で紐づける識別子
+  sessionId String   @unique
   createdAt DateTime @default(now())
 }
 
