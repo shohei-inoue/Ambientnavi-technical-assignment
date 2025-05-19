@@ -32,14 +32,24 @@ model User {
   birthday  DateTime
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  tableSessions TableSession[]
+  userSessions UserSession[]
+}
+
+model UserSession {
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  tableSessionId Int
+  user           User          @relation(fields: [userId], references: [id])
+  tableSession   TableSession  @relation(fields: [tableSessionId], references: [id])
+  createdAt      DateTime      @default(now())
+
+  @@unique([userId, tableSessionId])
 }
 
 
 // テーブル
 model Table {
   id           Int       @id @default(autoincrement())
-  uuid         String    @default(uuid()) @unique // ← 追加
   number       Int
   guestCount   Int?
   checkedInAt  DateTime
@@ -51,19 +61,17 @@ model Table {
 
 model TableSession {
   id        Int      @id @default(autoincrement())
-  uuid      String   @default(uuid()) @unique // ← 追加
   tableId   Int
   table     Table    @relation(fields: [tableId], references: [id])
   userId    Int?
-  user      User?    @relation(fields: [userId], references: [id])
-  sessionId String   @unique
+  sessionId String   @unique @default(uuid())
   createdAt DateTime @default(now())
-  cart      Cart?    
+  cart      Cart?
+  userSessions UserSession[]    
 }
 
 model Order {
   id         Int         @id @default(autoincrement())
-  uuid       String      @default(uuid()) @unique // ← 追加
   tableId    Int
   table      Table       @relation(fields: [tableId], references: [id])
   status     OrderStatus @default(PENDING)
@@ -94,7 +102,7 @@ enum OrderStatus {
 model Cart {
   id            Int          @id @default(autoincrement())
   tableSession  TableSession @relation(fields: [tableSessionId], references: [id])
-  tableSessionId Int           @unique
+  tableSessionId Int         @unique
   items         CartItem[]
   createdAt     DateTime     @default(now())
   updatedAt     DateTime     @updatedAt
@@ -102,13 +110,13 @@ model Cart {
 
 // カート内の商品
 model CartItem {
-  id      Int   @id @default(autoincrement())
-  cart    Cart  @relation(fields: [cartId], references: [id])
-  cartId  Int
-  menu    Menu  @relation(fields: [menuId], references: [id])
-  menuId  Int
-  quantity Int
-  note     String?
+  id        Int   @id @default(autoincrement())
+  cart      Cart  @relation(fields: [cartId], references: [id])
+  cartId    Int
+  menu      Menu  @relation(fields: [menuId], references: [id])
+  menuId    Int
+  quantity  Int
+  note      String?
 }
 
 // カテゴリー
@@ -131,28 +139,28 @@ model SubCategory {
 
 // タグ
 model Tag {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
   color     String? 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   menus     MenuTag[]
 }
 
 // メニュー
 model Menu {
-  id           Int   @id @default(autoincrement())
-  name         String @unique
-  description  String?
-  price        Int
-  imageUrl     String?
-  isAvailable  Boolean  @default(true)
-  taxIncluded  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id            Int         @id @default(autoincrement())
+  name          String      @unique
+  description   String?
+  price         Int
+  imageUrl      String?
+  isAvailable   Boolean     @default(true)
+  taxIncluded   Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   subCategoryId Int
   subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
-  tags         MenuTag[]
+  tags          MenuTag[]
   orderItems    OrderItem[]
   cartItems     CartItem[] 
 }

@@ -132,9 +132,15 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tableSessionId: 'tableSessionId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.TableScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   number: 'number',
   guestCount: 'guestCount',
   checkedInAt: 'checkedInAt',
@@ -144,7 +150,6 @@ exports.Prisma.TableScalarFieldEnum = {
 
 exports.Prisma.TableSessionScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   tableId: 'tableId',
   userId: 'userId',
   sessionId: 'sessionId',
@@ -153,7 +158,6 @@ exports.Prisma.TableSessionScalarFieldEnum = {
 
 exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
-  uuid: 'uuid',
   tableId: 'tableId',
   status: 'status',
   createdAt: 'createdAt',
@@ -251,6 +255,7 @@ exports.OrderStatus = exports.$Enums.OrderStatus = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  UserSession: 'UserSession',
   Table: 'Table',
   TableSession: 'TableSession',
   Order: 'Order',

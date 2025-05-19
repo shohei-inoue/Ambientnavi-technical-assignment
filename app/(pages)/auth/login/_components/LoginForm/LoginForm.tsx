@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import LoginMailField from "./LoginMailField";
 import Button from "@/app/components/Button/Button";
 import LoginPasswordField from "./LoginPasswordField";
 
 const LoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("redirect") || "/menu";
+
   const [mail, setMail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +34,7 @@ const LoginForm = () => {
       }
 
       alert("ログイン成功しました");
-      router.push("/menu"); // ログイン後にトップへ
+      router.push(redirectPath); // ログイン後にトップへ
     } catch (err: any) {
       console.error(err);
       setError(err.message);
@@ -39,9 +42,16 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-4 items-center w-full"
+    >
       <LoginMailField title="メールアドレス" value={mail} setValue={setMail} />
-      <LoginPasswordField title="パスワード" value={password} setValue={setPassword} />
+      <LoginPasswordField
+        title="パスワード"
+        value={password}
+        setValue={setPassword}
+      />
       {error && <p className="text-red-500">{error}</p>}
       <Button type="submit" size="fixed">
         ログイン

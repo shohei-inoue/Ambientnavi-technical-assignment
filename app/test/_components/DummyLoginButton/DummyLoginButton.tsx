@@ -7,25 +7,25 @@ const DummyLoginButton = () => {
   const router = useRouter();
 
   const handleTestLogin = async () => {
-    const res = await fetch("/api/web/session", {
+    const formData = new FormData();
+    formData.append("email", "test@example.com");
+    formData.append("password", "password1234");
+    formData.append("tableNumber", "1"); // QRで渡される想定の値
+
+    const res = await fetch("/api/web/auth/login", {
       method: "POST",
-      body: JSON.stringify({
-        tableNumber: 1, // 仮のテーブル番号
-        userId: 1,      // 仮のログイン済みユーザーID
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: formData,
     });
 
     const data = await res.json();
 
-    if (data.redirect) {
-      router.push(data.redirect);
-    } else {
-      alert("セッション開始: " + data.sessionId);
-      router.push("/menu");
+    if (!res.ok) {
+      alert("ログイン失敗: " + data.error);
+      return;
     }
+
+    alert("ログイン成功");
+    router.push("/menu");
   };
 
   return (

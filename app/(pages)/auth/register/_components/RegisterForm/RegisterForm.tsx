@@ -29,7 +29,7 @@ const RegisterForm = () => {
     formData.append("gender", gender);
 
     try {
-      const res = await fetch("/api/web/auth/register", {
+      const res = await fetch("/api/web/auth/signup", {
         method: "POST",
         body: formData,
       });

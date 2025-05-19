@@ -72,14 +72,12 @@ export async function linkUserToTableSession(userId: number) {
     throw new Error("有効なテーブルセッションが存在しません");
   }
 
-  if (session.userId) {
-    return session;
+  if (!session.userId) {
+    await prisma.tableSession.update({
+      where: { sessionId },
+      data: { userId },
+    });
   }
 
-  const updated = await prisma.tableSession.update({
-    where: { sessionId },
-    data: { userId },
-  });
-
-  return updated;
+  return session;
 }
