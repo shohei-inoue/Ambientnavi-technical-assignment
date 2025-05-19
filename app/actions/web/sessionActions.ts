@@ -4,19 +4,31 @@ import { prisma } from "@/app/lib/prisma";
 import { cookies } from "next/headers";
 import { v4 as uuidv4 } from "uuid";
 
-export async function createOrGetTableSession(tableNumber: number, userId?: number) {
-  const table = await prisma.table.findFirst({
-    where: { number: tableNumber },
+export async function createTableSession(tableId: number, userId?: number) {
+  const sessionId = uuidv4();
+
+  const session = await prisma.tableSession.create({
+    data: {
+      tableId,
+      userId: userId ?? null,
+      sessionId,
+    },
   });
 
-  if (!table) {
-    throw new Error("テーブルが存在しません");
-  }
+  // カートも同時作成
+  await prisma.cart.create({
+    data: {
+      tableSessionId: session.id,
+    },
+  });
 
-  // 進行中セッションがあるかを確認
-  const existing = await prisma.tableSession.findFirst({
+  return session;
+}
+
+export async function getLatestTableSession(tableId: number) {
+  return await prisma.tableSession.findFirst({
     where: {
-      tableId: table.id,
+      tableId,
       table: {
         isPaid: false,
         checkedOutAt: null,
@@ -26,20 +38,22 @@ export async function createOrGetTableSession(tableNumber: number, userId?: numb
       createdAt: "desc",
     },
   });
+}
 
-  if (existing) return existing;
-
-  const sessionId = uuidv4();
-
-  const session = await prisma.tableSession.create({
-    data: {
-      tableId: table.id,
-      userId: userId ?? null,
-      sessionId,
-    },
+export async function createOrGetTableSession(
+  tableNumber: number,
+  userId?: number
+) {
+  const table = await prisma.table.findFirst({
+    where: { number: tableNumber },
   });
 
-  return session;
+  if (!table) throw new Error("テーブルが存在しません");
+
+  const existing = await getLatestTableSession(table.id);
+  if (existing) return existing;
+
+  return await createTableSession(table.id, userId);
 }
 
 export async function linkUserToTableSession(userId: number) {
