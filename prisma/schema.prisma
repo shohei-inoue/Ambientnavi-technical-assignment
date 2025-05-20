@@ -5,9 +5,9 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
-  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+  provider        = "prisma-client-js"
+  output          = "../app/generated/prisma"
+  binaryTargets   = ["native", "linux-musl-arm64-openssl-3.0.x"]
 }
 
 datasource db {
@@ -15,7 +15,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ユーザー
 enum Gender {
   MALE
   FEMALE
@@ -23,63 +22,137 @@ enum Gender {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  uuid      String   @unique
-  email      String   @unique
-  password   String
-  name       String
-  gender     Gender
-  birthday  DateTime
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id            Int           @id @default(autoincrement())
+  uuid          String        @unique
+  email         String        @unique
+  password      String
+  name          String
+  gender        Gender
+  birthday      DateTime
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  userSessions  UserSession[]
 }
 
+model UserSession {
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  tableSessionId Int
+  user           User          @relation(fields: [userId], references: [id])
+  tableSession   TableSession  @relation(fields: [tableSessionId], references: [id])
+  createdAt      DateTime      @default(now())
 
-// カテゴリー
+  @@unique([userId, tableSessionId])
+}
+
+model Table {
+  id          Int              @id @default(autoincrement())
+  number      Int              @unique
+  isAvailable Boolean          @default(true)
+  sessions    TableSession[]
+  orders      Order[]
+}
+
+model TableSession {
+  id            Int             @id @default(autoincrement())
+  tableId       Int
+  table         Table           @relation(fields: [tableId], references: [id])
+  sessionId     String          @unique @default(uuid())
+  guestCount    Int
+  checkedInAt   DateTime        @default(now())
+  checkedOutAt  DateTime?
+  cart          Cart?
+  userSessions  UserSession[]
+}
+
+model Cart {
+  id              Int            @id @default(autoincrement())
+  tableSessionId  Int            @unique
+  tableSession    TableSession   @relation(fields: [tableSessionId], references: [id])
+  items           CartItem[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cartId    Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  menuId    Int
+  menu      Menu    @relation(fields: [menuId], references: [id])
+  quantity  Int
+  note      String?
+}
+
+model Order {
+  id          Int           @id @default(autoincrement())
+  tableId     Int
+  table       Table         @relation(fields: [tableId], references: [id])
+  status      OrderStatus   @default(PENDING)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  orderItems  OrderItem[]
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  menuId    Int
+  menu      Menu    @relation(fields: [menuId], references: [id])
+  quantity  Int
+  note      String?
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  SERVED
+  PAID
+}
+
 model Category {
-  id            Int    @id @default(autoincrement())
-  name          String @unique
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id            Int           @id @default(autoincrement())
+  name          String        @unique
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   subCategories SubCategory[]
 }
 
-// サブカテゴリー
 model SubCategory {
-  id         Int     @id @default(autoincrement())
-  name       String
-  categoryId Int
-  category   Category   @relation(fields: [categoryId], references: [id])
-  menus      Menu[]
+  id           Int        @id @default(autoincrement())
+  name         String
+  categoryId   Int
+  category     Category   @relation(fields: [categoryId], references: [id])
+  menus        Menu[]
 }
 
-// タグ
 model Tag {
-  id        Int     @id @default(autoincrement())
-  name      String  @unique
-  color     String? 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  color     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   menus     MenuTag[]
 }
 
-// メニュー
 model Menu {
-  id           Int   @id @default(autoincrement())
-  name         String @unique
-  description  String?
-  price        Int
-  imageUrl     String?
-  isAvailable  Boolean  @default(true)
-  taxIncluded  Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  subCategoryId Int
-  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
-  tags         MenuTag[]
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  description    String?
+  price          Int
+  imageUrl       String?
+  isAvailable    Boolean      @default(true)
+  taxIncluded    Boolean      @default(true)
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  subCategoryId  Int
+  subCategory    SubCategory  @relation(fields: [subCategoryId], references: [id])
+  tags           MenuTag[]
+  orderItems     OrderItem[]
+  cartItems      CartItem[]
 }
 
-// メニュー - タグ
 model MenuTag {
   menuId  Int
   tagId   Int

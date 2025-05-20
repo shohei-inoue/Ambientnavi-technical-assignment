@@ -1,33 +1,42 @@
-import { prisma } from "@/app/lib/prisma";
-import { compare } from "bcryptjs";
-import { signJwt } from "@/app/lib/jwt";
-import { NextRequest } from "next/server";
-import { setAuthCookie } from "@/app/lib/cookies";
+import { NextRequest, NextResponse } from "next/server";
+import { login } from "@/app/actions/admin/auth/controller/LoginController";
 
 export async function POST(req: NextRequest) {
   const data = await req.formData();
   const email = data.get("email") as string;
   const password = data.get("password") as string;
+  const sessionId = req.cookies.get("sessionId")?.value;
 
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user) {
-    return new Response(JSON.stringify({ error: "ユーザーが見つかりません" }), {
-      status: 401,
-    });
-  }
-
-  const isValid = await compare(password, user.password);
-  if (!isValid) {
-    return new Response(
-      JSON.stringify({ error: "パスワードが間違っています" }),
-      { status: 401 }
+  if (!sessionId) {
+    return NextResponse.json(
+      { error: "セッションが存在しません。QRコードから入り直してください。" },
+      { status: 400 }
     );
   }
 
-  const token = signJwt({ id: user.id, email: user.email });
-  setAuthCookie(token);
+  try {
+    const { user, token } = await login(email, password, sessionId);
 
-  return new Response(JSON.stringify({ message: "ログイン成功" }), {
-    status: 200,
-  });
+    const res = NextResponse.json({ message: "ログイン成功", user });
+
+    // cookieに保存
+    res.cookies.set("auth_token", token, {
+      httpOnly: true,
+      path: "/",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    res.cookies.set("sessionId", sessionId, {
+      path: "/",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
+    });
+
+    return res;
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 401 });
+  }
 }

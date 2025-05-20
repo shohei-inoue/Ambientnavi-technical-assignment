@@ -47,6 +47,7 @@ export async function createUser(formData: FormData) {
 
   return user;
 }
+
 export async function loginUser(email: string, password: string) {
   if (!email || !password) {
     throw new Error("メールアドレスとパスワードは必須です");

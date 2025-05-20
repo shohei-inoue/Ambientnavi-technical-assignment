@@ -1,4 +1,5 @@
 "use client";
+import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 
 const TopRegisterButton = () => {
@@ -9,12 +10,9 @@ const TopRegisterButton = () => {
   };
 
   return (
-    <button
-      className="bg-gray-500 text-white py-2 px-4 rounded"
-      onClick={handleClick}
-    >
+    <Button onClick={handleClick} type="button" size="fixed">
       新規登録して注文を始める
-    </button>
+    </Button>
   );
 };
 

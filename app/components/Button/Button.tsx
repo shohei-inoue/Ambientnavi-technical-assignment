@@ -34,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-      className={`${sizeStyles[size]} ${colorStyles[color]} ${variantStyles[variant]}`}
+      className={`${sizeStyles[size]} ${colorStyles[color]} ${variantStyles[variant]} cursor-pointer`}
       onClick={onClick}
       type={type}
     >

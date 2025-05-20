@@ -1,5 +1,23 @@
+// カート
+export type CartItemData = {
+  id: number;
+  menuId: number;
+  menuName: string;
+  menuPrice: number;
+  quantity: number;
+  note?: string;
+};
+
+export type CartData = {
+  id: number;
+  tableSessionId: number;
+  items: CartItemData[];
+  totalAmount: number;
+  guestCount: number;
+};
+
 // 性別
-export type Gender = 'MALE' | 'FEMALE' | 'OTHER'
+export type Gender = "MALE" | "FEMALE" | "OTHER";
 
 // カテゴリー
 export type CategoryData = {
@@ -13,7 +31,6 @@ export type SubCategoryData = {
   name: string;
   category: CategoryData;
 };
-
 
 export type TagData = {
   id: number;

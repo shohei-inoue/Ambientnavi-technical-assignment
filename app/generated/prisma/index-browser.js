@@ -132,6 +132,59 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserSessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tableSessionId: 'tableSessionId',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TableScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  isAvailable: 'isAvailable'
+};
+
+exports.Prisma.TableSessionScalarFieldEnum = {
+  id: 'id',
+  tableId: 'tableId',
+  sessionId: 'sessionId',
+  guestCount: 'guestCount',
+  checkedInAt: 'checkedInAt',
+  checkedOutAt: 'checkedOutAt'
+};
+
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  tableSessionId: 'tableSessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  menuId: 'menuId',
+  quantity: 'quantity',
+  note: 'note'
+};
+
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  tableId: 'tableId',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  menuId: 'menuId',
+  quantity: 'quantity',
+  note: 'note'
+};
+
 exports.Prisma.CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -191,8 +244,22 @@ exports.Gender = exports.$Enums.Gender = {
   OTHER: 'OTHER'
 };
 
+exports.OrderStatus = exports.$Enums.OrderStatus = {
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED',
+  SERVED: 'SERVED',
+  PAID: 'PAID'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
+  UserSession: 'UserSession',
+  Table: 'Table',
+  TableSession: 'TableSession',
+  Cart: 'Cart',
+  CartItem: 'CartItem',
+  Order: 'Order',
+  OrderItem: 'OrderItem',
   Category: 'Category',
   SubCategory: 'SubCategory',
   Tag: 'Tag',

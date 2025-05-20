@@ -1,14 +1,20 @@
-'use client'
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import LoginForm from "../LoginForm/LoginForm";
 import Button from "@/app/components/Button/Button";
+import DummyLoginButton from "@/app/test/_components/DummyLoginButton/DummyLoginButton";
 
 const LoginContents = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const tableNumber = searchParams.get("table_number");
 
   const handleRegisterClick = () => {
-    router.push("/auth/register");
+    const redirectUrl = tableNumber
+      ? `/auth/register?table_number=${tableNumber}`
+      : "/auth/register";
+    router.push(redirectUrl);
   };
 
   return (
@@ -17,6 +23,7 @@ const LoginContents = () => {
       <Button onClick={handleRegisterClick} size="fixed">
         新規登録はこちら
       </Button>
+      <DummyLoginButton /> {/* TODO: テスト用ボタン */}
     </div>
   );
 };
