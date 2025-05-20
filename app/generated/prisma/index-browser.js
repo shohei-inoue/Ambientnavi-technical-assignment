@@ -142,18 +142,31 @@ exports.Prisma.UserSessionScalarFieldEnum = {
 exports.Prisma.TableScalarFieldEnum = {
   id: 'id',
   number: 'number',
-  guestCount: 'guestCount',
-  checkedInAt: 'checkedInAt',
-  checkedOutAt: 'checkedOutAt',
-  isPaid: 'isPaid'
+  isAvailable: 'isAvailable'
 };
 
 exports.Prisma.TableSessionScalarFieldEnum = {
   id: 'id',
   tableId: 'tableId',
-  userId: 'userId',
   sessionId: 'sessionId',
-  createdAt: 'createdAt'
+  guestCount: 'guestCount',
+  checkedInAt: 'checkedInAt',
+  checkedOutAt: 'checkedOutAt'
+};
+
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  tableSessionId: 'tableSessionId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CartItemScalarFieldEnum = {
+  id: 'id',
+  cartId: 'cartId',
+  menuId: 'menuId',
+  quantity: 'quantity',
+  note: 'note'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -167,21 +180,6 @@ exports.Prisma.OrderScalarFieldEnum = {
 exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
-  menuId: 'menuId',
-  quantity: 'quantity',
-  note: 'note'
-};
-
-exports.Prisma.CartScalarFieldEnum = {
-  id: 'id',
-  tableSessionId: 'tableSessionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.CartItemScalarFieldEnum = {
-  id: 'id',
-  cartId: 'cartId',
   menuId: 'menuId',
   quantity: 'quantity',
   note: 'note'
@@ -258,10 +256,10 @@ exports.Prisma.ModelName = {
   UserSession: 'UserSession',
   Table: 'Table',
   TableSession: 'TableSession',
-  Order: 'Order',
-  OrderItem: 'OrderItem',
   Cart: 'Cart',
   CartItem: 'CartItem',
+  Order: 'Order',
+  OrderItem: 'OrderItem',
   Category: 'Category',
   SubCategory: 'SubCategory',
   Tag: 'Tag',

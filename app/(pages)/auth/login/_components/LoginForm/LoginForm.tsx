@@ -18,9 +18,12 @@ const LoginForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    const tableNumber = searchParams.get("table_number");
+    
     const formData = new FormData();
     formData.append("email", mail);
     formData.append("password", password);
+    formData.append("tableNumber", tableNumber || "");
 
     try {
       const res = await fetch("/api/web/auth/login", {

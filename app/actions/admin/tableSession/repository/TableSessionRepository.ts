@@ -2,7 +2,10 @@ import { prisma } from "@/app/lib/prisma";
 import { TableSession } from "../domain/TableSession";
 
 export interface TableSessionRepository {
-  createTableSession(tableId: number): Promise<TableSession>;
+  createTableSession(
+    tableId: number,
+    guestCount: number
+  ): Promise<TableSession>;
   getLatestTableSession(tableId: number): Promise<TableSession | null>;
   getTableSessionBySessionId(sessionId: string): Promise<TableSession | null>;
   linkUserToTableSession(sessionId: string, userId: number): Promise<void>;
@@ -10,13 +13,15 @@ export interface TableSessionRepository {
 
 export const TableSessionRepositoryImpl: TableSessionRepository = {
   // create session implement
-  async createTableSession(tableId: number) {
+  async createTableSession(tableId: number, guestCount: number) {
     const sessionId = crypto.randomUUID();
 
     const session = await prisma.tableSession.create({
       data: {
         tableId,
         sessionId,
+        guestCount,
+        checkedInAt: new Date(), // 新設カラムに合わせて追加
       },
     });
 
@@ -32,12 +37,9 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
     return prisma.tableSession.findFirst({
       where: {
         tableId,
-        table: {
-          isPaid: false,
-          checkedOutAt: null,
-        },
+        checkedOutAt: null, // セッションが終了していないかどうか
       },
-      orderBy: { createdAt: "desc" },
+      orderBy: { checkedInAt: "desc" }, // createdAt → checkedInAt に変更
     });
   },
 

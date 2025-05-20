@@ -2,16 +2,21 @@
 
 import Button from "@/app/components/Button/Button";
 import RegisterNameField from "./RegisterNameField";
-import { useState } from "react";
 import RegisterBirthdayField from "./RegisterBirthdayField";
 import RegisterMailField from "./RegisterMailField";
 import RegisterPasswordField from "./RegisterPasswordField";
 import RegisterGenderField from "./RegisterGenderField";
 import { Gender } from "@/app/types/types";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-const RegisterForm = () => {
+type RegisterFormProps = {
+  tableNumber?: string;
+};
+
+const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
   const router = useRouter();
+
   const [name, setName] = useState<string>("");
   const [birthday, setBirthday] = useState<string>("");
   const [mail, setMail] = useState<string>("");
@@ -27,6 +32,7 @@ const RegisterForm = () => {
     formData.append("password", password);
     formData.append("birthday", birthday);
     formData.append("gender", gender);
+    if (tableNumber) formData.append("tableNumber", tableNumber);
 
     try {
       const res = await fetch("/api/web/auth/signup", {
@@ -39,10 +45,9 @@ const RegisterForm = () => {
         throw new Error(err.error || "登録に失敗しました");
       }
 
-      const result = await res.json();
-      console.log("登録成功:", result);
+      const _result = await res.json();
       alert("登録が完了しました");
-      router.push("/");
+      router.push("/menu");
     } catch (error) {
       console.error(error);
       alert(`登録に失敗しました: ${error}`);

@@ -15,7 +15,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ユーザー
 enum Gender {
   MALE
   FEMALE
@@ -46,27 +45,43 @@ model UserSession {
   @@unique([userId, tableSessionId])
 }
 
-// テーブル
 model Table {
-  id           Int            @id @default(autoincrement())
-  number       Int
-  guestCount   Int
-  checkedInAt  DateTime
-  checkedOutAt DateTime?
-  isPaid       Boolean        @default(false)
-  sessions     TableSession[]
-  orders       Order[]
+  id          Int            @id @default(autoincrement())
+  number      Int            @unique
+  isAvailable Boolean        @default(true)
+  sessions    TableSession[]
+  orders      Order[]
 }
 
 model TableSession {
   id           Int           @id @default(autoincrement())
   tableId      Int
   table        Table         @relation(fields: [tableId], references: [id])
-  userId       Int?
   sessionId    String        @unique @default(uuid())
-  createdAt    DateTime      @default(now())
+  guestCount   Int
+  checkedInAt  DateTime      @default(now())
+  checkedOutAt DateTime?
   cart         Cart?
   userSessions UserSession[]
+}
+
+model Cart {
+  id             Int          @id @default(autoincrement())
+  tableSessionId Int          @unique
+  tableSession   TableSession @relation(fields: [tableSessionId], references: [id])
+  items          CartItem[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model CartItem {
+  id       Int     @id @default(autoincrement())
+  cartId   Int
+  cart     Cart    @relation(fields: [cartId], references: [id])
+  menuId   Int
+  menu     Menu    @relation(fields: [menuId], references: [id])
+  quantity Int
+  note     String?
 }
 
 model Order {
@@ -90,34 +105,12 @@ model OrderItem {
 }
 
 enum OrderStatus {
-  PENDING // 注文受付中
-  CONFIRMED // 厨房確認済み
-  SERVED // 配膳済み
-  PAID // 支払い済み
+  PENDING
+  CONFIRMED
+  SERVED
+  PAID
 }
 
-// カート
-model Cart {
-  id             Int          @id @default(autoincrement())
-  tableSession   TableSession @relation(fields: [tableSessionId], references: [id])
-  tableSessionId Int          @unique
-  items          CartItem[]
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
-}
-
-// カート内の商品
-model CartItem {
-  id       Int     @id @default(autoincrement())
-  cart     Cart    @relation(fields: [cartId], references: [id])
-  cartId   Int
-  menu     Menu    @relation(fields: [menuId], references: [id])
-  menuId   Int
-  quantity Int
-  note     String?
-}
-
-// カテゴリー
 model Category {
   id            Int           @id @default(autoincrement())
   name          String        @unique
@@ -126,7 +119,6 @@ model Category {
   subCategories SubCategory[]
 }
 
-// サブカテゴリー
 model SubCategory {
   id         Int      @id @default(autoincrement())
   name       String
@@ -135,7 +127,6 @@ model SubCategory {
   menus      Menu[]
 }
 
-// タグ
 model Tag {
   id        Int       @id @default(autoincrement())
   name      String    @unique
@@ -145,7 +136,6 @@ model Tag {
   menus     MenuTag[]
 }
 
-// メニュー
 model Menu {
   id            Int         @id @default(autoincrement())
   name          String      @unique
@@ -163,7 +153,6 @@ model Menu {
   cartItems     CartItem[]
 }
 
-// メニュー - タグ
 model MenuTag {
   menuId Int
   tagId  Int

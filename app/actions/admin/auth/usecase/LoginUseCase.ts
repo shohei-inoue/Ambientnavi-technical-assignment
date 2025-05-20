@@ -1,6 +1,5 @@
 import { compare } from "bcryptjs";
 import { signJwt } from "@/app/lib/jwt";
-import { linkUserToTableSession } from "@/app/actions/web/sessionActions";
 import { UserRepository } from "../repository/UserRepository";
 import { TableSessionRepository } from "../../tableSession/repository/TableSessionRepository";
 

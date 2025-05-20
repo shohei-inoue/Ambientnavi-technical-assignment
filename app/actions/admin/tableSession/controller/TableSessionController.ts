@@ -6,7 +6,6 @@ import {
 import { TableSessionRepositoryImpl } from "../repository/TableSessionRepository";
 import { TableRepositoryImpl } from "../../table/repository/TableRepository";
 import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";
-import { hasLoggedInUser } from "../../userSession/usecase/UserSessionUsecase";
 import { UserSessionRepositoryImpl } from "../../userSession/repository/UserSessionRepository";
 
 // usecase instance
@@ -22,19 +21,14 @@ const linkUserToSessionUsecase = getLinkUserToTableSession(
   TableSessionRepositoryImpl
 );
 
-const hasLoggedInUserUseCase = hasLoggedInUser(
-  TableSessionRepositoryImpl,
-  UserSessionRepositoryImpl
-);
-
 // get
 export async function getSession(tableNumber: number) {
   return await getSessionUsecase(tableNumber);
 }
 
 // create
-export async function createSession(tableNumber: number) {
-  const session = await createSessionUsecase(tableNumber);
+export async function createSession(tableNumber: number, guestCount: number) {
+  const session = await createSessionUsecase(tableNumber, guestCount);
   await setSessionCookie(session.sessionId);
   return session;
 }
@@ -46,9 +40,4 @@ export async function getLinkUserToSession(userId: number) {
   if (!sessionId) throw new Error("セッションIDが見つかりません");
 
   return await linkUserToSessionUsecase(sessionId, userId);
-}
-
-// check login user in session
-export async function checkIfSomeoneLoggedIn() {
-  return await hasLoggedInUserUseCase();
 }
