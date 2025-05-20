@@ -4,7 +4,6 @@ import Form from "@/app/components/Form/form";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import TableIsAvailableField from "../../../[id]/_components/TableContent/TableIsAvailableField";
-import { handleCreateTable } from "@/app/actions/admin/table/controller/TableController";
 import TableNumberField from "../../../[id]/_components/TableContent/TableNumberField";
 
 const TablesAddForm = () => {

@@ -29,6 +29,7 @@ const TableSettingForm: React.FC<TableSettingFormProps> = ({
     if (!isConfirmed) return;
 
     const formData = new FormData();
+    formData.append("id", id.toString());
     formData.append("number", tNumber.toString());
     formData.append("isAvailable", String(isAvailable));
 
