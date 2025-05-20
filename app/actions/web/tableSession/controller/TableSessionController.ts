@@ -1,3 +1,5 @@
+"use server";
+
 import {
   createTableSession,
   getLinkUserToTableSession,
@@ -5,8 +7,7 @@ import {
 } from "../usecase/TableSessionUsecase";
 import { TableSessionRepositoryImpl } from "../repository/TableSessionRepository";
 import { TableRepositoryImpl } from "../../../admin/table/repository/TableRepository";
-import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";
-import { UserSessionRepositoryImpl } from "../../userSession/repository/UserSessionRepository";
+import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";;
 
 // usecase instance
 const createSessionUsecase = createTableSession(

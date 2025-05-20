@@ -1,3 +1,5 @@
+"use server";
+
 import { TableSessionRepositoryImpl } from "@/app/actions/web/tableSession/repository/TableSessionRepository";
 import { CartRepositoryImpl } from "../repository/CartRepository";
 
@@ -8,7 +10,6 @@ import {
   getCartUsecase,
 } from "../usecase/CartUsecase";
 
-// usecaseインスタンス化
 const getCart = getCartUsecase(CartRepositoryImpl);
 const createCart = createCartUsecase(CartRepositoryImpl);
 const deleteCart = deleteCartUsecase(CartRepositoryImpl);

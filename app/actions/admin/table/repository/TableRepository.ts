@@ -4,7 +4,9 @@ import { Table } from "../domain/Table";
 export interface TableRepository {
   getTables(): Promise<Table[]>;
   getTable(id: number): Promise<Table | null>;
-  createTable(number: number): Promise<Table>;
+  getTableByNumber(number: number): Promise<Table | null>;
+  updateTable(id: number, number: number, isAvailable: boolean): Promise<Table>;
+  createTable(number: number, isAvailable: boolean): Promise<Table>;
   deleteTable(id: number): Promise<void>;
 }
 
@@ -21,12 +23,38 @@ export const TableRepositoryImpl: TableRepository = {
     return await prisma.table.findUnique({ where: { id } });
   },
 
+  // get table by Number implement
+  async getTableByNumber(number: number): Promise<Table | null> {
+    const result = await prisma.table.findUnique({
+      where: { number },
+    });
+
+    if (!result) return null;
+
+    return {
+      id: result.id,
+      number: result.number,
+      isAvailable: result.isAvailable,
+    };
+  },
+
   // create table implement
-  async createTable(number) {
+  async createTable(number, isAvailable) {
     return await prisma.table.create({
       data: {
         number,
-        isAvailable: true,
+        isAvailable,
+      },
+    });
+  },
+
+  // update table implement
+  async updateTable(id, number, isAvailable) {
+    return await prisma.table.update({
+      where: { id },
+      data: {
+        number,
+        isAvailable,
       },
     });
   },

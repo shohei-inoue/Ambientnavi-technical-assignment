@@ -5,12 +5,14 @@ import TopContent from "./_components/TopContent/TopContent";
 import { getSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
 import { hasLoggedInUserInSession } from "@/app/actions/web/userSession/controller/UserSessionController";
 
-export default async function Top({
-  searchParams,
-}: {
-  searchParams: { table_number?: string };
-}) {
-  const tableNumber = Number(searchParams.table_number);
+type TopProps = {
+  searchParams?: {
+    table_number?: string;
+  };
+};
+
+export default async function Top({ searchParams }: TopProps) {
+  const tableNumber = Number(searchParams?.table_number);
 
   if (!tableNumber || isNaN(tableNumber)) {
     return (

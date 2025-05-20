@@ -99,3 +99,9 @@ export type AdminTagData = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+//テーブル
+export type AdminTableData = {
+  id: number;
+  tableNumber: number;
+};

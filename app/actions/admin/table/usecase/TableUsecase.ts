@@ -13,8 +13,14 @@ export function getTableDetailUsecase(tr: TableRepository) {
 }
 
 export function createTableUsecase(tr: TableRepository) {
-  return async (number: number) => {
-    return await tr.createTable(number);
+  return async (number: number, isAvailable: boolean) => {
+    return await tr.createTable(number, isAvailable);
+  };
+}
+
+export function updateTableUsecase(tr: TableRepository) {
+  return async (id: number, number: number, isAvailable: boolean) => {
+    return await tr.updateTable(id, number, isAvailable);
   };
 }
 
