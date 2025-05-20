@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
 import { signJwt } from "@/app/lib/jwt";
 import { UserRepository } from "../repository/UserRepository";
-import { TableSessionRepository } from "../../tableSession/repository/TableSessionRepository";
+import { TableSessionRepository } from "../../../web/tableSession/repository/TableSessionRepository";
 
 // login
 export function loginUser(ur: UserRepository, tr: TableSessionRepository) {

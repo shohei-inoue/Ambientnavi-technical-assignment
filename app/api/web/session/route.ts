@@ -1,4 +1,4 @@
-import { createSession } from "@/app/actions/admin/tableSession/controller/TableSessionController";
+import { createSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

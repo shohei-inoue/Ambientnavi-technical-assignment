@@ -1,3 +1,5 @@
+"use server";
+
 import { UserRepositoryImpl } from "../repository/UserRepository";
 import { signupUser } from "../usecase/SignupUseCase";
 

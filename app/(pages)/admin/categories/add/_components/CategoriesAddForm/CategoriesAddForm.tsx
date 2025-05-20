@@ -7,7 +7,6 @@ import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import SubCategoryField from "../../../[id]/_components/SubCategoryField/SubCategoryField";
 
-
 const CategoriesAddForm = () => {
   const [name, setName] = useState<string>("");
   const [subCategories, setSubCategories] = useState<string[]>([""]);
@@ -55,7 +54,7 @@ const CategoriesAddForm = () => {
       await createCategory(formData);
       alert("カテゴリーを追加しました");
       setName("");
-      setSubCategories([""])
+      setSubCategories([""]);
     } catch (error) {
       console.error(error);
       alert(`カテゴリーを追加できませんでした. \n${error}`);

@@ -2,11 +2,17 @@ import { redirect } from "next/navigation";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import TopContent from "./_components/TopContent/TopContent";
-import { getSession } from "@/app/actions/admin/tableSession/controller/TableSessionController";
-import { hasLoggedInUserInSession } from "@/app/actions/admin/userSession/controller/UserSessionController";
+import { getSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
+import { hasLoggedInUserInSession } from "@/app/actions/web/userSession/controller/UserSessionController";
 
-export default async function Top({ searchParams }: { searchParams: { table_number?: string } }) {
-  const tableNumber = Number(searchParams.table_number);
+type TopProps = {
+  searchParams?: {
+    table_number?: string;
+  };
+};
+
+export default async function Top({ searchParams }: TopProps) {
+  const tableNumber = Number(searchParams?.table_number);
 
   if (!tableNumber || isNaN(tableNumber)) {
     return (

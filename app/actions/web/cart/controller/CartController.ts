@@ -1,4 +1,6 @@
-import { TableSessionRepositoryImpl } from "@/app/actions/admin/tableSession/repository/TableSessionRepository";
+"use server";
+
+import { TableSessionRepositoryImpl } from "@/app/actions/web/tableSession/repository/TableSessionRepository";
 import { CartRepositoryImpl } from "../repository/CartRepository";
 
 import {
@@ -8,7 +10,6 @@ import {
   getCartUsecase,
 } from "../usecase/CartUsecase";
 
-// usecaseインスタンス化
 const getCart = getCartUsecase(CartRepositoryImpl);
 const createCart = createCartUsecase(CartRepositoryImpl);
 const deleteCart = deleteCartUsecase(CartRepositoryImpl);
@@ -16,7 +17,8 @@ const addToCart = addToCartUsecase(CartRepositoryImpl);
 
 // sessionId(string) → tableSessionId(int) 変換共通処理
 async function resolveTableSessionId(sessionId: string): Promise<number> {
-  const session = await TableSessionRepositoryImpl.getTableSessionBySessionId(sessionId);
+  const session =
+    await TableSessionRepositoryImpl.getTableSessionBySessionId(sessionId);
   if (!session) throw new Error("セッションが存在しません");
   return session.id;
 }
