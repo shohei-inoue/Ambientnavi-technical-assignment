@@ -2,10 +2,10 @@ import { compare } from "bcryptjs";
 import { signJwt } from "@/app/lib/jwt";
 import { linkUserToTableSession } from "@/app/actions/web/sessionActions";
 import { UserRepository } from "../repository/UserRepository";
-import { SessionRepository } from "../../tableSession/repository/TableSessionRepository";
+import { TableSessionRepository } from "../../tableSession/repository/TableSessionRepository";
 
 // login
-export function loginUser(ur: UserRepository, sr: SessionRepository) {
+export function loginUser(ur: UserRepository, tr: TableSessionRepository) {
   return async (email: string, password: string, sessionId: string) => {
     const user = await ur.getUserByEmail(email);
     if (!user) throw new Error("ユーザーが見つかりません");
@@ -15,7 +15,7 @@ export function loginUser(ur: UserRepository, sr: SessionRepository) {
 
     const token = signJwt({ id: user.id, email: user.email });
 
-    await sr.linkUserToTableSession(sessionId, user.id);
+    await tr.linkUserToTableSession(sessionId, user.id);
 
     return { user, token };
   };

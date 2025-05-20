@@ -1,14 +1,14 @@
 import { prisma } from "@/app/lib/prisma";
 import { TableSession } from "../domain/TableSession";
 
-export interface SessionRepository {
+export interface TableSessionRepository {
   createTableSession(tableId: number): Promise<TableSession>;
   getLatestTableSession(tableId: number): Promise<TableSession | null>;
   getTableSessionBySessionId(sessionId: string): Promise<TableSession | null>;
   linkUserToTableSession(sessionId: string, userId: number): Promise<void>;
 }
 
-export const TableSessionRepositoryImpl: SessionRepository = {
+export const TableSessionRepositoryImpl: TableSessionRepository = {
   // create session implement
   async createTableSession(tableId: number) {
     const sessionId = crypto.randomUUID();

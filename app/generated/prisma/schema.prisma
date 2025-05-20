@@ -50,7 +50,7 @@ model UserSession {
 model Table {
   id           Int            @id @default(autoincrement())
   number       Int
-  guestCount   Int?
+  guestCount   Int
   checkedInAt  DateTime
   checkedOutAt DateTime?
   isPaid       Boolean        @default(false)

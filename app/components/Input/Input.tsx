@@ -1,7 +1,7 @@
 type InputProps = {
   type: "text" | "email" | "password" | "number" | "tel" | "url" | "date";
   placeholder?: string;
-  value?: string;
+  value?: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   required?: boolean;

@@ -4731,7 +4731,7 @@ export namespace Prisma {
   export type TableGroupByOutputType = {
     id: number
     number: number
-    guestCount: number | null
+    guestCount: number
     checkedInAt: Date
     checkedOutAt: Date | null
     isPaid: boolean
@@ -4813,7 +4813,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       number: number
-      guestCount: number | null
+      guestCount: number
       checkedInAt: Date
       checkedOutAt: Date | null
       isPaid: boolean
@@ -17350,7 +17350,7 @@ export namespace Prisma {
     NOT?: TableWhereInput | TableWhereInput[]
     id?: IntFilter<"Table"> | number
     number?: IntFilter<"Table"> | number
-    guestCount?: IntNullableFilter<"Table"> | number | null
+    guestCount?: IntFilter<"Table"> | number
     checkedInAt?: DateTimeFilter<"Table"> | Date | string
     checkedOutAt?: DateTimeNullableFilter<"Table"> | Date | string | null
     isPaid?: BoolFilter<"Table"> | boolean
@@ -17361,7 +17361,7 @@ export namespace Prisma {
   export type TableOrderByWithRelationInput = {
     id?: SortOrder
     number?: SortOrder
-    guestCount?: SortOrderInput | SortOrder
+    guestCount?: SortOrder
     checkedInAt?: SortOrder
     checkedOutAt?: SortOrderInput | SortOrder
     isPaid?: SortOrder
@@ -17375,7 +17375,7 @@ export namespace Prisma {
     OR?: TableWhereInput[]
     NOT?: TableWhereInput | TableWhereInput[]
     number?: IntFilter<"Table"> | number
-    guestCount?: IntNullableFilter<"Table"> | number | null
+    guestCount?: IntFilter<"Table"> | number
     checkedInAt?: DateTimeFilter<"Table"> | Date | string
     checkedOutAt?: DateTimeNullableFilter<"Table"> | Date | string | null
     isPaid?: BoolFilter<"Table"> | boolean
@@ -17386,7 +17386,7 @@ export namespace Prisma {
   export type TableOrderByWithAggregationInput = {
     id?: SortOrder
     number?: SortOrder
-    guestCount?: SortOrderInput | SortOrder
+    guestCount?: SortOrder
     checkedInAt?: SortOrder
     checkedOutAt?: SortOrderInput | SortOrder
     isPaid?: SortOrder
@@ -17403,7 +17403,7 @@ export namespace Prisma {
     NOT?: TableScalarWhereWithAggregatesInput | TableScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Table"> | number
     number?: IntWithAggregatesFilter<"Table"> | number
-    guestCount?: IntNullableWithAggregatesFilter<"Table"> | number | null
+    guestCount?: IntWithAggregatesFilter<"Table"> | number
     checkedInAt?: DateTimeWithAggregatesFilter<"Table"> | Date | string
     checkedOutAt?: DateTimeNullableWithAggregatesFilter<"Table"> | Date | string | null
     isPaid?: BoolWithAggregatesFilter<"Table"> | boolean
@@ -18134,7 +18134,7 @@ export namespace Prisma {
 
   export type TableCreateInput = {
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -18145,7 +18145,7 @@ export namespace Prisma {
   export type TableUncheckedCreateInput = {
     id?: number
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -18155,7 +18155,7 @@ export namespace Prisma {
 
   export type TableUpdateInput = {
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -18166,7 +18166,7 @@ export namespace Prisma {
   export type TableUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -18177,7 +18177,7 @@ export namespace Prisma {
   export type TableCreateManyInput = {
     id?: number
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -18185,7 +18185,7 @@ export namespace Prisma {
 
   export type TableUpdateManyMutationInput = {
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -18194,7 +18194,7 @@ export namespace Prisma {
   export type TableUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -18953,17 +18953,6 @@ export namespace Prisma {
     tableSessionId?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type DateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -19044,22 +19033,6 @@ export namespace Prisma {
     guestCount?: SortOrder
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -19080,6 +19053,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type TableScalarRelationFilter = {
@@ -19126,6 +19110,22 @@ export namespace Prisma {
     id?: SortOrder
     tableId?: SortOrder
     userId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumOrderStatusFilter<$PrismaModel = never> = {
@@ -19687,14 +19687,6 @@ export namespace Prisma {
     connect?: OrderWhereUniqueInput | OrderWhereUniqueInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
   }
@@ -19789,6 +19781,14 @@ export namespace Prisma {
     connectOrCreate?: UserSessionCreateOrConnectWithoutTableSessionInput | UserSessionCreateOrConnectWithoutTableSessionInput[]
     createMany?: UserSessionCreateManyTableSessionInputEnvelope
     connect?: UserSessionWhereUniqueInput | UserSessionWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TableUpdateOneRequiredWithoutSessionsNestedInput = {
@@ -20442,17 +20442,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -20467,6 +20456,39 @@ export namespace Prisma {
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -20494,28 +20516,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
@@ -20833,7 +20833,7 @@ export namespace Prisma {
 
   export type TableCreateWithoutSessionsInput = {
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -20843,7 +20843,7 @@ export namespace Prisma {
   export type TableUncheckedCreateWithoutSessionsInput = {
     id?: number
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -20907,7 +20907,7 @@ export namespace Prisma {
 
   export type TableUpdateWithoutSessionsInput = {
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -20917,7 +20917,7 @@ export namespace Prisma {
   export type TableUncheckedUpdateWithoutSessionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -20966,7 +20966,7 @@ export namespace Prisma {
 
   export type TableCreateWithoutOrdersInput = {
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -20976,7 +20976,7 @@ export namespace Prisma {
   export type TableUncheckedCreateWithoutOrdersInput = {
     id?: number
     number: number
-    guestCount?: number | null
+    guestCount: number
     checkedInAt: Date | string
     checkedOutAt?: Date | string | null
     isPaid?: boolean
@@ -21024,7 +21024,7 @@ export namespace Prisma {
 
   export type TableUpdateWithoutOrdersInput = {
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean
@@ -21034,7 +21034,7 @@ export namespace Prisma {
   export type TableUncheckedUpdateWithoutOrdersInput = {
     id?: IntFieldUpdateOperationsInput | number
     number?: IntFieldUpdateOperationsInput | number
-    guestCount?: NullableIntFieldUpdateOperationsInput | number | null
+    guestCount?: IntFieldUpdateOperationsInput | number
     checkedInAt?: DateTimeFieldUpdateOperationsInput | Date | string
     checkedOutAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isPaid?: BoolFieldUpdateOperationsInput | boolean

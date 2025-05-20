@@ -1,36 +1,38 @@
-import { SessionRepository } from "../repository/TableSessionRepository";
+import { TableSessionRepository } from "../repository/TableSessionRepository";
 import { TableRepository } from "../../table/repository/TableRepository";
+import { UserSessionRepository } from "../../userSession/repository/UserSessionRepository";
+import { cookies } from "next/headers";
 
 // create table session
-export function createTableSession(sr: SessionRepository, tr: TableRepository) {
+export function createTableSession(tsr: TableSessionRepository, tr: TableRepository) {
   return async (tableNumber: number) => {
     const table = await tr.getTableByNumber(tableNumber);
     if (!table) throw new Error("テーブルが存在しません");
 
-    const existing = await sr.getLatestTableSession(table.id);
+    const existing = await tsr.getLatestTableSession(table.id);
     if (existing) throw new Error("既に有効なセッションがあります");
 
-    return await sr.createTableSession(table.id);
+    return await tsr.createTableSession(table.id);
   };
 }
 
 // get table session
-export function getTableSession(sr: SessionRepository, tr: TableRepository) {
+export function getTableSession(tsr: TableSessionRepository, tr: TableRepository) {
   return async (tableNumber: number) => {
     const table = await tr.getTableByNumber(tableNumber);
     if (!table) throw new Error("テーブルが存在しません");
 
-    return await sr.getLatestTableSession(table.id);
+    return await tsr.getLatestTableSession(table.id);
   };
 }
 
 // get session and link user to session
-export function getLinkUserToTableSession(sr: SessionRepository) {
+export function getLinkUserToTableSession(tsr: TableSessionRepository) {
   return async (sessionId: string, userId: number) => {
-    const session = await sr.getTableSessionBySessionId(sessionId);
+    const session = await tsr.getTableSessionBySessionId(sessionId);
     if (!session) throw new Error("有効なセッションが存在しません");
 
-    await sr.linkUserToTableSession(sessionId, userId);
+    await tsr.linkUserToTableSession(sessionId, userId);
     return session;
   };
 }
