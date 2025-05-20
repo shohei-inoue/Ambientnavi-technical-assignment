@@ -1,7 +1,7 @@
 "use client";
 
 import { SetStateAction } from "react";
-import CategoryItem from "../CategoryItem/CategoryItem";
+import CategoryItem from "../CategoryContent/CategoryItem";
 
 type SubCategoryFieldProps = {
   value: string[];

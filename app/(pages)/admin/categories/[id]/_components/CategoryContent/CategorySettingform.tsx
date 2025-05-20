@@ -5,11 +5,12 @@ import {
   updateCategory,
 } from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
-import CategoryNameFiled from "../CategoryNameField/CategoryNameField";
+import CategoryNameFiled from "./CategoryNameField";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import SubCategoryField from "../SubCategoryField/SubCategoryField";
+import SubCategoryField from "./SubCategoryField";
+
 
 type CategorySettingFormProps = {
   id: number;
@@ -38,9 +39,7 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
     const formData = new FormData();
     formData.append("id", id.toString());
     formData.append("name", name);
-    subCategories.forEach((sub) =>
-      formData.append("subCategories", sub)
-    );
+    subCategories.forEach((sub) => formData.append("subCategories", sub));
 
     try {
       await updateCategory(formData);
@@ -72,7 +71,7 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
   return (
     <Form onSubmit={handleSubmit}>
       <CategoryNameFiled value={name} setValue={setName} />
-      <SubCategoryField value={subCategories} setValue={setSubCategories}/>
+      <SubCategoryField value={subCategories} setValue={setSubCategories} />
       <div className="flex gap-4">
         <Button type="reset" onClick={handleDelete}>
           削除

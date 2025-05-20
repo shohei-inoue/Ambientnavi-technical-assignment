@@ -1,5 +1,5 @@
 import ToggleSwitch from "@/app/components/ToggleSwitch/ToggleSwitch";
-import MenuDetailItem from "../MenuDetailItem/MenuDetailItem";
+import MenuDetailItem from "./MenuDetailItem";
 import { SetStateAction } from "react";
 
 type MenuDetailIsAvailableFieldProps = {

@@ -2,10 +2,10 @@
 
 import { createCategory } from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
-import CategoryNameFiled from "../../../[id]/_components/CategoryNameField/CategoryNameField";
+import CategoryNameFiled from "../../../[id]/_components/CategoryContent/CategoryNameField";
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
-import SubCategoryField from "../../../[id]/_components/SubCategoryField/SubCategoryField";
+import SubCategoryField from "../../../[id]/_components/CategoryContent/SubCategoryField";
 
 const CategoriesAddForm = () => {
   const [name, setName] = useState<string>("");

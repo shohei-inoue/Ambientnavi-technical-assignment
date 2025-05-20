@@ -1,7 +1,7 @@
 "use client";
 
 import { SetStateAction, useEffect, useRef, useState } from "react";
-import MenuDetailItem from "../MenuDetailItem/MenuDetailItem";
+import MenuDetailItem from "./MenuDetailItem";
 import NextImage from "next/image";
 
 type MenuDetailImageFieldProps = {

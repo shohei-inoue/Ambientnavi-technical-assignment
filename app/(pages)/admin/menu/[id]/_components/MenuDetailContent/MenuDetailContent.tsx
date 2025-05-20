@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import MenuDetailSettingForm from "../MenuDetailSettingForm/MenuDetailSettingForm";
+import MenuDetailSettingForm from "./MenuDetailSettingForm";
 import Loader from "@/app/components/Loader/Loader";
 import Error from "@/app/components/Error/Error";
 import NoData from "@/app/components/NoData/NoData";

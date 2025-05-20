@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import MenuDetailItem from "../MenuDetailItem/MenuDetailItem";
+import MenuDetailItem from "./MenuDetailItem";
 import ToggleSwitch from "@/app/components/ToggleSwitch/ToggleSwitch";
 
 type MenuDetailTaxIncludedFieldProps = {

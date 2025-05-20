@@ -1,7 +1,7 @@
 "use client";
 
 import { AdminCategoriesData } from "@/app/types/types";
-import MenuDetailItem from "../MenuDetailItem/MenuDetailItem";
+import MenuDetailItem from "./MenuDetailItem";
 import { useState } from "react";
 
 type MenuDetailSubCategoryFieldProps = {

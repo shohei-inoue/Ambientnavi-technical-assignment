@@ -6,7 +6,7 @@ import Loader from "@/app/components/Loader/Loader";
 import Error from "@/app/components/Error/Error";
 import NoData from "@/app/components/NoData/NoData";
 import { getCategory } from "@/app/actions/admin/categoriesActions";
-import CategorySettingForm from "../CategorySettingForm/CategorySettingform";
+import CategorySettingForm from "./CategorySettingform";
 
 type CategoryContentProps = {
   id: string;

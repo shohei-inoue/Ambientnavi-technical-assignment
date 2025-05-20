@@ -1,5 +1,5 @@
 import { SetStateAction } from "react";
-import CategoryItem from "../CategoryItem/CategoryItem";
+import CategoryItem from "./CategoryItem";
 
 type CategoryNameFieldProps = {
   value: string;

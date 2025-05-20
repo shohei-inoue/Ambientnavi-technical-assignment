@@ -1,16 +1,16 @@
 "use client";
 
-import MenuDetailNameFiled from "../../../[id]/_components/MenuDetailNameField/MenuDetailNameField";
-import MenuDetailDescriptionField from "../../../[id]/_components/MenuDetailDescriptionField/MenuDetailDescriptionField";
-import MenuDetailPriceField from "../../../[id]/_components/MenuDetailPriceField/MenuDetailPriceField";
+import MenuDetailNameFiled from "../../../[id]/_components/MenuDetailContent/MenuDetailNameField";
+import MenuDetailDescriptionField from "../../../[id]/_components/MenuDetailContent/MenuDetailDescriptionField";
+import MenuDetailPriceField from "../../../[id]/_components/MenuDetailContent/MenuDetailPriceField";
 import Button from "@/app/components/Button/Button";
 import Form from "@/app/components/Form/form";
 import { useEffect, useState } from "react";
-import MenuDetailCategoriesField from "../../../[id]/_components/MenuDetailCategoriesField/MenuDetailCategoriesField";
-import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailIsAvailableField/MenuDetailIsAvailableField";
-import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailTaxIncludedField/MenuDetailTaxIncludedField";
-import MenuDetailImageField from "../../../[id]/_components/MenuDetailImageField/MenuDetailImageField";
-import MenuDetailTagsField from "../../../[id]/_components/MenuDetailTagsField/MenuDetailTagsField";
+import MenuDetailCategoriesField from "../../../[id]/_components/MenuDetailContent/MenuDetailCategoriesField";
+import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailContent/MenuDetailIsAvailableField";
+import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailContent/MenuDetailTaxIncludedField";
+import MenuDetailImageField from "../../../[id]/_components/MenuDetailContent/MenuDetailImageField";
+import MenuDetailTagsField from "../../../[id]/_components/MenuDetailContent/MenuDetailTagsField";
 import { createMenu } from "@/app/actions/admin/menuActions";
 import { getCategories } from "@/app/actions/admin/categoriesActions";
 import { AdminCategoriesData } from "@/app/types/types";
