@@ -1,16 +1,11 @@
 "use client";
 
-import {
-  deleteCategory,
-  updateCategory,
-} from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
 import CategoryNameFiled from "./CategoryNameField";
 import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SubCategoryField from "./SubCategoryField";
-
 
 type CategorySettingFormProps = {
   id: number;
@@ -25,7 +20,8 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
 }) => {
   const router = useRouter();
   const [name, setName] = useState<string>(category_name);
-  const [subCategories, setSubCategories] = useState<string[]>(sub_categories);
+  const [subCategories, setSubCategories] =
+    useState<string[]>(sub_categories);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,15 +35,23 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
     const formData = new FormData();
     formData.append("id", id.toString());
     formData.append("name", name);
-    subCategories.forEach((sub) => formData.append("subCategories", sub));
+    subCategories.forEach((subName) => formData.append("subCategories", subName));
 
     try {
-      await updateCategory(formData);
+      const res = await fetch(`/api/admin/categories/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "更新に失敗しました");
+      }
       alert("カテゴリー情報を更新しました");
       router.refresh();
     } catch (error) {
       console.error(error);
-      alert(`カテゴリー情報を更新できませんでした. \n${error}`);
+      alert(`カテゴリー情報を更新できませんでした: ${error}`);
     }
   };
 
@@ -59,12 +63,20 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
     }
 
     try {
-      await deleteCategory(id);
+      const res = await fetch(`/api/admin/categories/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "削除に失敗しました");
+      }
+
       alert("カテゴリー情報を削除しました");
       router.back();
     } catch (error) {
       console.error(error);
-      alert(`カテゴリー情報を削除できませんでした`);
+      alert(`カテゴリー情報を削除できませんでした: ${error}`);
     }
   };
 
