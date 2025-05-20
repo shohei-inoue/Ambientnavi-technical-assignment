@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import TopContent from "./_components/TopContent/TopContent";
@@ -14,15 +14,9 @@ type TopProps = {
 export default async function Top({ searchParams }: TopProps) {
   const tableNumber = Number(searchParams?.table_number);
 
+  // 無効なテーブル番号 → 404ページへ
   if (!tableNumber || isNaN(tableNumber)) {
-    return (
-      <MainContainer>
-        <MainContent>
-          <p className="text-red-500">テーブル番号が不正です</p>
-          <p className="text-red-500">スタッフをお呼びください</p>
-        </MainContent>
-      </MainContainer>
-    );
+    notFound();
   }
 
   const session = await getSession(tableNumber);
