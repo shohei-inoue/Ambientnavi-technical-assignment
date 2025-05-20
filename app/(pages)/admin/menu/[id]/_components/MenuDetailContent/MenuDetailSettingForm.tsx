@@ -13,9 +13,8 @@ import MenuDetailTagsField from "./MenuDetailTagsField";
 import MenuDetailIsAvailableField from "./MenuDetailIsAvailableField";
 import { useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
-import { deleteMenu, updateMenu } from "@/app/actions/admin/menuActions";
-import { getCategories } from "@/app/actions/admin/categoriesActions";
-import { AdminCategoriesData } from "@/app/types/types";
+import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuDetailSettingFormProps = {
   id: number;
@@ -52,9 +51,7 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     useState<number>(menu_sub_category_id);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>(
-    []
-  );
+  const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
   // categories情報を取得
   useEffect(() => {
@@ -62,7 +59,7 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
       setLoading(true);
       setError(null);
       try {
-        const categories = await getCategories();
+        const categories = await handleGetCategories();
         setCategoriesData(categories);
       } catch (error) {
         console.error(error);
@@ -104,12 +101,20 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     formData.append("tags", tags.join(","));
 
     try {
-      await updateMenu(formData);
-      alert("メニューを更新しました");
+      const res = await fetch(`/api/admin/menu/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "更新に失敗しました");
+      }
+      alert("メニュー情報を更新しました");
       router.refresh();
     } catch (error) {
       console.error(error);
-      alert(`メニューを更新できませんでした \n${error}`);
+      alert(`メニュー情報を更新できませんでした: ${error}`);
     }
   };
 
@@ -121,12 +126,20 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     }
 
     try {
-      await deleteMenu(id);
-      alert("メニューを削除しました");
+      const res = await fetch(`/api/admin/menu/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "削除に失敗しました");
+      }
+
+      alert("メニュー情報を削除しました");
       router.back();
     } catch (error) {
       console.error(error);
-      alert(`メニューを削除できませんでした`);
+      alert(`メニュー情報を削除できませんでした: ${error}`);
     }
   };
 

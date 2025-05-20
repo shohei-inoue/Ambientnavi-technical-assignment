@@ -11,7 +11,6 @@ import MenuDetailIsAvailableField from "../../../[id]/_components/MenuDetailCont
 import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailContent/MenuDetailTaxIncludedField";
 import MenuDetailImageField from "../../../[id]/_components/MenuDetailContent/MenuDetailImageField";
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailContent/MenuDetailTagsField";
-import { createMenu } from "@/app/actions/admin/menuActions";
 import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
 import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
@@ -26,9 +25,7 @@ const MenuAddForm = () => {
   const [subCategoryId, setSubCategoryId] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<Category[]>(
-    []
-  );
+  const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
   // categories情報を取得
   useEffect(() => {
@@ -77,7 +74,15 @@ const MenuAddForm = () => {
     formData.append("tags", tags.join(","));
 
     try {
-      await createMenu(formData);
+      const res = await fetch("/api/admin/menu", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.error);
+
       alert("メニューを追加しました");
       setName("");
       setDescription("");

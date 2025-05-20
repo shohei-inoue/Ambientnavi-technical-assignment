@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import MenuDetailItem from "./MenuDetailItem";
 
 type MenuDetailTagsFieldProps = {
@@ -13,6 +13,10 @@ const MenuDetailTagsField: React.FC<MenuDetailTagsFieldProps> = ({
   setValue,
 }) => {
   const [input, setInput] = useState<string>("");
+
+  useEffect(() => {
+    setInput("");
+  }, [value]);
 
   const handleAdd = () => {
     const tag = input.trim().toLowerCase();
@@ -29,9 +33,9 @@ const MenuDetailTagsField: React.FC<MenuDetailTagsFieldProps> = ({
   return (
     <MenuDetailItem title="タグ">
       <div className="flex flex-wrap gap-2">
-        {value.map((tag, index) => (
+        {value.filter(Boolean).map((tag, index) => (
           <span
-            key={tag}
+            key={tag + index}
             className="bg-gray-200 px-3 py-1 rounded-full text-sm flex items-center"
           >
             {tag}

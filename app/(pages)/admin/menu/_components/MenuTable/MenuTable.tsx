@@ -1,3 +1,4 @@
+import { Menu } from "@/app/actions/admin/menu/domain/Menu";
 import Table from "@/app/components/Table/Table";
 import TableBody from "@/app/components/Table/TableBody";
 import TableContainer from "@/app/components/Table/TableContainer";
@@ -5,10 +6,9 @@ import TableData from "@/app/components/Table/TableData";
 import TableHead from "@/app/components/Table/TableHead";
 import TableHeader from "@/app/components/Table/TableHeader";
 import TableRow from "@/app/components/Table/TableRow";
-import { AdminMenuData } from "@/app/types/types";
 
 type MenuTableProps = {
-  menu: AdminMenuData[]
+  menu: Menu[]
 }
 
 const MenuTable: React.FC<MenuTableProps> = ({ menu }) => {
