@@ -1,5 +1,4 @@
 import { compare } from "bcryptjs";
-import { signJwt } from "@/app/lib/jwt";
 import { UserRepository } from "../repository/UserRepository";
 import { TableSessionRepository } from "../../../web/tableSession/repository/TableSessionRepository";
 
@@ -12,10 +11,8 @@ export function loginUser(ur: UserRepository, tr: TableSessionRepository) {
     const isValid = await compare(password, user.password);
     if (!isValid) throw new Error("パスワードが間違っています");
 
-    const token = signJwt({ id: user.id, email: user.email });
-
     await tr.linkUserToTableSession(sessionId, user.id);
 
-    return { user, token };
+    return { user };
   };
 }

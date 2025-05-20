@@ -14,7 +14,13 @@ export default function NotFound() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    router.push(`/?table_number=${tableNumber}`);
+    if (!/^\d+$/.test(tableNumber)) {
+      alert("テーブル番号は半角数字で入力してください");
+      return;
+    }
+
+    console.log("リダイレクト開始:", tableNumber);
+    router.replace(`/?table_number=${tableNumber}`);
   };
 
   return (

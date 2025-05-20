@@ -20,22 +20,22 @@ export function signupUser(ur: UserRepository) {
     genderStr,
   }: SignupParams): Promise<User> => {
     if (!name || !email || !password || !birthdayStr || !genderStr) {
-      throw new Error("すべてのフィールドを入力してください");
+      throw new Error("すべての項目を入力してください。");
     }
 
     const parsedBirthday = new Date(birthdayStr);
     if (isNaN(parsedBirthday.getTime())) {
-      throw new Error("有効な生年月日を入力してください");
+      throw new Error("生年月日が無効です。");
     }
 
     const gender = genderStr as Gender;
     if (!["MALE", "FEMALE", "OTHER"].includes(gender)) {
-      throw new Error("性別が不正です");
+      throw new Error("性別の値が不正です。");
     }
 
-    const existing = await ur.getUserByEmail(email);
+    const existing = await ur.getUserByEmail(email.toLowerCase());
     if (existing) {
-      throw new Error("このメールアドレスはすでに使用されています");
+      throw new Error("このメールアドレスは既に登録されています。");
     }
 
     const hashedPassword = await hash(password, 10);
@@ -43,7 +43,7 @@ export function signupUser(ur: UserRepository) {
     return await ur.createUser({
       name,
       uuid: uuidv4(),
-      email,
+      email: email.toLowerCase(),
       password: hashedPassword,
       birthday: parsedBirthday,
       gender: gender,

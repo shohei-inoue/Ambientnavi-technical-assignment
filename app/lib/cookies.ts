@@ -1,8 +1,10 @@
+"use server";
+
 import { cookies } from "next/headers";
 
-// 認証トークンをCookieに保存（非同期）
+// 認証トークンをCookieに保存
 export async function setAuthCookie(token: string) {
-  const cookieStore = await cookies(); // ← await が必要
+  const cookieStore = await cookies();
   await cookieStore.set("auth_token", token, {
     httpOnly: true,
     path: "/",

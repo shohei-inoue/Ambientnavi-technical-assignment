@@ -12,25 +12,13 @@ export async function POST(req: NextRequest) {
 
   if (!name || !email || !password || !birthdayStr || !genderStr) {
     return NextResponse.json(
-      {
-        error:
-          "すべての項目（name, email, password, birthday, gender, tableNumber）が必要です",
-      },
+      { error: "すべての項目が必要です" },
       { status: 400 }
     );
   }
 
-  // ユーザー作成 & セッションリンク
   try {
-    const user = await signup({
-      name,
-      email,
-      password,
-      birthdayStr,
-      genderStr,
-    });
-
-    return NextResponse.json({ message: "サインアップ成功", user });
+    return await signup({ name, email, password, birthdayStr, genderStr });
   } catch (err: any) {
     console.error("ユーザー作成失敗:", err);
     return NextResponse.json({ error: err.message }, { status: 400 });

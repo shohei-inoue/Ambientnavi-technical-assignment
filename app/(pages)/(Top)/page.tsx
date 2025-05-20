@@ -1,38 +1,22 @@
-import { notFound, redirect } from "next/navigation";
+export const dynamic = "force-dynamic";
+
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import TopContent from "./_components/TopContent/TopContent";
-import { getSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
-import { hasLoggedInUserInSession } from "@/app/actions/web/userSession/controller/UserSessionController";
+import { notFound } from "next/navigation";
 
 type TopProps = {
-  searchParams?: {
+  searchParams: Promise<{
     table_number?: string;
-  };
+  }>;
 };
 
 export default async function Top({ searchParams }: TopProps) {
-  const tableNumber = Number(searchParams?.table_number);
+  const params = await searchParams;
+  const tableNumber = Number(params?.table_number);
 
   if (!tableNumber || isNaN(tableNumber)) {
-    redirect("/404")
-  }
-
-  try {
-    const session = await getSession(tableNumber);
-
-    if (session) {
-      const hasLoggedIn = await hasLoggedInUserInSession(session.sessionId);
-
-      if (hasLoggedIn) {
-        redirect("/menu");
-      } else {
-        redirect(`/auth/login?table_number=${tableNumber}`);
-      }
-    }
-  } catch (error) {
-    console.error("セッション取得エラー:", error);
-    redirect("/404");
+    return notFound();
   }
 
   return (
