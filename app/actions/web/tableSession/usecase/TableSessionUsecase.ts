@@ -1,5 +1,5 @@
 import { TableSessionRepository } from "../repository/TableSessionRepository";
-import { TableRepository } from "../../table/repository/TableRepository";
+import { TableRepository } from "../../../admin/table/repository/TableRepository";
 
 // テーブルセッションを作成
 export function createTableSession(
@@ -7,7 +7,7 @@ export function createTableSession(
   tr: TableRepository
 ) {
   return async (tableNumber: number, guestCount: number) => {
-    const table = await tr.getTableByNumber(tableNumber);
+    const table = await tr.getTable(tableNumber);
     if (!table) throw new Error("テーブルが存在しません");
 
     const existing = await tsr.getLatestTableSession(table.id);
@@ -23,7 +23,7 @@ export function getTableSession(
   tr: TableRepository
 ) {
   return async (tableNumber: number) => {
-    const table = await tr.getTableByNumber(tableNumber);
+    const table = await tr.getTable(tableNumber);
     if (!table) throw new Error("テーブルが存在しません");
 
     return await tsr.getLatestTableSession(table.id);

@@ -1,7 +1,7 @@
 import { getSessionCookie, setAuthCookie } from "@/app/lib/cookies";
 import { UserRepositoryImpl } from "../repository/UserRepository";
 import { loginUser } from "../usecase/LoginUseCase";
-import { TableSessionRepositoryImpl } from "../../tableSession/repository/TableSessionRepository";
+import { TableSessionRepositoryImpl } from "../../../web/tableSession/repository/TableSessionRepository";
 
 // instance
 const loginUsecase = loginUser(UserRepositoryImpl, TableSessionRepositoryImpl);

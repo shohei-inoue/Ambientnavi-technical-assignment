@@ -1,10 +1,25 @@
 import { TableRepository } from "../repository/TableRepository";
 
-export function createTable(tr: TableRepository) {
-  return async (tableNumber: number) => {
-    const existing = await tr.getTableByNumber(tableNumber);
-    if (existing) throw new Error("すでに同じテーブル番号が存在します");
+export function getTablesUsecase(tr: TableRepository) {
+  return async () => {
+    return await tr.getTables();
+  };
+}
 
-    return await tr.createTable(tableNumber);
+export function getTableDetailUsecase(tr: TableRepository) {
+  return async (id: number) => {
+    return await tr.getTable(id);
+  };
+}
+
+export function createTableUsecase(tr: TableRepository) {
+  return async (number: number) => {
+    return await tr.createTable(number);
+  };
+}
+
+export function deleteTableUsecase(tr: TableRepository) {
+  return async (id: number) => {
+    return await tr.deleteTable(id);
   };
 }

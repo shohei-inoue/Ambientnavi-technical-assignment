@@ -4,8 +4,8 @@ import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import LoginContents from "./_components/LoginContents/LoginContents";
 
-import { getSession } from "@/app/actions/admin/tableSession/controller/TableSessionController";
-import { hasLoggedInUserInSession } from "@/app/actions/admin/userSession/controller/UserSessionController";
+import { getSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
+import { hasLoggedInUserInSession } from "@/app/actions/web/userSession/controller/UserSessionController";
 
 type Props = {
   searchParams: { table_number?: string };

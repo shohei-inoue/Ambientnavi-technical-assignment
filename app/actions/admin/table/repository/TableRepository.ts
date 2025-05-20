@@ -2,22 +2,37 @@ import { prisma } from "@/app/lib/prisma";
 import { Table } from "../domain/Table";
 
 export interface TableRepository {
-  createTable(tableNumber: number): Promise<Table>;
-  getTableByNumber(number: number): Promise<Table | null>;
+  getTables(): Promise<Table[]>;
+  getTable(id: number): Promise<Table | null>;
+  createTable(number: number): Promise<Table>;
+  deleteTable(id: number): Promise<void>;
 }
 
 export const TableRepositoryImpl: TableRepository = {
+  // get tables implement
+  async getTables() {
+    return await prisma.table.findMany({
+      orderBy: { number: "asc" },
+    });
+  },
+
+  // get table implement
+  async getTable(id: number) {
+    return await prisma.table.findUnique({ where: { id } });
+  },
+
   // create table implement
-  async createTable(tableNumber: number) {
-    return prisma.table.create({
+  async createTable(number) {
+    return await prisma.table.create({
       data: {
-        number: tableNumber,
-        isAvailable: true, // スキーマ変更で追加されたプロパティ
+        number,
+        isAvailable: true,
       },
     });
   },
 
-  async getTableByNumber(number: number) {
-    return prisma.table.findUnique({ where: { number } });
+  // delete table implement
+  async deleteTable(id) {
+    await prisma.table.delete({ where: { id } });
   },
 };

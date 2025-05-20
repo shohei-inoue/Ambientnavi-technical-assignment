@@ -4,7 +4,7 @@ import {
   getTableSession,
 } from "../usecase/TableSessionUsecase";
 import { TableSessionRepositoryImpl } from "../repository/TableSessionRepository";
-import { TableRepositoryImpl } from "../../table/repository/TableRepository";
+import { TableRepositoryImpl } from "../../../admin/table/repository/TableRepository";
 import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";
 import { UserSessionRepositoryImpl } from "../../userSession/repository/UserSessionRepository";
 
