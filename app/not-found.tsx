@@ -14,14 +14,7 @@ export default function NotFound() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const num = Number(tableNumber.trim());
-
-    if (!num || isNaN(num) || num <= 0) {
-      alert("有効なテーブル番号を入力してください");
-      return;
-    }
-
-    router.push(`/?table_number=${num}`);
+    router.push(`/?table_number=${tableNumber}`);
   };
 
   return (
@@ -32,13 +25,10 @@ export default function NotFound() {
           404 - ページが見つかりません
         </h1>
         <p className="mb-6 text-gray-600">
-          お探しのページは存在しないか、削除された可能性があります。
-        </p>
-        <p className="mb-4 text-gray-600">
-          QRコードでアクセスした場合は、QRコードが誤っている可能性があります。
+          QRコードが無効か、テーブル情報が見つかりませんでした。
         </p>
         <p className="mb-6 text-gray-600">
-          テーブル番号がわかる方は、以下に入力してください。
+          テーブル番号を入力することで再アクセスできます。
         </p>
         <p className="mb-6 text-gray-600">
           その他の方はスタッフをおよびください

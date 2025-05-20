@@ -14,21 +14,25 @@ type TopProps = {
 export default async function Top({ searchParams }: TopProps) {
   const tableNumber = Number(searchParams?.table_number);
 
-  // 無効なテーブル番号 → 404ページへ
   if (!tableNumber || isNaN(tableNumber)) {
-    notFound();
+    redirect("/404")
   }
 
-  const session = await getSession(tableNumber);
+  try {
+    const session = await getSession(tableNumber);
 
-  if (session) {
-    const hasLoggedIn = await hasLoggedInUserInSession(session.sessionId);
+    if (session) {
+      const hasLoggedIn = await hasLoggedInUserInSession(session.sessionId);
 
-    if (hasLoggedIn) {
-      redirect("/menu");
-    } else {
-      redirect(`/auth/login?table_number=${tableNumber}`);
+      if (hasLoggedIn) {
+        redirect("/menu");
+      } else {
+        redirect(`/auth/login?table_number=${tableNumber}`);
+      }
     }
+  } catch (error) {
+    console.error("セッション取得エラー:", error);
+    redirect("/404");
   }
 
   return (
