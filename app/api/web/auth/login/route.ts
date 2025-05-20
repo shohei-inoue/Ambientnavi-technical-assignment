@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { login } from "@/app/actions/admin/auth/controller/LoginController";
 import { createSession } from "@/app/actions/admin/tableSession/controller/TableSessionController";
+import { handleCreateCart } from "@/app/actions/web/cart/controller/CartController";
 
 export async function POST(req: NextRequest) {
   const data = await req.formData();
@@ -23,6 +24,17 @@ export async function POST(req: NextRequest) {
     try {
       const session = await createSession(tableNumber);
       sessionId = session.sessionId;
+
+      // カートを作成
+      try {
+        await handleCreateCart(sessionId);
+      } catch (error) {
+        console.error("カートの作成に失敗しました");
+        return NextResponse.json(
+          { error: "セッションの作成に失敗しました" },
+          { status: 500 }
+        );
+      }
     } catch (error) {
       console.error("セッションの作成に失敗しました", error);
       return NextResponse.json(

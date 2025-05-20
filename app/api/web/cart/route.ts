@@ -1,155 +1,88 @@
+import { NextRequest, NextResponse } from "next/server";
 import {
-  addCart,
-  createCart,
-  addToSessionCart,
-  deleteCartBySessionId,
-  getCartBySessionId,
-} from "@/app/actions/web/cartAction";
+  handleAddToCart,
+  handleGetCart,
+  handleDeleteCart,
+} from "@/app/actions/web/cart/controller/CartController";
 import { getSessionCookie } from "@/app/lib/cookies";
-import { prisma } from "@/app/lib/prisma";
-import { NextRequest } from "next/server";
 
+// POST: カートに商品を追加
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json();
-    const { tableSessionId, menuId, quantity, note } = data;
+    const { sessionId, menuId, quantity, note } = await req.json();
 
-    if (!tableSessionId || !menuId || !quantity) {
-      return new Response(
-        JSON.stringify({ error: "必要な情報が不足しています" }),
+    if (!sessionId || !menuId || !quantity) {
+      return NextResponse.json(
+        { error: "必要な情報が不足しています" },
         { status: 400 }
       );
     }
 
-    let cart = await prisma.cart.findUnique({
-      where: { tableSessionId: Number(tableSessionId) },
-    });
+    await handleAddToCart(sessionId, menuId, quantity, note);
 
-    if (!cart) {
-      cart = await createCart(Number(tableSessionId));
-    }
-
-    await addCart(cart.id, Number(menuId), Number(quantity), note);
-
-    return new Response(JSON.stringify({ message: "カートに追加しました" }), {
-      status: 200,
-    });
+    return NextResponse.json(
+      { message: "カートに追加しました" },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("カート追加エラー:", error);
-    return new Response(JSON.stringify({ error: "カート追加に失敗しました" }), {
-      status: 500,
-    });
+    return NextResponse.json(
+      { error: "カート追加に失敗しました" },
+      { status: 500 }
+    );
   }
 }
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { sessionId: string } }
-) {
-  const sessionId = parseInt(params.sessionId, 10);
-  const { menuId, quantity, note } = await req.json();
+// GET: セッションに紐づくカートを取得
+export async function GET(_req: NextRequest) {
+  const sessionId = await getSessionCookie();
 
-  if (!sessionId || !menuId || quantity <= 0) {
-    return new Response(JSON.stringify({ error: "無効なリクエスト" }), {
-      status: 400,
-    });
+  if (!sessionId) {
+    return NextResponse.json(
+      { error: "セッションIDが見つかりません" },
+      { status: 400 }
+    );
   }
 
   try {
-    const item = await addToSessionCart(sessionId, menuId, quantity, note);
-    return new Response(JSON.stringify(item), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  } catch (error) {
-    console.error("カート追加エラー:", error);
-    return new Response(JSON.stringify({ error: "カート追加に失敗しました" }), {
-      status: 500,
-    });
-  }
-}
-
-export async function GET(_: NextRequest) {
-  const sessionIdStr = await getSessionCookie();
-  const sessionId = sessionIdStr ? parseInt(sessionIdStr, 10) : NaN;
-
-  if (isNaN(sessionId)) {
-    return new Response(JSON.stringify({ error: "無効なセッションID" }), {
-      status: 400,
-    });
-  }
-
-  try {
-    const cart = await prisma.cart.findUnique({
-      where: { tableSessionId: sessionId },
-      include: {
-        items: {
-          include: {
-            menu: true,
-          },
-        },
-        tableSession: {
-          include: {
-            table: true,
-          },
-        },
-      },
-    });
+    const cart = await handleGetCart(sessionId);
 
     if (!cart) {
-      return new Response(JSON.stringify({ error: "カートが存在しません" }), {
-        status: 404,
-      });
+      return NextResponse.json(
+        { error: "カートが存在しません" },
+        { status: 404 }
+      );
     }
 
-    const totalAmount = cart.items.reduce(
-      (sum, item) => sum + item.menu.price * item.quantity,
-      0
-    );
-
-    return new Response(
-      JSON.stringify({
-        cart,
-        totalAmount,
-        guestCount: cart.tableSession.table.guestCount,
-      }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    return NextResponse.json(cart, { status: 200 });
   } catch (error) {
     console.error("カート取得エラー:", error);
-    return new Response(
-      JSON.stringify({ error: "カートの取得に失敗しました" }),
-      {
-        status: 500,
-      }
+    return NextResponse.json(
+      { error: "カート取得に失敗しました" },
+      { status: 500 }
     );
   }
 }
 
-export async function DELETE(
-  _: NextRequest,
-  { params }: { params: { sessionId: string } }
-) {
-  const sessionId = parseInt(params.sessionId, 10);
-  if (isNaN(sessionId)) {
-    return new Response(JSON.stringify({ error: "無効なセッションID" }), {
-      status: 400,
-    });
+// DELETE: カート削除
+export async function DELETE(_req: NextRequest) {
+  const sessionId = await getSessionCookie();
+
+  if (!sessionId) {
+    return NextResponse.json(
+      { error: "セッションIDが見つかりません" },
+      { status: 400 }
+    );
   }
 
   try {
-    await deleteCartBySessionId(sessionId);
+    await handleDeleteCart(sessionId);
     return new Response(null, { status: 204 });
   } catch (error) {
     console.error("カート削除エラー:", error);
-    return new Response(
-      JSON.stringify({ error: "カートの削除に失敗しました" }),
-      {
-        status: 500,
-      }
+    return NextResponse.json(
+      { error: "カート削除に失敗しました" },
+      { status: 500 }
     );
   }
 }
