@@ -1,6 +1,5 @@
 "use client";
 
-import { createCategory } from "@/app/actions/admin/categoriesActions";
 import Form from "@/app/components/Form/form";
 import CategoryNameFiled from "../../../[id]/_components/CategoryContent/CategoryNameField";
 import Button from "@/app/components/Button/Button";
@@ -51,13 +50,21 @@ const CategoriesAddForm = () => {
     });
 
     try {
-      await createCategory(formData);
-      alert("カテゴリーを追加しました");
+      const res = await fetch("/api/admin/categories", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) throw new Error(result.error);
+
+      alert("テーブルを追加しました");
       setName("");
       setSubCategories([""]);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert(`カテゴリーを追加できませんでした. \n${error}`);
+      alert(`テーブルを追加できませんでした。\n${error.message}`);
     }
   };
 

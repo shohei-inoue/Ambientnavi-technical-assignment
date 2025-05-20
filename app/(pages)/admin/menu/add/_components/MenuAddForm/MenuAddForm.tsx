@@ -12,8 +12,8 @@ import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailCont
 import MenuDetailImageField from "../../../[id]/_components/MenuDetailContent/MenuDetailImageField";
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailContent/MenuDetailTagsField";
 import { createMenu } from "@/app/actions/admin/menuActions";
-import { getCategories } from "@/app/actions/admin/categoriesActions";
-import { AdminCategoriesData } from "@/app/types/types";
+import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 const MenuAddForm = () => {
   const [name, setName] = useState<string>("");
@@ -26,7 +26,7 @@ const MenuAddForm = () => {
   const [subCategoryId, setSubCategoryId] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [categoriesData, setCategoriesData] = useState<AdminCategoriesData[]>(
+  const [categoriesData, setCategoriesData] = useState<Category[]>(
     []
   );
 
@@ -36,7 +36,7 @@ const MenuAddForm = () => {
       setLoading(true);
       setError(null);
       try {
-        const categories = await getCategories();
+        const categories = await handleGetCategories();
         setCategoriesData(categories);
       } catch (error) {
         console.error(error);

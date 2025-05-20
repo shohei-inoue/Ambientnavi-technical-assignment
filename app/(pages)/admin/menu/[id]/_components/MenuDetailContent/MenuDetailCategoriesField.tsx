@@ -1,13 +1,13 @@
 "use client";
 
-import { AdminCategoriesData } from "@/app/types/types";
 import MenuDetailItem from "./MenuDetailItem";
 import { useState } from "react";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuDetailSubCategoryFieldProps = {
   value: number | null;
   setValue: (val: number) => void;
-  categories: AdminCategoriesData[];
+  categories: Category[];
 };
 
 const MenuDetailSubCategoryField: React.FC<MenuDetailSubCategoryFieldProps> = ({

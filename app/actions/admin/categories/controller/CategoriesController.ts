@@ -1,3 +1,5 @@
+"use server";
+
 import { CategoriesRepositoryImpl } from "../repository/CategoriesRepository";
 import {
   createCategoryUsecase,
