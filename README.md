@@ -100,6 +100,7 @@ docker-compose up
 - Next.js App Router における Server Actions や Middleware 実装の疑問解決
 - Prisma を用いたバリデーションやカスタムエラー処理の最適化案の取得
 - エラーやビルド失敗時のトラブルシューティング（Docker/TypeScript/Next.js関連）
+- デザインの実装(CSS)
 
 ### 利用したプロンプト
 

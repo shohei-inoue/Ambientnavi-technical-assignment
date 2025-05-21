@@ -1,7 +1,7 @@
-import { TagData } from "@/app/types/types";
+import { Tag } from "@/app/actions/web/menu/domain/Menu";
 
 type MenuItemTagsContentsProps = {
-  tags: TagData[];
+  tags: Tag[];
 };
 
 const MenuItemTagsContents: React.FC<MenuItemTagsContentsProps> = ({
