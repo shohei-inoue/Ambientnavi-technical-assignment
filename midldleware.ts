@@ -8,7 +8,6 @@ const PUBLIC_PATHS = [
   "/auth/register",
   "/admin/auth/login",
   "/admin/auth/register",
-  "/api", // API ルートは基本公開（必要に応じて制限）
 ];
 
 export async function middleware(req: NextRequest) {
@@ -46,5 +45,6 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/((?!_next/static|_next/image|favicon.ico|images|assets|api/public).*)",
+    "/admin/:path*",
   ],
 };
