@@ -3,10 +3,10 @@
 import { UserSessionRepositoryImpl } from "../repository/UserSessionRepository";
 import { hasLoggedInUserUseCase } from "../usecase/UserSessionUsecase";
 
-const usecase = hasLoggedInUserUseCase(UserSessionRepositoryImpl);
+const loggedInUnusecase = hasLoggedInUserUseCase(UserSessionRepositoryImpl);
 
 export async function hasLoggedInUserInSession(
   sessionId: string
 ): Promise<boolean> {
-  return await usecase(sessionId);
+  return await loggedInUnusecase(sessionId);
 }

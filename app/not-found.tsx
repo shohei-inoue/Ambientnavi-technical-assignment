@@ -19,8 +19,7 @@ export default function NotFound() {
       return;
     }
 
-    console.log("リダイレクト開始:", tableNumber);
-    router.replace(`/?table_number=${tableNumber}`);
+    router.push(`/?table_number=${tableNumber}`);
   };
 
   return (
