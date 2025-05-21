@@ -1,5 +1,5 @@
 import { prisma } from "@/app/lib/prisma";
-import { Table } from "../domain/Table";
+import { Table } from "../domain/Tables";
 
 export interface TableRepository {
   getTable(id: number): Promise<Table | null>;
