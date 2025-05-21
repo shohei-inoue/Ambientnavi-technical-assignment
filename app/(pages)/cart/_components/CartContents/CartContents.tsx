@@ -1,36 +1,75 @@
 "use client";
 
 import Heading from "@/app/components/Heading/Heading";
-import CartBottomNav from "../CartNav/CartBottomNav";
-import CartContent from "../CartContent/CartContent";
+import CartBottomNav from "./CartBottomNav";
 import { useEffect, useState } from "react";
-import { CartData } from "@/app/types/types";
+import { Cart, CartItem } from "@/app/actions/web/cart/domain/Cart";
+import CartContent from "../CartContent/CartContent";
+import {
+  handleDecrementCartItem,
+  handleGetCart,
+  handleIncrementCartItem,
+  handleRemoveCartItem,
+} from "@/app/actions/web/cart/controller/CartController";
 
-const CartContents = () => {
-  const [cartData, setCartData] = useState<CartData | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+type CartContentProps = {
+  cart: Cart;
+};
+
+const CartContents: React.FC<CartContentProps> = ({ cart }) => {
+  const [items, setItems] = useState<CartItem[]>(cart.items);
+  const [totalPrice, setTotalPrice] = useState<number>(cart.totalPrice);
 
   useEffect(() => {
-    const fetchCart = async () => {
+    const newTotal = items.reduce((sum, item) => {
+      const price = item.menu?.price || 0;
+      return sum + price * item.quantity;
+    }, 0);
+    setTotalPrice(newTotal);
+  }, [items]);
 
-      try {
-        const res = await fetch(`/api/web/cart/`);
-        if (!res.ok) throw new Error("カート取得に失敗しました");
-        const data = await res.json();
-        console.log(data)
-        setCartData(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const menuInfoMap = Object.fromEntries(
+    cart.items.map((item) => [
+      item.menuId,
+      {
+        title: item.menu?.name || `メニュー#${item.menuId}`,
+        price: item.menu?.price || 0,
+      },
+    ])
+  );
 
-    fetchCart();
-  }, []);
+  const handleIncrement = async (menuId: number) => {
+    await handleIncrementCartItem(menuId);
+    const updatedCart = await handleGetCart();
+    setItems(updatedCart.items);
+    setTotalPrice(updatedCart.totalPrice);
+  };
+
+  const handleDecrement = async (menuId: number) => {
+    await handleDecrementCartItem(menuId);
+    const updatedCart = await handleGetCart();
+    setItems(updatedCart.items);
+    setTotalPrice(updatedCart.totalPrice);
+  };
+
+  const handleDelete = async (menuId: number) => {
+    await handleRemoveCartItem(menuId);
+    const updatedCart = await handleGetCart();
+    setItems(updatedCart.items);
+    setTotalPrice(updatedCart.totalPrice);
+  };
 
   return (
     <div>
       <Heading level={1}>カート</Heading>
-      {/* <CartContent /> */}
+      <CartContent
+        items={items}
+        totalPrice={totalPrice}
+        menuInfoMap={menuInfoMap}
+        onIncrement={handleIncrement}
+        onDecrement={handleDecrement}
+        onDelete={handleDelete}
+      />
       <CartBottomNav />
     </div>
   );

@@ -11,6 +11,7 @@ export interface CartRepository {
     note?: string
   ): Promise<CartItem>;
   deleteCart(sessionId: number): Promise<void>;
+  deleteCartItem(cartItemId: number): Promise<void>;
 }
 
 export const CartRepositoryImpl: CartRepository = {
@@ -35,6 +36,10 @@ export const CartRepositoryImpl: CartRepository = {
       menuId: item.menuId,
       quantity: item.quantity,
       note: item.note,
+      menu: {
+        name: item.menu.name,
+        price: item.menu.price,
+      },
     }));
 
     const totalPrice = cart.items.reduce(
@@ -97,7 +102,7 @@ export const CartRepositoryImpl: CartRepository = {
   },
 
   // delete cart implement
-  async deleteCart(sessionId) {
+  async deleteCart(sessionId: number) {
     const cart = await prisma.cart.findFirst({
       where: { tableSessionId: sessionId },
       include: { items: true },
@@ -107,5 +112,12 @@ export const CartRepositoryImpl: CartRepository = {
 
     await prisma.cartItem.deleteMany({ where: { cartId: cart.id } });
     await prisma.cart.delete({ where: { id: cart.id } });
+  },
+
+  // delete cart item implement
+  async deleteCartItem(cartItemId: number) {
+    await prisma.cartItem.delete({
+      where: { id: cartItemId },
+    });
   },
 };

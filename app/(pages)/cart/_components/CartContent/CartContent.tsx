@@ -1,60 +1,47 @@
 import CartItem from "../CartItem/CartItem";
+import { CartItem as CartItemType } from "@/app/actions/web/cart/domain/Cart";
 
-type CartItemData = {
-  title: string;
-  price: number;
-  quantity: number;
-  sub_variable: string;
-  sub_variable_price: number;
-  sub_variable_quantity: number;
+type CartContentProps = {
+  items: CartItemType[];
+  totalPrice: number;
+  menuInfoMap: Record<number, { title: string; price: number }>;
+  onIncrement: (menuId: number) => void;
+  onDecrement: (menuId: number) => void;
+  onDelete: (menuId: number) => void;
 };
 
-const CartItemDataList: CartItemData[] = [
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-];
-
-const CartContent = () => {
+const CartContent: React.FC<CartContentProps> = ({
+  items,
+  totalPrice,
+  menuInfoMap,
+  onIncrement,
+  onDecrement,
+  onDelete,
+}) => {
   return (
     <div>
       <ul>
-        {CartItemDataList.map((item, index) => (
-          <CartItem
-            key={index}
-            title={item.title}
-            price={item.price}
-            quantity={item.quantity}
-            sub_variable={item.sub_variable}
-            sub_variable_price={item.sub_variable_price}
-            sub_variable_quantity={item.sub_variable_quantity}
-          />
-        ))}
+        {items.map((item, index) => {
+          const menu = menuInfoMap[item.menuId];
+          return (
+            <CartItem
+              key={index}
+              title={menu?.title || `メニュー #${item.menuId}`}
+              price={menu?.price || 0}
+              quantity={item.quantity}
+              onIncrement={() => onIncrement(item.menuId)}
+              onDecrement={() => onDecrement(item.menuId)}
+              onDelete={() => onDelete(item.menuId)}
+              sub_variable={item.note || ""}
+              sub_variable_price={0}
+              sub_variable_quantity={0}
+            />
+          );
+        })}
       </ul>
       <div className="flex justify-between items-center p-4">
         <h2>注文合計金額</h2>
-        <p>合計金額: 297円</p>
+        <p>{totalPrice}円</p>
       </div>
     </div>
   );

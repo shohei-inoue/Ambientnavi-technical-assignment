@@ -1,8 +1,8 @@
-import { CategoryData } from "@/app/types/types";
 import MenuHeadNavItem from "./MenuHeadNavItem";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuHeadNavProps = {
-  categories: CategoryData[];
+  categories: Category[];
   selectedCategoryId: number | null;
   onSelectCategory: (id: number) => void;
 };

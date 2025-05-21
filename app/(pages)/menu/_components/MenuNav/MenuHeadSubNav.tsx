@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { SubCategoryData } from "@/app/types/types";
+import { SubCategory } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuHeadSubNavProps = {
-  subCategories: SubCategoryData[];
+  subCategories: SubCategory[];
   activeSubCategoryId: number | null;
   onSelectSubCategory: (id: number) => void;
 };

@@ -5,11 +5,11 @@ import MenuHeadNav from "../MenuNav/MenuHeadNav";
 import MenuContent from "../MenuContent/MenuContent";
 import MenuBottomNav from "../MenuNav/MenuBottomNav";
 import { useEffect, useState } from "react";
-import { CategoryData } from "@/app/types/types";
 import MenuHeadSubNav from "../MenuNav/MenuHeadSubNav";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuContentsProps = {
-  categories: CategoryData[];
+  categories: Category[];
 };
 
 const MenuContents: React.FC<MenuContentsProps> = ({ categories }) => {

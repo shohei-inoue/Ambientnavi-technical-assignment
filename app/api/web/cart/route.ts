@@ -9,16 +9,16 @@ import { getSessionCookie } from "@/app/lib/cookies";
 // POST: カートに商品を追加
 export async function POST(req: NextRequest) {
   try {
-    const { sessionId, menuId, quantity, note } = await req.json();
+    const { menuId, quantity, note } = await req.json();
 
-    if (!sessionId || !menuId || !quantity) {
+    if (!menuId || !quantity) {
       return NextResponse.json(
         { error: "必要な情報が不足しています" },
         { status: 400 }
       );
     }
 
-    await handleAddToCart(sessionId, menuId, quantity, note);
+    await handleAddToCart(menuId, quantity, note);
 
     return NextResponse.json(
       { message: "カートに追加しました" },
@@ -35,17 +35,8 @@ export async function POST(req: NextRequest) {
 
 // GET: セッションに紐づくカートを取得
 export async function GET(_req: NextRequest) {
-  const sessionId = await getSessionCookie();
-
-  if (!sessionId) {
-    return NextResponse.json(
-      { error: "セッションIDが見つかりません" },
-      { status: 400 }
-    );
-  }
-
   try {
-    const cart = await handleGetCart(sessionId);
+    const cart = await handleGetCart();
 
     if (!cart) {
       return NextResponse.json(

@@ -1,6 +1,6 @@
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
-import MenuItemContent from "./_components/MenuItemContent/MenuItemContent";
+import MenuItemContent from "./_components/MenuItemContents/MenuItemContents";
 import HeadNav from "@/app/components/HeadNav/HeadNav";
 import { getMenuDetail } from "@/app/actions/web/menuActions";
 import NoData from "@/app/components/NoData/NoData";

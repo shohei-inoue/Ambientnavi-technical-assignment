@@ -22,14 +22,10 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
         sessionId,
         guestCount,
         checkedInAt: new Date(),
-        checkedOutAt: null
+        checkedOutAt: null,
       },
     });
-
-    await prisma.cart.create({
-      data: { tableSessionId: session.id },
-    });
-
+    
     return session;
   },
 

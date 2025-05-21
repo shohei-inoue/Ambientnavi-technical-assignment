@@ -3,12 +3,12 @@ export const dynamic = "force-dynamic";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MenuContents from "./_components/MenuContents/MenuContents";
 import MainContent from "@/app/components/MainContainer/MainContent";
-import { getCategories } from "@/app/actions/web/categoriesActions";
 import { requireUserSession } from "@/app/lib/auth";
+import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
 
 export default async function Menu() {
   await requireUserSession()
-  const categories = await getCategories()
+  const categories = await handleGetCategories()
   return (
     <MainContainer>
       <MainContent>

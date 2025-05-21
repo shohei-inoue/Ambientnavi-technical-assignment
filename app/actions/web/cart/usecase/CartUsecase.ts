@@ -31,9 +31,16 @@ export function addToCartUsecase(cr: CartRepository) {
   };
 }
 
-//delete
+// delete
 export function deleteCartUsecase(cr: CartRepository) {
   return async (sessionId: number) => {
     await cr.deleteCart(sessionId);
+  };
+}
+
+// delete cartItem
+export function deleteCartItemUsecase(cr: CartRepository) {
+  return async (menuId: number) => {
+    await cr.deleteCartItem(menuId);
   };
 }
