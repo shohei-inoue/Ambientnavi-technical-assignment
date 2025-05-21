@@ -5,15 +5,16 @@ import CategoryNameFiled from "../../../[id]/_components/CategoryContent/Categor
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import SubCategoryField from "../../../[id]/_components/CategoryContent/SubCategoryField";
+import { handleCreateCategory } from "@/app/actions/admin/categories/controller/CategoriesController";
 
 const CategoriesAddForm = () => {
   const [name, setName] = useState<string>("");
   const [subCategories, setSubCategories] = useState<string[]>([""]);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // バリデーション
     const filteredSubs = subCategories
       .map((sc) => sc.trim())
       .filter((sc) => sc !== "");
@@ -26,7 +27,6 @@ const CategoriesAddForm = () => {
     const duplicates = filteredSubs.filter(
       (item, index) => filteredSubs.indexOf(item) !== index
     );
-
     if (duplicates.length > 0) {
       alert(`サブカテゴリ名が重複しています: ${duplicates.join(", ")}`);
       return;
@@ -37,34 +37,21 @@ const CategoriesAddForm = () => {
       return;
     }
 
-    // ダイアログの表示
     const isConfirmed = window.confirm("カテゴリーを追加しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     const formData = new FormData();
     formData.append("name", name);
-    subCategories.forEach((sc) => {
-      formData.append("subCategories", sc);
-    });
+    filteredSubs.forEach((sc) => formData.append("subCategories", sc));
 
     try {
-      const res = await fetch("/api/admin/categories", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) throw new Error(result.error);
-
-      alert("テーブルを追加しました");
+      await handleCreateCategory(formData);
+      alert("カテゴリーを追加しました");
       setName("");
       setSubCategories([""]);
-    } catch (error: any) {
-      console.error(error);
-      alert(`テーブルを追加できませんでした。\n${error.message}`);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "カテゴリーの追加に失敗しました");
     }
   };
 
@@ -72,6 +59,7 @@ const CategoriesAddForm = () => {
     <Form onSubmit={handleSubmit}>
       <CategoryNameFiled value={name} setValue={setName} />
       <SubCategoryField value={subCategories} setValue={setSubCategories} />
+      {error && <p className="text-red-500">{error}</p>}
       <Button type="submit">追加する</Button>
     </Form>
   );

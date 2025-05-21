@@ -6,7 +6,7 @@ import MenuContent from "../MenuContent/MenuContent";
 import MenuBottomNav from "../MenuNav/MenuBottomNav";
 import { useEffect, useState } from "react";
 import MenuHeadSubNav from "../MenuNav/MenuHeadSubNav";
-import { Category } from "@/app/actions/admin/categories/domain/Categories";
+import { Category } from "@/app/actions/web/menu/domain/Menu";
 
 type MenuContentsProps = {
   categories: Category[];

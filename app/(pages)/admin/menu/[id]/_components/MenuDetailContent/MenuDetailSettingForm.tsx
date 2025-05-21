@@ -15,6 +15,10 @@ import { useRouter } from "next/navigation";
 import Loader from "@/app/components/Loader/Loader";
 import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
 import { Category } from "@/app/actions/admin/categories/domain/Categories";
+import {
+  handleUpdateMenu,
+  handleDeleteMenu,
+} from "@/app/actions/admin/menu/controller/MenuController";
 
 type MenuDetailSettingFormProps = {
   id: number;
@@ -40,58 +44,48 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
   menu_sub_category_id,
 }) => {
   const router = useRouter();
-  const [name, setName] = useState<string>(menu_name);
-  const [description, setDescription] = useState<string>(menu_description);
-  const [price, setPrice] = useState<number>(menu_price);
+  const [name, setName] = useState(menu_name);
+  const [description, setDescription] = useState(menu_description);
+  const [price, setPrice] = useState(menu_price);
   const [image, setImage] = useState<File>();
-  const [isAvailable, setIsAvailable] = useState<boolean>(menu_is_available);
-  const [taxIncluded, setTaxIncluded] = useState<boolean>(menu_tax_included);
+  const [isAvailable, setIsAvailable] = useState(menu_is_available);
+  const [taxIncluded, setTaxIncluded] = useState(menu_tax_included);
   const [tags, setTags] = useState<string[]>(menu_tags);
-  const [subCategoryId, setSubCategoryId] =
-    useState<number>(menu_sub_category_id);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [subCategoryId, setSubCategoryId] = useState(menu_sub_category_id);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
-  // categories情報を取得
   useEffect(() => {
     const fetchCategories = async () => {
       setLoading(true);
-      setError(null);
       try {
         const categories = await handleGetCategories();
         setCategoriesData(categories);
-      } catch (error) {
-        console.error(error);
-        setError(error as Error);
+      } catch (err) {
+        console.error(err);
+        setError(err as Error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchCategories();
   }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // カテゴリーのバリデーション
     if (!subCategoryId) {
       alert("サブカテゴリを選択してください");
       return;
     }
 
-    // ダイアログの表示
     const isConfirmed = window.confirm("メニューを更新しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     const formData = new FormData();
     formData.append("id", id.toString());
-    if (image) {
-      formData.append("image", image);
-    }
+    if (image) formData.append("image", image);
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price.toString());
@@ -101,45 +95,26 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
     formData.append("tags", tags.join(","));
 
     try {
-      const res = await fetch(`/api/admin/menu/${id}`, {
-        method: "PUT",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "更新に失敗しました");
-      }
+      await handleUpdateMenu(formData);
       alert("メニュー情報を更新しました");
       router.refresh();
-    } catch (error) {
-      console.error(error);
-      alert(`メニュー情報を更新できませんでした: ${error}`);
+    } catch (err: any) {
+      console.error(err);
+      alert(`メニュー情報を更新できませんでした: ${err.message}`);
     }
   };
 
   const handleDelete = async () => {
-    // ダイアログ表示
     const isConfirmed = window.confirm("メニューを削除しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     try {
-      const res = await fetch(`/api/admin/menu/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "削除に失敗しました");
-      }
-
+      await handleDeleteMenu(id);
       alert("メニュー情報を削除しました");
       router.back();
-    } catch (error) {
-      console.error(error);
-      alert(`メニュー情報を削除できませんでした: ${error}`);
+    } catch (err: any) {
+      console.error(err);
+      alert(`メニュー情報を削除できませんでした: ${err.message}`);
     }
   };
 

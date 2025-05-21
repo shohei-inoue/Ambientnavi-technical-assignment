@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import MenuHeadNavItem from "./MenuHeadNavItem";
-import { Category } from "@/app/actions/admin/categories/domain/Categories";
 import HeaderHamBurgerMenu from "@/app/components/HeaderHamburgerMenu/HeaderHamBurgerMenu";
+import { Category } from "@/app/actions/web/menu/domain/Menu";
 
 type MenuHeadNavProps = {
   categories: Category[];

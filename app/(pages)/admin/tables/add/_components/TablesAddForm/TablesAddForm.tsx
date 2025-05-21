@@ -5,6 +5,7 @@ import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import TableIsAvailableField from "../../../[id]/_components/TableContent/TableIsAvailableField";
 import TableNumberField from "../../../[id]/_components/TableContent/TableNumberField";
+import { handleCreateTable } from "@/app/actions/admin/table/controller/TableController";
 
 const TablesAddForm = () => {
   const [tNumber, setTNumber] = useState<number>(1);
@@ -21,15 +22,7 @@ const TablesAddForm = () => {
     formData.append("isAvailable", String(isAvailable));
 
     try {
-      const res = await fetch("/api/admin/tables", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) throw new Error(result.error);
-
+      await handleCreateTable(formData);
       alert("テーブルを追加しました");
       setTNumber(1);
       setIsAvailable(true);
