@@ -36,19 +36,35 @@
 
 ## 環境構築(ビルドと開発)
 
-初回起動時にビルドを行う.
+### 開発環境
+1. 初回ビルド
 
 ```bash
 docker-compose build
 ```
 
-その後、開発を行う場合は以下のコマンドでプロジェクトを立ち上げてください.
+2. 開発サーバーでの起動
 
 ```bash
 docker-compose up
 ```
 
-ローカル環境にアクセス：[http://localhost:3000](http://localhost:3000)
+3. アクセス：[http://localhost:3000](http://localhost:3000)
+
+### 本番環境
+
+```
+docker-compose -f docker-compose.yml up --build -d
+```
+-	.env.production に必要な環境変数を定義.
+-	NODE_ENV=production を明記.
+-	prisma generate は npm run build に含まれているため、別途実行不要.
+
+### 本番デプロイ(vercel)
+
+- GitHub Actions を使用し、release/1.0.0-betaブランチをプッシュすると自動デプロイが走るよう設定.
+-	vercel.json に projectId および orgId を明示.
+-	Vercel の環境変数は Project Settings > Environment Variables にて設定.
 
 ## 技術的な工夫点
 
