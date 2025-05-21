@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import AdminLoginEmployeeNumberField from "./ADminEmployeeNumberField";
+import AdminLoginEmployeeNumberField from "./AdminEmployeeNumberField";
 import AdminLoginPasswordField from "./AdminLoginPasswordField";
 import Button from "@/app/components/Button/Button";
 import { handleAdminLogin } from "@/app/actions/admin/auth/controller/loginController";
