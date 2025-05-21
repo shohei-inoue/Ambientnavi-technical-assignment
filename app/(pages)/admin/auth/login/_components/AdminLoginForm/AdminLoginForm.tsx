@@ -1,41 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import LoginMailField from "./LoginMailField";
+import AdminLoginEmployeeNumberField from "./ADminEmployeeNumberField";
+import AdminLoginPasswordField from "./AdminLoginPasswordField";
 import Button from "@/app/components/Button/Button";
-import LoginPasswordField from "./LoginPasswordField";
-import { handleLogin } from "@/app/actions/web/auth/controller/LoginController";
+import { handleAdminLogin } from "@/app/actions/admin/auth/controller/loginController";
+import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
+const AdminLoginForm = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const redirectPath = searchParams.get("redirect") || "/menu";
-
-  const [mail, setMail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [employeeNumber, setEmployeeNumber] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const sessionId = searchParams.get("sessionId");
-
     const formData = new FormData();
-    formData.append("email", mail);
+    formData.append("employeeNumber", employeeNumber);
     formData.append("password", password);
-    if (sessionId) formData.append("sessionId", sessionId);
 
     try {
-      const result = await handleLogin(formData);
-
+      const result = await handleAdminLogin(formData);
       if (!result.success) {
         setError(result.error || "ログインに失敗しました");
         return;
       }
 
       alert("ログイン成功しました");
-      router.push(redirectPath);
+      router.push("/admin");
     } catch (err: any) {
       console.error(err);
       setError("予期せぬエラーが発生しました");
@@ -47,8 +40,12 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 items-center w-full"
     >
-      <LoginMailField title="メールアドレス" value={mail} setValue={setMail} />
-      <LoginPasswordField
+      <AdminLoginEmployeeNumberField
+        title="社員番号"
+        value={employeeNumber}
+        setValue={setEmployeeNumber}
+      />
+      <AdminLoginPasswordField
         title="パスワード"
         value={password}
         setValue={setPassword}
@@ -61,4 +58,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default AdminLoginForm;

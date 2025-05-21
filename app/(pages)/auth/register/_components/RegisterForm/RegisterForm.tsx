@@ -9,6 +9,7 @@ import RegisterGenderField from "./RegisterGenderField";
 import { Gender } from "@/app/types/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { handleSignup } from "@/app/actions/web/auth/controller/SignupController";
 
 type RegisterFormProps = {
   tableNumber: number;
@@ -32,28 +33,21 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
     formData.append("password", password);
     formData.append("birthday", birthday);
     formData.append("gender", gender);
-    if (tableNumber) formData.append("tableNumber", tableNumber.toString());
 
     try {
-      const res = await fetch("/api/web/auth/signup", {
-        method: "POST",
-        body: formData,
-      });
+      const result = await handleSignup(formData);
 
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "登録に失敗しました");
+      if (!result.success) {
+        alert(`登録に失敗しました: ${result.error}`);
+        return;
       }
 
-      const _result = await res.json();
-      alert("登録が完了しました");
-      if (tableNumber) {
-        router.push(`/auth/login?table_number=${tableNumber}`);
-      } else {
-        router.push("/auth/login");
-      }
+      alert(result.message);
+      router.push(
+        tableNumber ? `/auth/login?table_number=${tableNumber}` : "/auth/login"
+      );
     } catch (error) {
-      console.error(error);
+      console.error(error)
       alert(`登録に失敗しました: ${error}`);
     }
   };

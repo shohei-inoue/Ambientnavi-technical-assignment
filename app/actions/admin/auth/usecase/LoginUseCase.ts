@@ -1,18 +1,19 @@
 import { compare } from "bcryptjs";
-import { UserRepository } from "../repository/UserRepository";
-import { TableSessionRepository } from "../../../web/tableSession/repository/TableSessionRepository";
+import { AdminUserRepository } from "../repository/AdminUserRepository";
 
-// login
-export function loginUser(ur: UserRepository, tr: TableSessionRepository) {
-  return async (email: string, password: string, sessionId: string) => {
-    const user = await ur.getUserByEmail(email);
-    if (!user) throw new Error("ユーザーが見つかりません");
+export function loginAdmin(repo: AdminUserRepository) {
+  return async (employeeNumber: string, password: string) => {
+    const user = await repo.getByEmployeeNumber(employeeNumber);
+
+    if (!user) {
+      return { success: false, error: "ユーザーが見つかりません" };
+    }
 
     const isValid = await compare(password, user.password);
-    if (!isValid) throw new Error("パスワードが間違っています");
+    if (!isValid) {
+      return { success: false, error: "パスワードが正しくありません" };
+    }
 
-    await tr.linkUserToTableSession(sessionId, user.id);
-
-    return { user };
+    return { success: true, adminUser: user };
   };
 }

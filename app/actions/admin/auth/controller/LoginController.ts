@@ -1,38 +1,64 @@
 "use server";
 
-import { loginUser } from "../usecase/LoginUseCase";
-import { UserRepositoryImpl } from "../repository/UserRepository";
-import { TableSessionRepositoryImpl } from "../../../web/tableSession/repository/TableSessionRepository";
 import { signJwt } from "@/app/lib/jwt";
-import { NextResponse } from "next/server";
+import { UserRepositoryImpl } from "../repository/AdminUserRepository";
+import { loginAdmin } from "../usecase/LoginUseCase";
+import { setAuthCookie } from "@/app/lib/cookies";
 
-const loginUsecase = loginUser(UserRepositoryImpl, TableSessionRepositoryImpl);
+const loginUsecase = loginAdmin(UserRepositoryImpl);
 
-export async function loginWithCookie(
-  email: string,
-  password: string,
-  sessionId: string
-): Promise<NextResponse> {
-  const { user } = await loginUsecase(email, password, sessionId);
+export async function handleAdminLogin(formData: FormData): Promise<{
+  success: boolean;
+  error?: string;
+  user?: {
+    id: number;
+    email: string;
+    name: string;
+    role: string;
+  };
+}> {
+  try {
+    const employeeNumber = formData.get("employeeNumber")?.toString() ?? "";
+    const password = formData.get("password")?.toString() ?? "";
 
-  const token = signJwt({ id: user.id, email: user.email });
+    if (!employeeNumber || !password) {
+      return {
+        success: false,
+        error: "社員番号とパスワードを入力してください。",
+      };
+    }
 
-  const response = NextResponse.json({ message: "ログイン成功", user });
+    const result = await loginUsecase(employeeNumber, password);
 
-  response.cookies.set("auth_token", token, {
-    httpOnly: true,
-    path: "/",
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    if (!result.success || !result.adminUser) {
+      return {
+        success: false,
+        error: result.error || "ログイン失敗",
+      };
+    }
 
-  response.cookies.set("sessionId", sessionId, {
-    path: "/",
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7,
-  });
+    const token = signJwt({
+      id: result.adminUser.id,
+      email: result.adminUser.email,
+      role: result.adminUser.role,
+    });
 
-  return response;
+    await setAuthCookie(token);
+
+    return {
+      success: true,
+      user: {
+        id: result.adminUser.id,
+        email: result.adminUser.email,
+        name: result.adminUser.name,
+        role: result.adminUser.role,
+      },
+    };
+  } catch (error: any) {
+    console.error("ログイン処理エラー:", error);
+    return {
+      success: false,
+      error: "ログイン処理中にエラーが発生しました。",
+    };
+  }
 }

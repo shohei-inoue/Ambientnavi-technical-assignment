@@ -1,4 +1,4 @@
-import { logoutWithCookie } from "@/app/actions/admin/auth/controller/LogoutController";
+import { logoutWithCookie } from "@/app/actions/web/auth/controller/LogoutController";
 import { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
