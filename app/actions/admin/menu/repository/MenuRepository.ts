@@ -90,7 +90,7 @@ export const MenuRepositoryImpl: MenuRepository = {
     const subCategoryId = parseInt(formData.get("subCategoryId") as string);
 
     // validation
-    if (!name || !price || !subCategoryId || Number.isNaN(price)) {
+    if (!name || Number.isNaN(price) || !subCategoryId) {
       throw new Error("必須項目が正しく入力されていません");
     }
 
@@ -163,7 +163,7 @@ export const MenuRepositoryImpl: MenuRepository = {
     let imageUrl = existing?.imageUrl || null;
 
     // validation
-    if (!name || !price || !subCategoryId || Number.isNaN(price)) {
+    if (!name || Number.isNaN(price) || !subCategoryId) {
       throw new Error("必須項目が正しく入力されていません");
     }
 
