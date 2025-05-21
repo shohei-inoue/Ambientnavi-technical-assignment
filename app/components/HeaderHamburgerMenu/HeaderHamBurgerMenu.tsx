@@ -15,7 +15,7 @@ const userLinks = [
   { name: "メニュー", href: "/menu" },
   { name: "カート", href: "/cart" },
   {name: "注文履歴", href: "/order-history"},
-  { name: "従業員管理画面へ", href: "/admin" },
+  { name: "従業員管理画面へ", href: "/admin/auth/login" },
 ];
 
 type HeaderHamBurgerMenuProps = {
