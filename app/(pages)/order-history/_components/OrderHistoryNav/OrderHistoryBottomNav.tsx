@@ -8,10 +8,9 @@ const OrderHistoryBottomNav = () => {
   const [loading, setLoading] = useState(false);
 
   const handleNavigateToMenu = () => {
-    router.push("/menu"); // メニューのパスに書き換えてください
+    router.push("/menu");
   };
 
-  // 2025/5/21 会計処理を追加
   const handleAccount = () => {};
 
   return (

@@ -1,4 +1,3 @@
-// app/components/Loader/Loader.tsx
 "use client";
 
 const Loader = () => {

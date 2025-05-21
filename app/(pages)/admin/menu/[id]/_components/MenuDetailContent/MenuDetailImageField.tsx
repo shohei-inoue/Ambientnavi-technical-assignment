@@ -86,7 +86,7 @@ const MenuDetailImageField: React.FC<MenuDetailImageFieldProps> = ({
   };
 
   // TODO HEICの対策追加
-  // TODO 圧縮が正しいか確認が必要
+  // TODO 圧縮が正しいか確認
 
   return (
     <MenuDetailItem title="画像">
@@ -106,8 +106,8 @@ const MenuDetailImageField: React.FC<MenuDetailImageFieldProps> = ({
           <NextImage
             src={previewImageUrl}
             alt="プレビュー"
-            fill // ← 幅・高さではなく、親要素に合わせる
-            className="rounded border object-cover" // ← object-fit: cover
+            fill
+            className="rounded border object-cover"
           />
         ) : (
           <span className="material-symbols-rounded text-gray-500 text-4xl">

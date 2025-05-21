@@ -34,7 +34,7 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
     return prisma.tableSession.findFirst({
       where: {
         tableId,
-        checkedOutAt: null, // セッションが終了していないかどうか
+        checkedOutAt: null,
       },
       orderBy: { checkedInAt: "desc" },
     });
@@ -53,7 +53,7 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
 
     if (!session) throw new Error("セッションが存在しません");
 
-    // すでにリンクされているかをチェック（重複挿入防止）
+    // すでにリンクされているかをチェック
     const existing = await prisma.userSession.findFirst({
       where: {
         userId,

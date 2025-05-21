@@ -26,8 +26,8 @@ const OrderHistoryItem: React.FC<OrderHistoryItemProps> = ({
       </div>
       <div className="flex justify-between border-t-2 border-dashed border-gray-300">
         <h3>{sub_variable}</h3>
-        <p>{sub_variable_quantity}点</p>
-        <p>{sub_variable_price}円</p>
+        {/* <p>{sub_variable_quantity}点</p> */}
+        {/* <p>{sub_variable_price}円</p> */}
       </div>
     </li>
   );

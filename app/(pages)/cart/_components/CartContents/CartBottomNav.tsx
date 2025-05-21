@@ -8,9 +8,9 @@ const CartBottomNav = () => {
 
   const handleSubmit = async () => {
     try {
-      await handleCreateOrder(); // 注文確定処理
+      await handleCreateOrder();
       alert("注文が確定しました");
-      router.push("/menu"); // 成功後の遷移先（必要に応じて変更）
+      router.push("/menu");
     } catch (err) {
       console.error("注文エラー:", err);
       alert("注文に失敗しました");

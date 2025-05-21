@@ -8,7 +8,6 @@ const HeadNav = () => {
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // TODO クエリパラメータを定義次第変更
   const handleClick = () => {
     if (window.history.length > 1) {
       router.back();

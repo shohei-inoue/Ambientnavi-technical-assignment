@@ -11,13 +11,14 @@ export const metadata: Metadata = {
 };
 
 type AdminMenuDetailProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function AdminMenuDetail({
   params,
 }: AdminMenuDetailProps) {
-  const menuDetail = await handleGetMenuDetail(Number(params.id));
+  const { id } = await params;
+  const menuDetail = await handleGetMenuDetail(Number(id));
 
   if (!menuDetail) {
     notFound();
