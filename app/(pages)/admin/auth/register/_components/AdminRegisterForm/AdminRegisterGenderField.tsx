@@ -1,16 +1,18 @@
-
-import { Gender } from "@/app/actions/web/auth/domain/User";
-import RegisterItem from "./RegisterItem";
+import { Gender } from "@/app/actions/admin/auth/domain/User";
 import { SetStateAction } from "react";
+import AdminRegisterItem from "./AdminRegisterItem";
 
-type RegisterGenderFieldProps = {
+type AdminRegisterGenderFieldProps = {
   value: Gender;
   setValue: React.Dispatch<SetStateAction<Gender>>;
 };
 
-const RegisterGenderField: React.FC<RegisterGenderFieldProps> = ({ value, setValue }) => {
+const AdminRegisterGenderField: React.FC<AdminRegisterGenderFieldProps> = ({
+  value,
+  setValue,
+}) => {
   return (
-    <RegisterItem title="性別">
+    <AdminRegisterItem title="性別">
       <select
         value={value}
         onChange={(e) => setValue(e.target.value as Gender)}
@@ -20,8 +22,8 @@ const RegisterGenderField: React.FC<RegisterGenderFieldProps> = ({ value, setVal
         <option value="FEMALE">女性</option>
         <option value="OTHER">その他</option>
       </select>
-    </RegisterItem>
+    </AdminRegisterItem>
   );
 };
 
-export default RegisterGenderField;
+export default AdminRegisterGenderField;

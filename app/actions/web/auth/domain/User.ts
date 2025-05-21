@@ -1,14 +1,14 @@
 export type Gender = "MALE" | "FEMALE" | "OTHER";
 export type Role = "ADMIN" | "CUSTOMER";
 
-export type AdminUser = {
+export type User = {
   id: number;
   uuid: string;
   name: string;
   email: string;
   password: string;
   birthday: Date;
-  employeeNumber?: string;
-  role: Role;
   gender: Gender;
+  role: Role;
+  employeeNumber?: string;
 };

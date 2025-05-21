@@ -1,15 +1,17 @@
 export const dynamic = "force-dynamic";
 
+import Heading from "@/app/components/Heading/Heading";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
-import DashboardContents from "./_components/DashboardContents/DashboardContents";
+import AdminRegisterContents from "./_components/AdminRegisterContents/AdminRegisterContents";
 
-export default function AdminDashBoard() {
+export default async function Register() {
+
   return (
     <MainContainer>
+      <Heading level={1}>管理者登録</Heading>
       <MainContent>
-        {/* TODO 2025/05/22 dashboardのactionsを作成し追加する */}
-        <DashboardContents />
+        <AdminRegisterContents />
       </MainContent>
     </MainContainer>
   );

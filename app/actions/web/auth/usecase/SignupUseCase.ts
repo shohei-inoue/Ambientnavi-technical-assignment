@@ -42,11 +42,11 @@ export function signupUser(ur: UserRepository) {
 
     return await ur.createUser({
       name,
-      uuid: uuidv4(),
       email: email.toLowerCase(),
       password: hashedPassword,
       birthday: parsedBirthday,
       gender: gender,
+      role: "CUSTOMER",
     });
   };
 }

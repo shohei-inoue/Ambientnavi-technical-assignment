@@ -11,7 +11,6 @@ type EntryFormProps = {
 };
 
 const EntryForm: React.FC<EntryFormProps> = ({ tableNumber }) => {
-  console.log(tableNumber)
   const router = useRouter();
   const [peopleNum, setPeopleNum] = useState<number>(1);
 
@@ -21,8 +20,6 @@ const EntryForm: React.FC<EntryFormProps> = ({ tableNumber }) => {
     const formData = new FormData();
     formData.append("tableNumber", tableNumber.toString());
     formData.append("guestCount", peopleNum.toString());
-
-    console.log(peopleNum)
 
     try {
       const res = await fetch("/api/web/tables/", {

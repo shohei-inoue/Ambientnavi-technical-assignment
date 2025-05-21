@@ -1,21 +1,18 @@
 "use client";
 
-import Button from "@/app/components/Button/Button";
-import RegisterNameField from "./RegisterNameField";
-import RegisterBirthdayField from "./RegisterBirthdayField";
-import RegisterMailField from "./RegisterMailField";
-import RegisterPasswordField from "./RegisterPasswordField";
-import RegisterGenderField from "./RegisterGenderField";
+import { Gender } from "@/app/actions/admin/auth/domain/User";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { handleSignup } from "@/app/actions/web/auth/controller/SignupController";
-import { Gender } from "@/app/actions/web/auth/domain/User";
+import AdminRegisterNameField from "./AdminRegisterNameField";
+import AdminRegisterGenderField from "./AdminRegisterGenderField";
+import AdminRegisterBirthdayField from "./AdminRegisterBirthdayField";
+import AdminRegisterMailField from "./AdminRegisterMailField";
+import AdminRegisterPasswordField from "./AdminRegisterPasswordField";
+import AdminRegisterEmployeeNumberField from "./AdminRegisterEmployeeNumberField";
+import Button from "@/app/components/Button/Button";
+import { handleAdminRegister } from "@/app/actions/admin/auth/controller/registerController";
 
-type RegisterFormProps = {
-  tableNumber: number;
-};
-
-const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
+const AdminRegisterForm = () => {
   const router = useRouter();
 
   const [name, setName] = useState<string>("");
@@ -23,6 +20,7 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
   const [mail, setMail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [gender, setGender] = useState<Gender>("MALE");
+  const [employeeNumber, setEmployeeNumber] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,9 +31,10 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
     formData.append("password", password);
     formData.append("birthday", birthday);
     formData.append("gender", gender);
+    formData.append("employeeNumber", employeeNumber);
 
     try {
-      const result = await handleSignup(formData);
+      const result = await handleAdminRegister(formData);
 
       if (!result.success) {
         alert(`登録に失敗しました: ${result.error}`);
@@ -43,11 +42,9 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
       }
 
       alert(result.message);
-      router.push(
-        tableNumber ? `/auth/login?table_number=${tableNumber}` : "/auth/login"
-      );
+      router.push("/admin/auth/login");
     } catch (error) {
-      console.error(error)
+      console.error(error);
       alert(`登録に失敗しました: ${error}`);
     }
   };
@@ -57,19 +54,24 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
       onSubmit={handleSubmit}
       className="flex flex-col gap-4 items-center w-full"
     >
-      <RegisterNameField title="氏名" value={name} setValue={setName} />
-      <RegisterGenderField value={gender} setValue={setGender} />
-      <RegisterBirthdayField
+      <AdminRegisterNameField title="氏名" value={name} setValue={setName} />
+      <AdminRegisterGenderField value={gender} setValue={setGender} />
+      <AdminRegisterBirthdayField
         title="生年月日"
         value={birthday}
         setValue={setBirthday}
       />
-      <RegisterMailField
+      <AdminRegisterMailField
         title="メールアドレス"
         value={mail}
         setValue={setMail}
       />
-      <RegisterPasswordField
+      <AdminRegisterEmployeeNumberField
+        title="社員番号"
+        value={employeeNumber}
+        setValue={setEmployeeNumber}
+      />
+      <AdminRegisterPasswordField
         title="パスワード"
         value={password}
         setValue={setPassword}
@@ -81,4 +83,4 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
   );
 };
 
-export default RegisterForm;
+export default AdminRegisterForm;
