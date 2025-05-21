@@ -8,8 +8,9 @@ export default function AdminDashBoard() {
   return (
     <MainContainer>
       <MainContent>
+        {/* TODO 2025/05/22 dashboardのactionsを作成し追加する */}
         <DashboardContents />
       </MainContent>
     </MainContainer>
-  )
+  );
 }
