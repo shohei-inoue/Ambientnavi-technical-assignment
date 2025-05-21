@@ -4,6 +4,10 @@ export type CartItem = {
   menuId: number;
   quantity: number;
   note?: string | null;
+  menu?: {
+    name: string;
+    price: number;
+  };
 };
 
 export type Cart = {
