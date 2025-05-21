@@ -27,8 +27,8 @@ const OrderHistoryContent: React.FC<OrderHistoryContentProps> = ({
               price={item.price}
               quantity={item.quantity}
               sub_variable={item.note ?? ""}
-              sub_variable_price={0} // 仮、必要なら構造見直し
-              sub_variable_quantity={0} // 仮
+              sub_variable_price={0} // TODO 仮置き
+              sub_variable_quantity={0} //TODO 仮置き
             />
           ))
         )}

@@ -8,7 +8,6 @@ type MenuGridProps = {
 };
 
 const MenuGrid: React.FC<MenuGridProps> = ({ menu }) => {
-  // サブカテゴリごとにメニューをグループ化
   const groupedMenu = Object.entries(
     menu.reduce(
       (acc, item) => {

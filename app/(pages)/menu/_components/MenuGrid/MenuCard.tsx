@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { DEFAULT_MENU_IMAGE } from "@/app/constants"
 
 type MenuCardProps = {
   id: number;
@@ -24,8 +25,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ id, name, price, image }) => {
       onClick={handleClick}
     >
       <div>
-        {/* TODO default直がきやめる */}
-        <Image src={image || "/default.png"} height={100} width={100} alt="" />
+        <Image src={image || DEFAULT_MENU_IMAGE} height={100} width={100} alt="" />
       </div>
       <div>
         <p className="text-lg font-semibold">{name}</p>

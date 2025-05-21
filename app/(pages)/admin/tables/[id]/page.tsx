@@ -3,7 +3,7 @@ import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import { Metadata } from "next";
 import TableContent from "./_components/TableContent/TableContent";
-import { handleGetTable } from "@/app/actions/admin/table/controller/TableController"; // ✅ actionsから取得
+import { handleGetTable } from "@/app/actions/admin/table/controller/TableController";
 import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { handleAddToCart } from "@/app/actions/web/cart/controller/CartController"; // actions を呼び出す
+import { handleAddToCart } from "@/app/actions/web/cart/controller/CartController";
 
 type MenuItemBottomNavProps = {
   menuId: number;

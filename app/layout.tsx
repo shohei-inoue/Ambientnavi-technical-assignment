@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ambientnavi technical assignment",
   description: "mobile order by ambientnavi technical assignment",
+  // TODO 2025/5/22 icon追加 
 };
 
 export default function RootLayout({
