@@ -21,7 +21,8 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
         tableId,
         sessionId,
         guestCount,
-        checkedInAt: new Date(), // 新設カラムに合わせて追加
+        checkedInAt: new Date(),
+        checkedOutAt: null
       },
     });
 
@@ -39,7 +40,7 @@ export const TableSessionRepositoryImpl: TableSessionRepository = {
         tableId,
         checkedOutAt: null, // セッションが終了していないかどうか
       },
-      orderBy: { checkedInAt: "desc" }, // createdAt → checkedInAt に変更
+      orderBy: { checkedInAt: "desc" },
     });
   },
 

@@ -1,37 +1,30 @@
-import { redirect } from "next/navigation";
+export const dynamic = "force-dynamic";
+
+import { notFound } from "next/navigation";
 import Heading from "@/app/components/Heading/Heading";
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import LoginContents from "./_components/LoginContents/LoginContents";
 
-import { getSession } from "@/app/actions/web/tableSession/controller/TableSessionController";
-import { hasLoggedInUserInSession } from "@/app/actions/web/userSession/controller/UserSessionController";
-
-type Props = {
-  searchParams: { table_number?: string };
+type LoginProps = {
+  searchParams: Promise<{
+    table_number?: string;
+  }>;
 };
 
-export default async function Login({ searchParams }: Props) {
-  const tableNumber = Number(searchParams.table_number);
+export default async function Login({ searchParams }: LoginProps) {
+  const params = await searchParams;
+  const tableNumber = Number(params?.table_number);
+
   if (!tableNumber || isNaN(tableNumber)) {
-    redirect("/"); // 不正ならトップに戻す
-  }
-
-  const session = await getSession(tableNumber);
-  if (!session) {
-    redirect(`/?table_number=${tableNumber}`);
-  }
-
-  const alreadyLoggedIn = await hasLoggedInUserInSession(session.sessionId);
-  if (alreadyLoggedIn) {
-    redirect("/menu");
+    return notFound();
   }
 
   return (
     <MainContainer>
       <Heading level={1}>ログイン</Heading>
       <MainContent>
-        <LoginContents />
+        <LoginContents tableNumber={tableNumber} />
       </MainContent>
     </MainContainer>
   );

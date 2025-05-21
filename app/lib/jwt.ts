@@ -4,9 +4,9 @@ const secret = process.env.JWT_SECRET;
 if (!secret) {
   throw new Error("JWT_SECRET is not set in environment variables");
 }
-const SECRET: Secret = secret; // ここで型が確定する
+const SECRET: Secret = secret;
 
-type Exp = `${number}${"d" | "h" | "m" | "s"}`; // "7d", "1h" などに限定
+type Exp = `${number}${"d" | "h" | "m" | "s"}`;
 
 export function signJwt(payload: object, expiresIn: Exp = "7d") {
   return jwt.sign(payload, SECRET, { expiresIn });

@@ -1,3 +1,4 @@
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
 import Table from "@/app/components/Table/Table";
 import TableBody from "@/app/components/Table/TableBody";
 import TableContainer from "@/app/components/Table/TableContainer";
@@ -8,7 +9,7 @@ import TableRow from "@/app/components/Table/TableRow";
 import { AdminCategoriesData } from "@/app/types/types";
 
 type CategoriesTableProps = {
-  categories: AdminCategoriesData[];
+  categories: Category[];
 };
 
 const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {
@@ -25,7 +26,7 @@ const CategoriesTable: React.FC<CategoriesTableProps> = ({ categories }) => {
           {categories.map((category) => {
             const subCategoryCount = category.subCategories.length;
             const menuTotalCount = category.subCategories.reduce(
-              (sum, sub) => sum + sub._count.menus,
+              (sum, sub) => sum + sub.menuCount,
               0
             );
             return (

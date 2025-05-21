@@ -1,0 +1,191 @@
+"use client";
+
+import Button from "@/app/components/Button/Button";
+import Form from "@/app/components/Form/form";
+import { useEffect, useState } from "react";
+import MenuDetailImageField from "./MenuDetailImageField";
+import MenuDetailNameFiled from "./MenuDetailNameField";
+import MenuDetailDescriptionField from "./MenuDetailDescriptionField";
+import MenuDetailPriceField from "./MenuDetailPriceField";
+import MenuDetailTaxIncludedField from "./MenuDetailTaxIncludedField";
+import MenuDetailCategoriesField from "./MenuDetailCategoriesField";
+import MenuDetailTagsField from "./MenuDetailTagsField";
+import MenuDetailIsAvailableField from "./MenuDetailIsAvailableField";
+import { useRouter } from "next/navigation";
+import Loader from "@/app/components/Loader/Loader";
+import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
+import { Category } from "@/app/actions/admin/categories/domain/Categories";
+
+type MenuDetailSettingFormProps = {
+  id: number;
+  menu_name: string;
+  menu_description: string;
+  menu_price: number;
+  menu_image_url: string;
+  menu_is_available: boolean;
+  menu_tax_included: boolean;
+  menu_sub_category_id: number;
+  menu_tags: string[];
+};
+
+const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
+  id,
+  menu_name,
+  menu_description,
+  menu_price,
+  menu_image_url,
+  menu_is_available,
+  menu_tax_included,
+  menu_tags,
+  menu_sub_category_id,
+}) => {
+  const router = useRouter();
+  const [name, setName] = useState<string>(menu_name);
+  const [description, setDescription] = useState<string>(menu_description);
+  const [price, setPrice] = useState<number>(menu_price);
+  const [image, setImage] = useState<File>();
+  const [isAvailable, setIsAvailable] = useState<boolean>(menu_is_available);
+  const [taxIncluded, setTaxIncluded] = useState<boolean>(menu_tax_included);
+  const [tags, setTags] = useState<string[]>(menu_tags);
+  const [subCategoryId, setSubCategoryId] =
+    useState<number>(menu_sub_category_id);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [categoriesData, setCategoriesData] = useState<Category[]>([]);
+
+  // categories情報を取得
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const categories = await handleGetCategories();
+        setCategoriesData(categories);
+      } catch (error) {
+        console.error(error);
+        setError(error as Error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // カテゴリーのバリデーション
+    if (!subCategoryId) {
+      alert("サブカテゴリを選択してください");
+      return;
+    }
+
+    // ダイアログの表示
+    const isConfirmed = window.confirm("メニューを更新しますか?");
+    if (!isConfirmed) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("id", id.toString());
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price.toString());
+    formData.append("isAvailable", String(isAvailable));
+    formData.append("taxIncluded", String(taxIncluded));
+    formData.append("subCategoryId", subCategoryId.toString());
+    formData.append("tags", tags.join(","));
+
+    try {
+      const res = await fetch(`/api/admin/menu/${id}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "更新に失敗しました");
+      }
+      alert("メニュー情報を更新しました");
+      router.refresh();
+    } catch (error) {
+      console.error(error);
+      alert(`メニュー情報を更新できませんでした: ${error}`);
+    }
+  };
+
+  const handleDelete = async () => {
+    // ダイアログ表示
+    const isConfirmed = window.confirm("メニューを削除しますか?");
+    if (!isConfirmed) {
+      return;
+    }
+
+    try {
+      const res = await fetch(`/api/admin/menu/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "削除に失敗しました");
+      }
+
+      alert("メニュー情報を削除しました");
+      router.back();
+    } catch (error) {
+      console.error(error);
+      alert(`メニュー情報を削除できませんでした: ${error}`);
+    }
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <MenuDetailImageField
+        image_url={menu_image_url}
+        value={image}
+        setValue={setImage}
+      />
+      <MenuDetailNameFiled value={name} setValue={setName} />
+      <MenuDetailDescriptionField
+        value={description}
+        setValue={setDescription}
+      />
+      <MenuDetailPriceField value={price} setValue={setPrice} />
+      <MenuDetailTaxIncludedField
+        value={taxIncluded}
+        setValue={setTaxIncluded}
+      />
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <div>{error.message}</div>
+      ) : categoriesData.length > 0 ? (
+        <MenuDetailCategoriesField
+          value={subCategoryId}
+          setValue={setSubCategoryId}
+          categories={categoriesData}
+        />
+      ) : (
+        <div>カテゴリーがありません</div>
+      )}
+      <MenuDetailTagsField value={tags} setValue={setTags} />
+      <MenuDetailIsAvailableField
+        value={isAvailable}
+        setValue={setIsAvailable}
+      />
+      <div className="flex gap-2">
+        <Button type="reset" onClick={handleDelete}>
+          削除
+        </Button>
+        <Button type="submit">更新</Button>
+      </div>
+    </Form>
+  );
+};
+
+export default MenuDetailSettingForm;

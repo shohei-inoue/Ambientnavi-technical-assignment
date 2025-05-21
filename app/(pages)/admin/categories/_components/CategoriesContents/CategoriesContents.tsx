@@ -1,13 +1,9 @@
-import { getCategories } from "@/app/actions/admin/categoriesActions";
+import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
 import CategoriesTable from "../CategoriesTable/CategoriesTable";
 
 const CategoriesContents = async () => {
-  const categories = await getCategories();
-  return (
-    <>
-      <CategoriesTable categories={categories} />
-    </>
-  );
+  const categories = await handleGetCategories();
+  return <CategoriesTable categories={categories} />;
 };
 
 export default CategoriesContents;

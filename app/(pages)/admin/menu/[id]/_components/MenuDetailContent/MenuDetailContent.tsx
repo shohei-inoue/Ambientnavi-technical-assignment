@@ -1,68 +1,26 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import MenuDetailSettingForm from "../MenuDetailSettingForm/MenuDetailSettingForm";
-import Loader from "@/app/components/Loader/Loader";
-import Error from "@/app/components/Error/Error";
-import NoData from "@/app/components/NoData/NoData";
-import { getMenuDetail } from "@/app/actions/admin/menuActions";
-import { AdminMenuData, AdminTagData } from "@/app/types/types";
+import MenuDetailSettingForm from "./MenuDetailSettingForm";
+import { Menu } from "@/app/actions/admin/menu/domain/Menu";
 
 type MenuDetailContentProps = {
-  id: string;
+  menuDetail: Menu;
 };
 
-const MenuDetailContent: React.FC<MenuDetailContentProps> = ({ id }) => {
-  const [menuDetailData, setMenuDetailData] = useState<AdminMenuData | null>(
-    null
-  );
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    const fetchMenuDetail = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const menuDetail = await getMenuDetail(parseInt(id));
-        setMenuDetailData(menuDetail);
-      } catch (error) {
-        console.error(error);
-        setError(error as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMenuDetail();
-  }, [id]);
-
-  const handleFormateTags = (tags: AdminTagData[]): string[] => {
-    return tags.map((tag) => tag.name);
-  };
-
+const MenuDetailContent: React.FC<MenuDetailContentProps> = ({
+  menuDetail,
+}) => {
+  const menuTagNames = menuDetail.tags.map((tag) => tag.name)
   return (
-    <div>
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Error />
-      ) : menuDetailData ? (
-        <MenuDetailSettingForm
-          id={menuDetailData.id}
-          menu_name={menuDetailData.name}
-          menu_description={menuDetailData.description}
-          menu_price={menuDetailData.price}
-          menu_image_url={menuDetailData.imageUrl}
-          menu_sub_category_id={menuDetailData.subCategory.id}
-          menu_is_available={menuDetailData.isAvailable}
-          menu_tags={handleFormateTags(menuDetailData.tags)}
-          menu_tax_included={menuDetailData.taxIncluded}
-        />
-      ) : (
-        <NoData />
-      )}
-    </div>
+    <MenuDetailSettingForm
+      id={menuDetail.id}
+      menu_name={menuDetail.name}
+      menu_description={menuDetail.description}
+      menu_price={menuDetail.price}
+      menu_image_url={menuDetail.imageUrl ? menuDetail.imageUrl : ''}
+      menu_sub_category_id={menuDetail.subCategory.id}
+      menu_is_available={menuDetail.isAvailable}
+      menu_tags={menuTagNames}
+      menu_tax_included={menuDetail.taxIncluded}
+    />
   );
 };
 

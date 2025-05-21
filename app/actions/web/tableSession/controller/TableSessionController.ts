@@ -7,7 +7,7 @@ import {
 } from "../usecase/TableSessionUsecase";
 import { TableSessionRepositoryImpl } from "../repository/TableSessionRepository";
 import { TableRepositoryImpl } from "../../../admin/table/repository/TableRepository";
-import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";;
+import { getSessionCookie, setSessionCookie } from "@/app/lib/cookies";
 
 // usecase instance
 const createSessionUsecase = createTableSession(
@@ -24,7 +24,13 @@ const linkUserToSessionUsecase = getLinkUserToTableSession(
 
 // get
 export async function getSession(tableNumber: number) {
-  return await getSessionUsecase(tableNumber);
+  const session = await getSessionUsecase(tableNumber);
+  
+  if (session) {
+    await setSessionCookie(session.sessionId);
+  }
+
+  return session;
 }
 
 // create

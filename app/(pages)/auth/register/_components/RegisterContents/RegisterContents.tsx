@@ -5,7 +5,7 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 import { useRouter } from "next/navigation";
 
 type RegisterContentsProps = {
-  tableNumber?: string;
+  tableNumber: number;
 };
 
 const RegisterContents: React.FC<RegisterContentsProps> = ({ tableNumber }) => {

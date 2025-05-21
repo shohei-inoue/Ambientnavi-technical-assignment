@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type RegisterFormProps = {
-  tableNumber?: string;
+  tableNumber: number;
 };
 
 const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
@@ -32,7 +32,7 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
     formData.append("password", password);
     formData.append("birthday", birthday);
     formData.append("gender", gender);
-    if (tableNumber) formData.append("tableNumber", tableNumber);
+    if (tableNumber) formData.append("tableNumber", tableNumber.toString());
 
     try {
       const res = await fetch("/api/web/auth/signup", {
@@ -47,7 +47,11 @@ const RegisterForm = ({ tableNumber }: RegisterFormProps) => {
 
       const _result = await res.json();
       alert("登録が完了しました");
-      router.push("/menu");
+      if (tableNumber) {
+        router.push(`/auth/login?table_number=${tableNumber}`);
+      } else {
+        router.push("/auth/login");
+      }
     } catch (error) {
       console.error(error);
       alert(`登録に失敗しました: ${error}`);

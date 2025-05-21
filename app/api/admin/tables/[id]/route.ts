@@ -4,27 +4,6 @@ import {
   handleUpdateTable,
 } from "@/app/actions/admin/table/controller/TableController";
 
-// export async function GET(
-//   _req: NextRequest,
-//   { params }: { params: { id: string } }
-// ) {
-//   const id = parseInt(params.id, 10);
-//   if (isNaN(id)) {
-//     return NextResponse.json({ error: "Invalid table ID" }, { status: 400 });
-//   }
-
-//   try {
-//     const table = await handleGetTable(id);
-//     return NextResponse.json({ table }, { status: 200 });
-//   } catch (err: any) {
-//     console.error("GET /api/admin/tables/[id] エラー:", err);
-//     return NextResponse.json(
-//       { error: err.message || "テーブルの取得に失敗しました" },
-//       { status: 500 }
-//     );
-//   }
-// }
-
 export async function PUT(
   req: NextRequest,
   context: { params: { id: string } }
