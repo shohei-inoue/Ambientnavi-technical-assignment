@@ -10,13 +10,24 @@ import NoData from "@/app/components/NoData/NoData";
 
 export default async function Cart() {
   await requireUserSession();
-  const cart = await handleGetCart();
-  return (
-    <MainContainer>
-      <HeadNav />
-      <MainContent>
-        {cart ? <CartContents cart={cart} /> : <NoData />}
-      </MainContent>
-    </MainContainer>
-  );
+  try {
+    const cart = await handleGetCart();
+    return (
+      <MainContainer>
+        <HeadNav />
+        <MainContent>
+          <CartContents cart={cart} />
+        </MainContent>
+      </MainContainer>
+    );
+  } catch (error) {
+    return (
+      <MainContainer>
+        <HeadNav />
+        <MainContent>
+          <NoData />
+        </MainContent>
+      </MainContainer>
+    );
+  }
 }

@@ -45,6 +45,7 @@ const CartContents: React.FC<CartContentProps> = ({ cart }) => {
     setTotalPrice(updatedCart.totalPrice);
   };
 
+  // 2025/5/21 decrementした際に session id でエラー
   const handleDecrement = async (menuId: number) => {
     await handleDecrementCartItem(menuId);
     const updatedCart = await handleGetCart();
