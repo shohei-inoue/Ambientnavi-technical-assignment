@@ -18,7 +18,7 @@ export type JwtPayload = {
 type Exp = `${number}${"d" | "h" | "m" | "s"}`;
 
 // JWTの署名
-export function signJwt(payload: JwtPayload, expiresIn: Exp = "1d"): string {
+export function signJwt(payload: JwtPayload, expiresIn: Exp = "7d"): string {
   return jwt.sign(payload, SECRET, { expiresIn });
 }
 
