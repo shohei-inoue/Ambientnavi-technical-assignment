@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 };
 
 type AdminTablePageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function AdminTablePage({ params }: AdminTablePageProps) {
-  const table = await handleGetTable(Number(params.id));
+  const { id } = await params;
+  const table = await handleGetTable(Number(id));
 
   if (!table) {
     notFound();

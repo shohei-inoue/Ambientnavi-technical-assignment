@@ -11,11 +11,12 @@ export const metadata: Metadata = {
 };
 
 type AdminCategoryProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function AdminCategory({ params }: AdminCategoryProps) {
-  const category = await handleGetCategory(Number(params.id));
+  const { id } = await params;
+  const category = await handleGetCategory(Number(id));
 
   if (!category) {
     notFound();
