@@ -1,7 +1,7 @@
 "use client";
 
+import { SubCategory } from "@/app/actions/web/menu/domain/Menu";
 import React from "react";
-import { SubCategory } from "@/app/actions/admin/categories/domain/Categories";
 
 type MenuHeadSubNavProps = {
   subCategories: SubCategory[];

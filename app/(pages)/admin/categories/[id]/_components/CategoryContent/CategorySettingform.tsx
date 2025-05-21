@@ -6,6 +6,10 @@ import Button from "@/app/components/Button/Button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import SubCategoryField from "./SubCategoryField";
+import {
+  handleUpdateCategory,
+  handleDeleteCategory,
+} from "@/app/actions/admin/categories/controller/CategoriesController";
 
 type CategorySettingFormProps = {
   id: number;
@@ -20,63 +24,41 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
 }) => {
   const router = useRouter();
   const [name, setName] = useState<string>(category_name);
-  const [subCategories, setSubCategories] =
-    useState<string[]>(sub_categories);
+  const [subCategories, setSubCategories] = useState<string[]>(sub_categories);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // ダイアログの表示
     const isConfirmed = window.confirm("カテゴリーを更新しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     const formData = new FormData();
     formData.append("id", id.toString());
     formData.append("name", name);
-    subCategories.forEach((subName) => formData.append("subCategories", subName));
+    subCategories.forEach((sub) => formData.append("subCategories", sub));
 
     try {
-      const res = await fetch(`/api/admin/categories/${id}`, {
-        method: "PUT",
-        body: formData,
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "更新に失敗しました");
-      }
+      await handleUpdateCategory(formData);
       alert("カテゴリー情報を更新しました");
       router.refresh();
-    } catch (error) {
-      console.error(error);
-      alert(`カテゴリー情報を更新できませんでした: ${error}`);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "カテゴリー情報を更新できませんでした");
     }
   };
 
   const handleDelete = async () => {
-    // ダイアログを表示
     const isConfirmed = window.confirm("このカテゴリー情報を削除しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     try {
-      const res = await fetch(`/api/admin/categories/${id}`, {
-        method: "DELETE",
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.error || "削除に失敗しました");
-      }
-
+      await handleDeleteCategory(id);
       alert("カテゴリー情報を削除しました");
       router.back();
-    } catch (error) {
-      console.error(error);
-      alert(`カテゴリー情報を削除できませんでした: ${error}`);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || "カテゴリー情報を削除できませんでした");
     }
   };
 
@@ -84,6 +66,7 @@ const CategorySettingForm: React.FC<CategorySettingFormProps> = ({
     <Form onSubmit={handleSubmit}>
       <CategoryNameFiled value={name} setValue={setName} />
       <SubCategoryField value={subCategories} setValue={setSubCategories} />
+      {error && <p className="text-red-500">{error}</p>}
       <div className="flex gap-4">
         <Button type="reset" onClick={handleDelete}>
           削除

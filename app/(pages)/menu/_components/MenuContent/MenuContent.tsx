@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Heading from "@/app/components/Heading/Heading";
 import MenuGrid from "../MenuGrid/MenuGrid";
 import { MenuData } from "@/app/types/types";
+import { handleGetMenu } from "@/app/actions/web/menu/controller/MenuController";
 
 type MenuContentProps = {
   categoryId: number | null;
@@ -22,14 +23,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
     const fetchMenu = async () => {
       setLoading(true);
       try {
-        const url =
-          categoryId !== null
-            ? `/api/web/menu?categoryId=${categoryId}`
-            : `/api/web/menu`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("メニュー取得に失敗しました");
-
-        const data: MenuData[] = await res.json();
+        const data = await handleGetMenu(categoryId);
         setMenu(data);
         setError(null);
       } catch (err) {

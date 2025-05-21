@@ -2,14 +2,14 @@
 
 import { useState } from "react";
 import MenuItemBottomNav from "./MenuItemBottomNav";
-import { MenuData } from "@/app/types/types";
 import MenuItemHeadContent from "./MenuItemHeadContent";
 import MenuItemQuantityField from "./MenuItemQuantityField";
 import MenuItemTagsContents from "./MenuItemTagsContents";
 import MenuItemDescriptionContent from "./MenuItemDescriptionContent";
+import { Menu } from "@/app/actions/web/menu/domain/Menu";
 
 type MenuItemContentProps = {
-  menu: MenuData;
+  menu: Menu;
 };
 
 const MenuItemContents: React.FC<MenuItemContentProps> = ({ menu }) => {

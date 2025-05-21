@@ -12,6 +12,7 @@ import MenuDetailTaxIncludedField from "../../../[id]/_components/MenuDetailCont
 import MenuDetailImageField from "../../../[id]/_components/MenuDetailContent/MenuDetailImageField";
 import MenuDetailTagsField from "../../../[id]/_components/MenuDetailContent/MenuDetailTagsField";
 import { handleGetCategories } from "@/app/actions/admin/categories/controller/CategoriesController";
+import { handleCreateMenu } from "@/app/actions/admin/menu/controller/MenuController";
 import { Category } from "@/app/actions/admin/categories/domain/Categories";
 
 const MenuAddForm = () => {
@@ -27,7 +28,6 @@ const MenuAddForm = () => {
   const [error, setError] = useState<Error | null>(null);
   const [categoriesData, setCategoriesData] = useState<Category[]>([]);
 
-  // categories情報を取得
   useEffect(() => {
     const fetchCategories = async () => {
       setLoading(true);
@@ -49,22 +49,16 @@ const MenuAddForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // カテゴリーのバリデーション
     if (!subCategoryId) {
       alert("サブカテゴリを選択してください");
       return;
     }
 
-    // ダイアログの表示
     const isConfirmed = window.confirm("メニューを追加しますか?");
-    if (!isConfirmed) {
-      return;
-    }
+    if (!isConfirmed) return;
 
     const formData = new FormData();
-    if (image) {
-      formData.append("image", image);
-    }
+    if (image) formData.append("image", image);
     formData.append("name", name);
     formData.append("description", description);
     formData.append("price", price.toString());
@@ -74,15 +68,7 @@ const MenuAddForm = () => {
     formData.append("tags", tags.join(","));
 
     try {
-      const res = await fetch("/api/admin/menu", {
-        method: "POST",
-        body: formData,
-      });
-
-      const result = await res.json();
-
-      if (!res.ok) throw new Error(result.error);
-
+      await handleCreateMenu(formData);
       alert("メニューを追加しました");
       setName("");
       setDescription("");
@@ -92,9 +78,9 @@ const MenuAddForm = () => {
       setTaxIncluded(true);
       setTags([]);
       setSubCategoryId(null);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
-      alert(`メニューを追加できませんでした. \n${error}`);
+      alert(`メニューを追加できませんでした. \n${error.message}`);
     }
   };
 

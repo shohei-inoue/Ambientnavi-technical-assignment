@@ -33,6 +33,9 @@ export async function handleUpdateCategory(formData: FormData) {
   const id = parseInt(formData.get("id") as string, 10);
   const name = formData.get("name") as string;
   const subCategories = formData.getAll("subCategories") as string[];
+
+  if (!id || !name) throw new Error("IDまたは名前が無効です");
+
   return updateCategory(id, name, subCategories);
 }
 
