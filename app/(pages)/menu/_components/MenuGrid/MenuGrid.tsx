@@ -1,10 +1,10 @@
 "use client";
-
-import { MenuData } from "@/app/types/types";
+;
+import { Menu } from "@/app/actions/web/menu/domain/Menu";
 import MenuCard from "./MenuCard";
 
 type MenuGridProps = {
-  menu: MenuData[];
+  menu: Menu[];
 };
 
 const MenuGrid: React.FC<MenuGridProps> = ({ menu }) => {
@@ -16,7 +16,7 @@ const MenuGrid: React.FC<MenuGridProps> = ({ menu }) => {
         acc[key].push(item);
         return acc;
       },
-      {} as Record<number, MenuData[]>
+      {} as Record<number, Menu[]>
     )
   );
 

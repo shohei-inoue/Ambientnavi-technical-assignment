@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import Heading from "@/app/components/Heading/Heading";
 import MenuGrid from "../MenuGrid/MenuGrid";
-import { MenuData } from "@/app/types/types";
 import { handleGetMenu } from "@/app/actions/web/menu/controller/MenuController";
+import { Menu } from "@/app/actions/web/menu/domain/Menu";
 
 type MenuContentProps = {
   categoryId: number | null;
@@ -15,7 +15,7 @@ const MenuContent: React.FC<MenuContentProps> = ({
   categoryId,
   categoryName,
 }) => {
-  const [menu, setMenu] = useState<MenuData[]>([]);
+  const [menu, setMenu] = useState<Menu[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
