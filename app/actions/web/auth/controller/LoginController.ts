@@ -19,10 +19,14 @@ export async function handleLogin(formData: FormData): Promise<{
   try {
     const email = formData.get("email")?.toString() || "";
     const password = formData.get("password")?.toString() || "";
-    const sessionId = formData.get("sessionId")?.toString() || (await getSessionCookie());
+    const sessionId =
+      formData.get("sessionId")?.toString() || (await getSessionCookie());
 
     if (!email || !password) {
-      return { success: false, error: "メールアドレスとパスワードは必須です。" };
+      return {
+        success: false,
+        error: "メールアドレスとパスワードは必須です。",
+      };
     }
 
     if (!sessionId) {
@@ -34,7 +38,11 @@ export async function handleLogin(formData: FormData): Promise<{
 
     const { user } = await loginUsecase(email, password, sessionId);
 
-    const token = signJwt({ id: user.id, email: user.email });
+    const token = signJwt({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
 
     await setAuthCookie(token);
     await setSessionCookie(sessionId);

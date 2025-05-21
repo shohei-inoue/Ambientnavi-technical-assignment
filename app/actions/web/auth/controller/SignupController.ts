@@ -57,7 +57,11 @@ export async function handleSignup(formData: FormData): Promise<{
 
     await getLinkUserToSession(user.id);
 
-    const token = signJwt({ id: user.id, email: user.email });
+    const token = signJwt({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
 
     await setAuthCookie(token);
     await setSessionCookie(sessionId);
