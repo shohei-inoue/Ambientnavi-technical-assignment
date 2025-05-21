@@ -1,12 +1,19 @@
 import Heading from "@/app/components/Heading/Heading";
 import OrderHistoryContent from "../OrderHistoryContent/OrderHistoryContent";
 import OrderHistoryBottomNav from "../OrderHistoryNav/OrderHistoryBottomNav";
+import { Order } from "@/app/actions/web/order/domain/OrderDomain";
 
-const OrderHistoryContents = () => {
+type OrderHistoryContentsProps = {
+  orderHistories: Order[];
+};
+
+const OrderHistoryContents: React.FC<OrderHistoryContentsProps> = ({
+  orderHistories,
+}) => {
   return (
     <div>
       <Heading level={1}>Order History</Heading>
-      <OrderHistoryContent />
+      <OrderHistoryContent orderHistories={orderHistories} />
       <OrderHistoryBottomNav />
     </div>
   );

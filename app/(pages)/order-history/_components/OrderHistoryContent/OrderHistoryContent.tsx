@@ -1,60 +1,41 @@
 import OrderHistoryItem from "../OrderHistoryItem/OrderHistoryItem";
+import { Order } from "@/app/actions/web/order/domain/OrderDomain";
 
-type OrderHistoryItemData = {
-  title: string;
-  price: number;
-  quantity: number;
-  sub_variable: string;
-  sub_variable_price: number;
-  sub_variable_quantity: number;
+type OrderHistoryContentProps = {
+  orderHistories: Order[];
 };
 
-const OrderHistoryItemDataList: OrderHistoryItemData[] = [
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-  {
-    title: "ちょこっとポテトフライ",
-    price: 99,
-    quantity: 1,
-    sub_variable: "バター醤油",
-    sub_variable_price: 0,
-    sub_variable_quantity: 0,
-  },
-];
+const OrderHistoryContent: React.FC<OrderHistoryContentProps> = ({
+  orderHistories,
+}) => {
+  // 合計金額を算出
+  const totalPrice = orderHistories.reduce((total, order) => {
+    return (
+      total +
+      order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    );
+  }, 0);
 
-const OrderHistoryContent = () => {
   return (
     <div>
       <ul>
-        {OrderHistoryItemDataList.map((item, index) => (
-          <OrderHistoryItem
-            key={index}
-            title={item.title}
-            price={item.price}
-            quantity={item.quantity}
-            sub_variable={item.sub_variable}
-            sub_variable_price={item.sub_variable_price}
-            sub_variable_quantity={item.sub_variable_quantity}
-          />
-        ))}
+        {orderHistories.map((order) =>
+          order.items.map((item, idx) => (
+            <OrderHistoryItem
+              key={`${order.id}-${idx}`}
+              title={item.menuName}
+              price={item.price}
+              quantity={item.quantity}
+              sub_variable={item.note ?? ""}
+              sub_variable_price={0} // 仮、必要なら構造見直し
+              sub_variable_quantity={0} // 仮
+            />
+          ))
+        )}
       </ul>
       <div className="flex justify-between items-center p-4">
         <h3>合計金額</h3>
-        <p>297円</p>
+        <p>{totalPrice}円</p>
       </div>
     </div>
   );
