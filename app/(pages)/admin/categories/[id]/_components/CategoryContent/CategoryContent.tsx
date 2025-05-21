@@ -1,6 +1,7 @@
 "use client";
-import CategorySettingForm from "./CategorySettingForm";
+
 import { Category } from "@/app/actions/admin/categories/domain/Categories";
+import CategorySettingForm from "./CategorySettingform";
 
 type CategoryContentProps = {
   category: Category;

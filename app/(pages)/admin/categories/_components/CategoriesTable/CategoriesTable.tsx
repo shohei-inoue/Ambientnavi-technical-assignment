@@ -6,7 +6,6 @@ import TableData from "@/app/components/Table/TableData";
 import TableHead from "@/app/components/Table/TableHead";
 import TableHeader from "@/app/components/Table/TableHeader";
 import TableRow from "@/app/components/Table/TableRow";
-import { AdminCategoriesData } from "@/app/types/types";
 
 type CategoriesTableProps = {
   categories: Category[];
