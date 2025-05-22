@@ -63,7 +63,6 @@ const MenuDetailSettingForm: React.FC<MenuDetailSettingFormProps> = ({
         const categories = await handleGetCategories();
         setCategoriesData(categories);
       } catch (err) {
-        console.error(err);
         setError(err as Error);
       } finally {
         setLoading(false);

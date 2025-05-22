@@ -21,7 +21,6 @@ const MenuItemBottomNav: React.FC<MenuItemBottomNavProps> = ({
       alert("カートに追加しました！");
     } catch (err: any) {
       console.error("カート追加失敗:", err);
-      alert(err.message || "エラーが発生しました");
     } finally {
       setLoading(false);
     }
