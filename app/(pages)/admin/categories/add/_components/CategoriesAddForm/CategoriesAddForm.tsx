@@ -5,7 +5,7 @@ import CategoryNameFiled from "../../../[id]/_components/CategoryContent/Categor
 import Button from "@/app/components/Button/Button";
 import { useState } from "react";
 import SubCategoryField from "../../../[id]/_components/CategoryContent/SubCategoryField";
-import { handleCreateCategory } from "@/app/actions/admin/categories/controller/CategoriesController";
+import { handleCreateCategory } from "@/app/actions/admin/categories/RuntimeWrapper";
 
 const CategoriesAddForm = () => {
   const [name, setName] = useState<string>("");
