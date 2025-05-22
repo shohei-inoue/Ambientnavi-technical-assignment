@@ -256,7 +256,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/app/app/generated/prisma",
+      "value": "/Users/inoueshohei/Desktop/ambientnavi-technical-assignment/app/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -265,7 +265,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "linux-musl-arm64-openssl-3.0.x",
+        "value": "darwin-arm64",
         "native": true
       },
       {
@@ -274,7 +274,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/app/prisma/schema.prisma",
+    "sourceFilePath": "/Users/inoueshohei/Desktop/ambientnavi-technical-assignment/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -288,6 +288,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
