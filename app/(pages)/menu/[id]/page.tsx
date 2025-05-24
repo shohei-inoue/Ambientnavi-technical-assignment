@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import MenuItemContent from "./_components/MenuItemContents/MenuItemContents";
