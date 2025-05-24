@@ -1,7 +1,5 @@
 "use server";
 
-export const runtime = "nodejs";
-
 import { CategoriesRepositoryImpl } from "../repository/CategoriesRepository";
 import {
   createCategoryUsecase,
