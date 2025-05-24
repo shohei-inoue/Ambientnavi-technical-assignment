@@ -1,5 +1,4 @@
 export const dynamic = "force-dynamic"; 
-export const runtime = "nodejs";
 
 import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";

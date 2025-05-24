@@ -6,8 +6,6 @@ import MenuDetailContent from "./_components/MenuDetailContent/MenuDetailContent
 import { handleGetMenuDetail } from "@/app/actions/admin/menu/controller/MenuController";
 import { notFound } from "next/navigation";
 
-export const runtime = "nodejs";
-
 export const metadata: Metadata = {
   title: "メニュー詳細",
 };

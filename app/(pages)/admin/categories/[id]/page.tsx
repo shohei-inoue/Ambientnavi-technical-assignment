@@ -6,8 +6,6 @@ import CategoryContent from "./_components/CategoryContent/CategoryContent";
 import { notFound } from "next/navigation";
 import { handleGetCategory } from "@/app/actions/admin/categories/controller/CategoriesController";
 
-export const runtime = "nodejs";
-
 export const metadata: Metadata = {
   title: "カテゴリー詳細",
 };
