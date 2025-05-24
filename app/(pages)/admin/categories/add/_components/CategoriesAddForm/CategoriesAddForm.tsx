@@ -50,8 +50,8 @@ const CategoriesAddForm = () => {
       setName("");
       setSubCategories([""]);
     } catch (err: any) {
-      console.error(err);
       setError(err.message || "カテゴリーの追加に失敗しました");
+      alert("カテゴリーの追加に失敗しました:");
     }
   };
 
