@@ -1,6 +1,5 @@
 import { prisma } from "@/app/lib/prisma";
 import { Category } from "../domain/Categories";
-export const runtime = "nodejs";
 
 export interface CategoriesRepository {
   getCategories(): Promise<Category[]>;

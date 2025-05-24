@@ -3,8 +3,6 @@ import MainContainer from "@/app/components/MainContainer/MainContainer";
 import MainContent from "@/app/components/MainContainer/MainContent";
 import CategoriesAddForm from "./_components/CategoriesAddForm/CategoriesAddForm";
 
-export const runtime = "nodejs";
-
 export default function AddCategories() {
   return (
     <MainContainer>
