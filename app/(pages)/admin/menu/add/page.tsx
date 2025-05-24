@@ -4,6 +4,8 @@ import MainContent from "@/app/components/MainContainer/MainContent";
 import { Metadata } from "next";
 import MenuAddForm from "./_components/MenuAddForm/MenuAddForm";
 
+export const runtime = "nodejs";
+
 export const metadata: Metadata = {
   title: "メニューを追加",
 }
